@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trinta anos do Real em números — uma análise para as eleições de 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --paper:#F5F7F4; --ink:#16243B; --muted:#5B6675; --rule:#D5DBD9; --card:#FFFFFF;
+  --teal:#0E6B6B; --plum:#8A3B7D; --ochre:#C8952A; --brick:#B8433F;
+  --band-a:#E9EFF4; --band-b:#F2EEE4;
+  --arg:#F6EEF4; --arg-ink:#5E2A55; --con:#E9F3F2; --con-ink:#0B4D4D;
+  --bolso:#2F5D8A; --lula:#A0522D; --lula12:#C8952A;
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:500;line-height:1.15;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:.4rem}
+h3{font-size:1.25rem;font-weight:600}
+p{margin:.4rem 0 .9rem;max-width:72ch}
+a{color:var(--teal)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header{padding:56px 0 28px;border-bottom:1px solid var(--rule)}
+header p.lead{font-size:1.15rem;color:var(--muted);max-width:66ch}
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:22px}
+.howto div{border-left:3px solid var(--teal);padding-left:12px;font-size:.95rem;color:var(--muted)}
+.howto strong{color:var(--ink);display:block;margin-bottom:2px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:.92rem}
+nav.toc a{text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:1px}
+section{padding:44px 0 12px}
+section + section{border-top:1px solid var(--rule)}
+.intro{color:var(--muted)}
+
+.govlegend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 18px;font-size:.88rem;color:var(--muted)}
+.govlegend span{display:inline-flex;align-items:center;gap:6px}
+.govlegend i{width:14px;height:14px;border:1px solid var(--rule);display:inline-block}
+
+/* Timeline */
+.tl-scroll{overflow-x:auto;padding-bottom:6px}
+.tl{position:relative;min-width:1040px;height:290px;margin-top:8px}
+.tl .band{position:absolute;top:0;bottom:0;border-left:1px solid #fff}
+.tl .band span{position:absolute;top:8px;left:8px;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.tl .axis{position:absolute;left:0;right:0;bottom:0;height:26px;border-top:1px solid var(--ink)}
+.tl .tick{position:absolute;bottom:0;font-size:.74rem;color:var(--muted);transform:translateX(-50%)}
+.tl .tick::before{content:"";position:absolute;top:-8px;left:50%;width:1px;height:6px;background:var(--ink)}
+.tl .ev{position:absolute;transform:translateX(-50%);background:var(--card);border:1.5px solid var(--ink);border-radius:999px;padding:3px 10px;font:500 .78rem "IBM Plex Sans",sans-serif;color:var(--ink);cursor:pointer;white-space:nowrap;line-height:1.3}
+.tl .ev::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;background:var(--ink);height:var(--drop,14px)}
+.tl .ev.debate{border-color:var(--plum);color:var(--arg-ink)}
+.tl .ev.debate::after{background:var(--plum)}
+.tl .ev.crise{border-color:var(--ochre);color:#6B4E0E}
+.tl .ev.crise::after{background:var(--ochre)}
+.tl .ev:hover,.tl .ev:focus-visible{background:var(--ink);color:#fff;outline:none}
+.tl .ev.debate:hover,.tl .ev.debate:focus-visible{background:var(--plum)}
+.tl .ev.crise:hover,.tl .ev.crise:focus-visible{background:var(--ochre)}
+.tl .ev.active{background:var(--ink);color:#fff}
+.tl .ev.debate.active{background:var(--plum)}
+.tl .ev.crise.active{background:var(--ochre)}
+.tl-filters{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.tl-filters button{font:500 .85rem "IBM Plex Sans",sans-serif;border:1px solid var(--rule);background:var(--card);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer}
+.tl-filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.detail{margin-top:18px;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;min-height:120px}
+.detail .when{font-size:.9rem;color:var(--muted)}
+.detail h3{margin:2px 0 8px;font-size:1.45rem}
+.detail .claim{font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:1.15rem;margin:0 0 12px;max-width:70ch}
+.detail .data{margin:0 0 14px;max-width:78ch}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.side{padding:14px 16px;border-radius:8px;font-size:.95rem}
+.side h4{margin:0 0 6px;font:600 .82rem "IBM Plex Sans",sans-serif;letter-spacing:.02em}
+.side p{margin:0;max-width:none}
+.side.arg{background:var(--arg);color:var(--arg-ink)}
+.side.con{background:var(--con);color:var(--con-ink)}
+.side.arg h4{color:var(--plum)} .side.con h4{color:var(--teal)}
+.verdict{margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule);font-size:.95rem}
+.verdict strong{color:var(--ink)}
+.detail .empty{color:var(--muted);font-style:italic}
+@media (max-width:720px){.sides{grid-template-columns:1fr}}
+
+/* Charts */
+.chartgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px 28px;margin-top:10px}
+@media (max-width:860px){.chartgrid{grid-template-columns:1fr}}
+.chart{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 16px 10px}
+.chart h3{font-size:1.1rem;margin-bottom:2px}
+.chart .sub{font-size:.85rem;color:var(--muted);margin:0 0 8px;max-width:none}
+.chart .cv{position:relative;height:260px}
+.chart .note{font-size:.82rem;color:var(--muted);margin:8px 0 0;max-width:none}
+.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:.9rem;color:var(--muted);margin:6px 0 4px}
+.controls label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+
+/* Crises */
+.crises{display:grid;gap:22px;margin-top:10px}
+.crise{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;border-top:4px solid var(--ochre)}
+.crise .when{font-size:.9rem;color:var(--muted)}
+.crise h3{font-size:1.4rem;margin:2px 0 10px}
+.crise .grid{display:grid;grid-template-columns:minmax(260px,1fr) 1.4fr;gap:20px;align-items:start}
+@media (max-width:820px){.crise .grid{grid-template-columns:1fr}}
+.crise table{min-width:0;font-size:.9rem}
+.crise td,.crise th{padding:6px 8px}
+.crise thead th{font-size:.78rem}
+.crise .src{font-size:.8rem;color:var(--muted);margin-top:6px}
+.crise .sides{margin-top:12px}
+
+/* Scoreboard */
+.board{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:26px 28px;margin-top:12px}
+.heads{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:18px}
+@media (max-width:980px){.heads{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.heads{grid-template-columns:repeat(2,1fr)}}
+.head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.avatar{position:relative;width:64px;height:64px;border-radius:50%;flex:none;display:grid;place-items:center;font:600 1.15rem "Newsreader",serif;color:#fff;overflow:hidden;border:3px solid}
+.avatar img{width:100%;height:100%;object-fit:cover;display:none}
+.avatar.has img{display:block} .avatar.has span{display:none}
+.avatar label{position:absolute;inset:auto 0 0 0;background:rgba(22,36,59,.75);color:#fff;font:500 .6rem "IBM Plex Sans",sans-serif;text-align:center;padding:2px 0;cursor:pointer}
+.avatar input{display:none}
+.head .who h3{font-size:1rem}
+.head .who p{margin:0;font-size:.78rem;color:var(--muted);max-width:none;line-height:1.35}
+.head.dispute .who h3{text-decoration:underline;text-decoration-color:var(--ochre);text-decoration-thickness:2px;text-underline-offset:4px}
+.attr{display:grid;grid-template-columns:190px 1fr;gap:10px 22px;align-items:start;padding:14px 0;border-top:1px solid var(--rule)}
+@media (max-width:760px){.attr{grid-template-columns:1fr;gap:6px}}
+.attr .name{font-weight:600}
+.attr .name small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;line-height:1.35}
+.rows{display:grid;gap:5px}
+.row{display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center}
+.row .g{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap}
+.row.dispute .g{color:var(--ink);font-weight:600}
+.bar{position:relative;height:22px;background:#EEF1EF;border-radius:5px;overflow:hidden}
+.bar .fill{height:100%;border-radius:5px;transition:width .35s ease}
+.bar .val{position:absolute;right:8px;top:0;line-height:22px;font-size:.78rem;font-variant-numeric:tabular-nums;color:var(--ink)}
+.bar .score{position:absolute;left:8px;top:0;line-height:22px;font-size:.78rem;font-weight:600;color:#fff}
+.bar.low .score{color:var(--ink)}
+.total{display:grid;grid-template-columns:190px 1fr;gap:10px 22px;align-items:start;padding:16px 0 4px;border-top:2px solid var(--ink);margin-top:6px}
+@media (max-width:760px){.total{grid-template-columns:1fr}}
+.total .bar{height:28px} .total .bar .val,.total .bar .score{line-height:28px;font-size:.9rem}
+.method{font-size:.85rem;color:var(--muted);margin-top:14px;max-width:none}
+.method summary{cursor:pointer;color:var(--ink);font-weight:500}
+.method ul{padding-left:18px;margin:6px 0}
+.legend-bars{display:none}
+
+/* Table */
+.table-scroll{overflow-x:auto;margin-top:12px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font:600 .8rem "IBM Plex Sans",sans-serif;color:var(--muted);border-bottom:2px solid var(--ink)}
+tbody th{font-weight:600;white-space:nowrap}
+tbody th small{display:block;font-weight:400;color:var(--muted);font-size:.78rem}
+td .v{white-space:nowrap}
+td .d{font-size:.78rem;display:block;margin-top:2px}
+.up{color:var(--teal)} .down{color:var(--brick)} .flat{color:var(--muted)}
+.legend-sc{font-size:.85rem;color:var(--muted);margin-top:8px}
+
+.sources ol{padding-left:20px;columns:2;column-gap:32px;font-size:.9rem}
+@media (max-width:760px){.sources ol{columns:1}}
+.sources li{margin:0 0 8px;break-inside:avoid}
+footer{padding:28px 0 60px;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Trinta anos do Real em números — uma análise para as eleições de 2026</h1>
+    <p class="lead">Séries anuais de 1994 a 2026 do IBGE, do Banco Central, do Tesouro, do Inpe e da Serasa, com cada governo sombreado no mesmo lugar em todos os gráficos, as contestações posicionadas na linha do tempo, a gestão das grandes crises comparada com o resto do mundo e um placar de 0 a 10 para os dois governos em disputa.</p>
+    <div class="howto">
+      <div><strong>Linha do tempo</strong>Roxo abre uma contestação com argumento e contra-argumento; amarelo, uma crise; preto, um marco de contexto.</div>
+      <div><strong>Gráficos</strong>Passe o mouse para ver o valor do ano. O sombreamento alternado marca a troca de presidente.</div>
+      <div><strong>Placar 0–10</strong>Zero é o pior resultado entre os seis governos desde 1995; dez é o melhor. Todos os governos lado a lado.</div>
+    </div>
+    <nav class="toc" aria-label="Seções">
+      <a href="#timeline">Linha do tempo</a><a href="#charts">Séries</a><a href="#crises">Gestão de crises</a><a href="#board">Placar 0–10</a><a href="#scorecard">Recebeu → entregou</a><a href="#sources">Fontes</a>
+    </nav>
+  </div>
+</header>
+
+<section id="timeline">
+  <div class="wrap">
+    <h2>Linha do tempo das contestações</h2>
+    <p class="intro">Um número fiscal ou social quase nunca é só resultado de quem estava no cargo: choques externos, decisões do Congresso, do STF e do Banco Central e contas herdadas se acumulam. Cada marcador situa uma dessas decisões no ano em que ocorreu.</p>
+    <div class="govlegend" id="govlegend"></div>
+    <div class="tl-filters" id="filters" role="group" aria-label="Filtrar marcadores por tema"></div>
+    <div class="tl-scroll"><div class="tl" id="tl" aria-live="polite"></div></div>
+    <div class="detail" id="detail"><p class="empty">Selecione um marcador na linha do tempo.</p></div>
+  </div>
+</section>
+
+<section id="charts">
+  <div class="wrap">
+    <h2>As séries, ano a ano</h2>
+    <p class="intro">Valores de 1994 a 2024 são das séries oficiais em suas versões mais recentes (sujeitas a revisões de até ±0,5 p.p. em PIB e dívida). Os de 2025 e 2026 vêm das divulgações de 2026 listadas nas fontes. Onde a série oficial começa mais tarde, o gráfico começa junto com ela — séries anteriores usavam outra metodologia.</p>
+    <div class="controls">
+      <label><input type="checkbox" id="bands" checked> Sombrear governos</label>
+      <label><input type="checkbox" id="focus"> Destacar apenas 2019–2026</label>
+    </div>
+    <div class="chartgrid" id="chartgrid"></div>
+  </div>
+</section>
+
+<section id="crises">
+  <div class="wrap">
+    <h2>Gestão de crises: Brasil versus o mundo</h2>
+    <p class="intro">Crises são o teste mais duro e o mais fácil de distorcer, porque cada lado escolhe o país de comparação que lhe convém. Abaixo, para cada choque, os mesmos indicadores para o Brasil e para referências fixas (mundo, EUA, zona do euro, América Latina), com a resposta do governo e a leitura dos dois lados.</p>
+    <div class="crises" id="crises"></div>
+  </div>
+</section>
+
+<section id="board">
+  <div class="wrap">
+    <h2>Placar 0–10: os seis governos desde o Real</h2>
+    <p class="intro">Cada atributo é uma nota relativa: 0 para o pior resultado entre os seis governos desde 1995 e 10 para o melhor, calculada ao vivo a partir das séries deste documento. Os dois governos em disputa em 2026 aparecem sublinhados e em negrito; os demais dão a régua histórica. Lembre que 2003–2010 coincidiu com o maior boom de commodities em um século e que 2020 foi a pandemia.</p>
+    <div class="board">
+      <div class="heads" id="heads"></div>
+      <div class="controls">
+        <label><input type="checkbox" id="ex2020"> Excluir 2020 (pandemia) das médias de PIB e resultado primário</label>
+      </div>
+      <div id="attrs"></div>
+      <div class="total" id="total"></div>
+      
+      <details class="method"><summary>Como as notas são calculadas</summary>
+        <ul>
+          <li>Crescimento: média anual do PIB no mandato. Inflação: média do IPCA. Investimento: média da taxa FBCF/PIB. Contas públicas: média do resultado primário consolidado. Setor externo: saldo comercial médio. Desmatamento: média anual do Prodes (Amazônia).</li>
+          <li>Emprego, pobreza e dívida: variação entre o último ano anterior à posse e o último ano do mandato (em pontos percentuais). Só há série comparável de desemprego e pobreza a partir de 2012, então FHC e Lula 1–2 ficam fora desses atributos; a dívida bruta começa em 2006 e o valor de Lula 1–2 cobre 2006–2010.</li>
+          <li>Salário mínimo real: variação percentual entre o valor do primeiro ano do mandato e o do primeiro ano do mandato seguinte, deflacionado pelo IPCA.</li>
+          <li>Dilma inclui 2016 inteiro; Temer, 2017–2018. Lula 3 usa 2023–2025 (dívida: julho/2026; desemprego: média de 2025).</li>
+          <li>A média final é simples: cada atributo pesa igual. Isso é uma escolha discutível — um eleitor que prioriza emprego e outro que prioriza dívida chegariam a totais diferentes, e é exatamente por isso que as barras individuais importam mais que a média.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="scorecard">
+  <div class="wrap">
+    <h2>Recebeu → entregou, seis governos</h2>
+    <p class="intro">"Recebeu" é o valor de dezembro do ano anterior à posse; "entregou" é o de dezembro do último ano completo (para Lula 3, o dado mais recente). O PIB é a média anual do período.</p>
+    <div class="table-scroll"><table id="sc"></table></div>
+    <p class="legend-sc">Verde indica melhora e vermelho piora na direção economicamente desejável. Câmbio e Selic não recebem cor: sua direção "boa" depende do objetivo.</p>
+  </div>
+</section>
+
+<section id="sources" class="sources">
+  <div class="wrap">
+    <h2>Fontes</h2>
+    <p class="intro">Séries históricas: IBGE (Contas Nacionais, IPCA, PNAD Contínua, Síntese de Indicadores Sociais), Banco Central (DBGG, resultado primário, Selic, PTAX), MDIC/Secex (balança), Inpe/Prodes (desmatamento), Serasa Experian (recuperações judiciais), FMI/WEO (PIB mundial) e Our World in Data (Covid). O salário mínimo real foi deflacionado pelo IPCA anual a preços de janeiro de 2026. Abaixo, as divulgações usadas para 2025–2026 e para os episódios.</p>
+    <ol>
+      <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/45968-pib-cresce-2-3-em-2025-e-fecha-o-ano-em-r-12-7-trilhoes">IBGE — PIB cresce 2,3% em 2025</a></li>
+      <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/47739-ipca-fica-em-0-07-em-julho">IBGE — IPCA de julho de 2026</a></li>
+      <li><a href="https://biblioteca.ibge.gov.br/visualizacao/periodicos/3086/pnacm_2026_jul.pdf">IBGE — PNAD Contínua, maio–julho de 2026</a></li>
+      <li><a href="https://www.poder360.com.br/poder-economia/divida-bruta-chega-a-r-109-tri-e-atinge-825-do-pib/">BC via Poder360 — Dívida bruta em julho de 2026</a></li>
+      <li><a href="https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/janeiro/governo-central-cumpre-com-folga-a-meta-fiscal-estabelecida-para-2025-aponta-relatorio-do-tesouro">Tesouro — Resultado primário de 2025</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-01/contas-publicas-tem-deficit-de-r-55021-bilhoes-em-2025">Agência Brasil — Setor público consolidado 2025</a></li>
+      <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/45344-8-6-milhoes-de-pessoas-sairam-da-pobreza-entre-2023-e-2024">IBGE — Síntese de Indicadores Sociais 2025</a></li>
+      <li><a href="https://www.ipea.gov.br/portal/categorias/45-todas-as-noticias/noticias/16170-brasil-registrou-em-2024-recorde-de-renda-e-menor-nivel-de-pobreza-e-desigualdade">Ipea — Renda, pobreza e desigualdade 1995–2024</a></li>
+      <li><a href="https://www.cnnbrasil.com.br/economia/macroeconomia/bc-copom-agosto-2026/">CNN Brasil — Copom de agosto de 2026</a></li>
+      <li><a href="https://forbes.com.br/forbes-money/2026/01/brasil-tem-superavit-comercial-de-us-683-bi-em-2025/">Forbes/MDIC — Balança comercial 2025</a></li>
+      <li><a href="https://www.gov.br/inpe/pt-br/assuntos/ultimas-noticias/novos-dados-do-prodes-sao-atualizados-pelo-programa-biomasbr">Inpe — Prodes 2025 consolidado (5.731 km²)</a></li>
+      <li><a href="https://agenciagov.ebc.com.br/noticias/202510/em-2025-desmatamento-tem-reducao-de-11-08-na-amazonia-e-11-49-no-cerrado-1">Agência Gov — Desmatamento 2025, Amazônia e Cerrado</a></li>
+      <li><a href="https://www.serasaexperian.com.br/sala-de-imprensa/indicadores/recuperacoes-judiciais-avancam-no-brasil-e-atingem-25-mil-empresas-em-2025-maior-nivel-da-serie-aponta-serasa-experian/">Serasa Experian — Recuperações judiciais 2025</a></li>
+      <li><a href="https://forbes.com.br/forbes-money/2026/04/recorde-no-numero-de-recuperacoes-judiciais-esconde-mudanca-critica-aponta-indicador-da-serasa-experian/">Forbes — RJ recorde e crescimento da base de empresas</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/politica/noticia/2021-12/o-que-muda-com-pec-dos-precatorios">Agência Brasil — PEC dos Precatórios (2021)</a></li>
+      <li><a href="https://diariodocomercio.com.br/economia/governo-considera-facil-obter-mais-de-r-100-bi-em-dividendos-apos-recorde-da-petrobras/">Diário do Comércio — Eletrobras e dividendos em 2022</a></li>
+      <li><a href="https://www.jb.com.br/colunistas/o-outro-lado-da-moeda/2024/01/1048497-deficit-e-de-lula-ou-bolsonaro.html">Jornal do Brasil — Déficit de 2023</a></li>
+      <li><a href="https://www.cnnbrasil.com.br/economia/macroeconomia/gastos-fora-da-meta-fiscal-ultrapassam-r-300-bilhoes-em-governo-lula-3/">CNN Brasil — Gastos fora da meta em Lula 3</a></li>
+      <li><a href="https://blogdoibre.fgv.br/posts/incredibilidade-na-politica-fiscal-e-consequente-necessidade-de-aumento-de-juros">FGV Ibre — Credibilidade fiscal e juros</a></li>
+      <li><a href="https://exame.com/economia/mesmo-sem-guerra-pacote-de-r-200-bi-de-lula-dificulta-queda-da-selic-diz-economista/">Exame — Pacote de 2026 e a Selic</a></li>
+      <li><a href="https://www.gazetadopovo.com.br/economia/risco-fiscal-kit-reeleicao-lula/">Gazeta do Povo — PEC 66/2025</a></li>
+      <li><a href="https://www.gazetadopovo.com.br/economia/guerra-ira-impacto-petroleo-dolar-economia-brasil/">Gazeta do Povo — Guerra no Irã e a economia brasileira</a></li>
+      <li><a href="https://www.cartacapital.com.br/mundo/como-a-guerra-de-eua-e-israel-no-ira-pode-afetar-o-brasil/">CartaCapital — Efeitos da guerra no Irã</a></li>
+      <li><a href="https://www.brasil247.com/economia/atuacao-do-governo-lula-faz-combustiveis-subirem-menos-no-brasil-do-que-no-resto-do-mundo-aponta-estudo">Ineep via Brasil 247 — Combustíveis na guerra de 2026 (visão favorável ao governo)</a></li>
+      <li><a href="https://www.vitrinedocariri.com.br/2026/05/03/inflacao-volta-a-ganhar-forca-no-brasil-e-complica-planos-de-acelerar-corte-de-juros">Vitrine do Cariri — Inflação e guerra em 2026 (visão crítica)</a></li>
+      <li><a href="https://www.eco.unicamp.br/noticias/dimensoes-da-economia-brasileira-renda-emprego-e-desigualdade-nos-governos-lula-a-bolsonaro">Unicamp/IE — Renda e emprego (visão favorável a Lula)</a></li>
+      <li><a href="https://www.gazetadopovo.com.br/vozes/alan-ghani/lula-3-e-pior-que-dilma-1/">Gazeta do Povo — A herança recebida por Lula (visão favorável a Bolsonaro)</a></li>
+      <li><a href="https://www.forte.jor.br/2026/08/20/jair-bolsonaro-da-onda-antipolitica-ao-planalto-pandemia-recuperacao-economica-e-transformacao-das-forcas-armadas/">Forças Terrestres — Balanço do governo Bolsonaro</a></li>
+      <li><a href="https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%A3o_presidencial_no_Brasil_em_2026">Wikipédia — Eleição presidencial de 2026 (candidaturas)</a></li>
+    </ol>
+  </div>
+</section>
+
+<footer><div class="wrap">Documento elaborado em setembro de 2026 e publicado em outubro de 2026. Dados de 2026 são parciais. Fotos: o documento não inclui imagens de pessoas reais; use "trocar foto" para carregar uma imagem do seu computador — ela fica só na sua tela e não é enviada a lugar nenhum.</div></footer>
+
+<script>
+/* ---------- Governments ---------- */
+const GOVS=[
+ {n:"Itamar",s:1994,e:1995,c:"var(--band-b)"},
+ {n:"FHC",s:1995,e:2003,c:"var(--band-a)"},
+ {n:"Lula 1 e 2",s:2003,e:2011,c:"var(--band-b)"},
+ {n:"Dilma",s:2011,e:2016.67,c:"var(--band-a)"},
+ {n:"Temer",s:2016.67,e:2019,c:"var(--band-b)"},
+ {n:"Bolsonaro",s:2019,e:2023,c:"var(--band-a)"},
+ {n:"Lula 3",s:2023,e:2027,c:"var(--band-b)"}
+];
+const T0=1994,T1=2027;
+const pct=y=>((y-T0)/(T1-T0)*100);
+
+/* ---------- Data series ---------- */
+const Y=(a,b)=>{const r=[];for(let i=a;i<=b;i++)r.push(String(i));return r};
+const D={
+ pib:{labels:Y(1994,2025),v:[5.9,4.2,2.2,3.4,0.3,0.5,4.4,1.4,3.1,1.1,5.8,3.2,4.0,6.1,5.1,-0.1,7.5,4.0,1.9,3.0,0.5,-3.5,-3.3,1.3,1.8,1.2,-3.3,4.8,3.0,3.2,3.4,2.3]},
+ mundo:{labels:Y(1995,2025),v:[3.1,3.9,4.1,2.6,3.6,4.8,2.5,3.0,4.0,5.4,4.9,5.5,5.6,3.0,-0.1,5.4,4.3,3.5,3.5,3.6,3.5,3.3,3.8,3.6,2.8,-2.7,6.3,3.5,3.3,3.3,3.2]},
+ emerg:{labels:Y(1995,2025),v:[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,6.4,5.4,5.1,4.7,4.3,4.4,4.8,4.6,3.6,-1.8,6.9,4.1,4.4,4.3,4.1]},
+ ipca:{labels:Y(1995,2025),v:[22.4,9.6,5.2,1.7,8.9,6.0,7.7,12.5,9.3,7.6,5.7,3.1,4.5,5.9,4.3,5.9,6.5,5.8,5.9,6.4,10.7,6.3,2.9,3.7,4.3,4.5,10.1,5.8,4.6,4.8,4.3]},
+ meta:{labels:Y(1995,2025),v:[null,null,null,null,8,6,4,3.5,4,5.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.25,4,3.75,3.5,3.25,3,3]},
+ desemp:{labels:Y(2012,2025),v:[7.4,7.1,6.8,8.5,11.5,12.7,12.3,11.9,13.8,13.2,9.3,7.8,6.6,5.6]},
+ dbgg:{labels:[...Y(2006,2025),"jul/26"],v:[55.5,56.7,56.0,59.2,51.8,51.3,53.7,51.5,56.3,65.5,69.8,73.7,75.3,74.4,86.9,77.3,71.7,73.8,76.5,78.6,82.5]},
+ prim:{labels:Y(1997,2025),v:[-0.9,0.0,2.9,3.2,3.3,3.2,3.3,3.7,3.7,3.2,3.2,3.3,1.9,2.6,2.9,2.2,1.7,-0.6,-1.9,-2.5,-1.7,-1.5,-0.8,-9.4,0.7,1.2,-2.3,-0.4,-0.4]},
+ selic:{labels:[...Y(1999,2025),"ago/26"],v:[19,15.75,19,25,16.5,17.75,18,13.25,11.25,13.75,8.75,10.75,11,7.25,10,11.75,14.25,13.75,7,6.5,4.5,2,9.25,13.75,11.75,12.25,15,14]},
+ cambio:{labels:[...Y(1994,2025),"ago/26"],v:[0.85,0.97,1.04,1.12,1.21,1.79,1.95,2.32,3.53,2.89,2.65,2.34,2.14,1.77,2.34,1.74,1.67,1.88,2.04,2.34,2.66,3.90,3.26,3.31,3.87,4.03,5.20,5.58,5.22,4.84,6.19,5.44,5.20]},
+ fbcf:{labels:Y(1995,2025),v:[18.0,16.9,17.4,17.0,15.7,16.8,17.0,16.4,15.3,16.1,15.9,16.4,17.4,19.1,18.1,19.5,19.3,19.4,19.7,19.9,17.6,15.0,14.6,15.5,15.5,16.6,18.9,17.8,16.4,16.9,16.8]},
+ balanca:{labels:Y(1994,2025),v:[10.5,-3.5,-5.6,-6.8,-6.6,-1.3,-0.7,2.7,13.1,24.8,33.6,44.7,46.5,40.0,24.8,25.3,20.1,29.8,19.4,2.3,-4.0,19.7,47.7,67.0,58.0,48.0,50.4,61.4,61.8,98.8,74.2,68.3]},
+ smreal:{labels:Y(1995,2026),v:[728,666,652,671,690,704,792,817,871,863,926,1022,1076,1125,1190,1251,1263,1353,1393,1405,1437,1450,1453,1437,1449,1454,1464,1466,1509,1543,1583,1621]},
+ pobreza:{labels:Y(2012,2024),v:[26.5,24.9,24.1,26.7,27.9,27.7,26.5,25.9,24.1,36.7,31.6,27.3,23.1]},
+ desmat:{labels:Y(1994,2025),v:[14896,29059,18161,13227,17383,17259,18226,18165,21651,25396,27772,19014,14286,11651,12911,7464,7000,6418,4571,5891,5012,6207,7893,6947,7536,10129,10851,13038,11594,9064,6288,5731]},
+ rj:{labels:Y(2010,2025),v:[475,515,757,874,828,1287,1863,1420,1408,1387,1179,891,833,1405,2182,2466]}
+};
+
+/* ---------- Timeline events ---------- */
+const EV=[
+ {y:1994.5,cat:"precos",t:"Plano Real",data:"O Real entra em circulação em 1º de julho de 1994. O IPCA do ano foi de 916%; em 1995 caiu para 22,4% e em 1998 para 1,7%. A âncora era o câmbio quase fixo, que exigiu juros altíssimos e gerou déficits externos."},
+ {y:1999.1,cat:"precos",t:"Câmbio flutuante e metas de inflação",data:"Após a crise de janeiro de 1999, o Brasil abandona a âncora cambial, adota metas de inflação e assume compromisso de superávit primário. Nasce o 'tripé' que todos os governos seguintes herdaram — e reinterpretaram."},
+ {y:2002.8,cat:"externo",t:"Crise eleitoral de 2002",data:"Temor com a eleição de Lula leva o dólar a R$ 3,53 e o IPCA a 12,5%. A 'Carta ao Povo Brasileiro' compromete o PT com o tripé. Em 2003 o governo eleva a meta de superávit para 4,25% do PIB."},
+ {y:2004.5,cat:"ambiente",t:"Pico do desmatamento e PPCDAm",data:"27.772 km² desmatados na Amazônia em 2004, o segundo pior ano da série. O PPCDAm (2004), embargos, Deter em tempo real e a moratória da soja derrubam a taxa para 4.571 km² em 2012 — a maior queda da série, sob Lula e Dilma."},
+ {y:2008.7,cat:"externo",t:"Crise financeira global",crise:true,
+  claim:"“Foi só uma marolinha.”",
+  data:"PIB de 2009: Brasil −0,1%, mundo −0,1%, EUA −2,6%, zona do euro −4,5%. Resposta: redução do IPI de automóveis e eletrodomésticos, expansão do crédito público (BNDES, Caixa), corte da Selic de 13,75% para 8,75%. Rebote de 7,5% em 2010, o maior desde 1986.",
+  pro:"Entre as grandes economias, o Brasil foi uma das que menos caiu e a que mais rápido se recuperou, com desemprego em queda mesmo em 2009.",
+  con:"A saída foi comprada com crédito direcionado e a capitalização da Petrobras (2010), que inflou o primário; o modelo de estímulo permanente virou a política econômica de Dilma e desaguou na recessão de 2015–16.",
+  verdict:"Gestão de curto prazo bem-sucedida por qualquer métrica internacional; o custo apareceu quando o estímulo não foi retirado."},
+ {y:2014.6,cat:"fiscal",t:"Pedaladas e fim do superávit",data:"2014 é o primeiro déficit primário desde 1997 (−0,6% do PIB). O atraso de repasses a bancos públicos vira a base jurídica do impeachment de 2016. A dívida bruta sai de 51,5% (2013) para 69,8% (2016)."},
+ {y:2016.95,cat:"fiscal",t:"Teto de gastos",data:"A EC 95/2016 congela o gasto primário real por 20 anos. É a regra que Bolsonaro herdou, contornou em 2021–22 e que Lula substituiu pelo arcabouço fiscal em 2023."},
+ {y:2017.85,cat:"trabalho",t:"Reforma trabalhista",data:"Em vigor desde novembro de 2017. Defensores de Temer e Bolsonaro a citam como causa da queda do desemprego nos anos seguintes; críticos apontam a alta da informalidade. O desemprego só começou a cair de forma sustentada em 2021."},
+ {y:2019.85,cat:"fiscal",t:"Reforma da Previdência",debate:true,
+  claim:"“A reforma de 2019 explica a melhora fiscal e o mercado de trabalho que Lula herdou.”",
+  data:"A EC 103/2019 criou idade mínima e mudou transições; a economia estimada foi de ~R$ 800 bilhões em dez anos. Mesmo assim, o déficit do RGPS foi de R$ 317 bilhões em 2025 e Previdência mais BPC são o principal vetor de alta do gasto obrigatório.",
+  pro:"A reforma conteve uma trajetória explosiva. Sem ela, o déficit previdenciário de 2025 seria dezenas de bilhões maior, e a autonomia do BC (2021) deu ao país o arranjo institucional que Lula usa hoje.",
+  con:"A reforma não reduz o gasto em nível, apenas a velocidade de crescimento. O emprego respondeu ao ciclo, não à Previdência; o desemprego seguiu em 12% em 2019 e subiu em 2020.",
+  verdict:"Reforma relevante para o longo prazo, mas insuficiente para explicar o mercado de trabalho: a curva de desemprego não muda em 2019 nem em 2023 — muda em 2021."},
+ {y:2019.6,cat:"ambiente",t:"Desmatamento volta a subir",debate:true,
+  claim:"“Bolsonaro incentivou o desmatamento” / “o fogo é cultural e a série já subia desde 2012.”",
+  data:"Prodes Amazônia: 7.536 km² (2018) → 10.129 (2019) → 10.851 (2020) → 13.038 (2021, maior desde 2006) → 11.594 (2022). Média do mandato: 11.400 km²/ano, contra 6.000 sob Dilma e 7.200 sob Temer. Sob Lula 3: 9.064 → 6.288 → 5.731 (2025, terceira menor taxa da série).",
+  pro:"A alta começou em 2013 e o mandato coincidiu com secas fortes; o Brasil tem 66% do território com vegetação nativa e o agro cresceu sem novas áreas. O governo Lula colhe o efeito da fiscalização que só é possível com o orçamento e a queda de preços das commodities de 2023.",
+  con:"Multas do Ibama caíram, o Fundo Amazônia foi paralisado, o discurso presidencial desautorizou a fiscalização e as queimadas de 2019–2020 custaram a imagem externa e acordos comerciais. A queda de 50% em três anos de Lula mostra que era política, não clima.",
+  verdict:"O dado é dos mais inequívocos do documento: a única inflexão de alta sustentada desde 2004 ocorreu em 2019–2021, e a reversão foi imediata à troca de governo."},
+ {y:2020.25,cat:"externo",t:"Pandemia",crise:true,ref:"pandemia",
+  claim:"“A queda do PIB e a explosão da dívida em 2020 não são culpa de Bolsonaro.”",
+  data:"PIB −3,3% (mundo −2,7%; América Latina −7,0%). Déficit primário de −9,4% do PIB. Dívida bruta salta de 74,4% para 86,9%. O Auxílio Emergencial chegou a 68 milhões de pessoas e derrubou a pobreza em 2020 para o menor nível da série, que voltou a explodir em 2021 (36,7%) quando o auxílio encolheu. Veja o quadro comparativo completo na seção de crises.",
+  pro:"A recessão foi global, o Brasil caiu menos que a média latino-americana e a resposta fiscal foi proporcional à das economias avançadas. O Congresso, não o Executivo, definiu o valor de R$ 600.",
+  con:"O governo demorou a reagir, resistiu ao valor do auxílio, e o corte abrupto em 2021 produziu o pior ano de pobreza da série. A recuperação de 2021 (+4,8%) é rebote estatístico.",
+  verdict:"O choque foi exógeno; a política de 2020 foi eficaz na pobreza; a de 2021 foi o ponto fraco. Qualquer média 2019–2022 deve ser lida com 2020 em mente."},
+ {y:2021.25,cat:"fiscal",t:"Autonomia do Banco Central",data:"Lei Complementar 179/2021, sancionada por Bolsonaro, dá mandatos fixos à diretoria do BC. É por isso que Lula conviveu dois anos com Campos Neto e por isso o BC indicado por ele (Galípolo) votou pelas altas de 2025."},
+ {y:2021.6,cat:"externo",t:"Crise hídrica e bandeira de escassez",crise:true,ref:"hidrica",
+  data:"Pior seca em 91 anos nos reservatórios do Sudeste/Centro-Oeste. Bandeira 'escassez hídrica' (R$ 14,20 por 100 kWh) de setembro de 2021 a abril de 2022; energia elétrica sobe 21,2% no IPCA de 2021 e é o item de maior peso na inflação de 10,06%.",
+  pro:"Não houve racionamento nem apagão, ao contrário de 2001; o despacho de térmicas foi decisão técnica do ONS.",
+  con:"O governo demorou a acionar térmicas e usou a MP da Eletrobras para embutir contratação de gás a longo prazo, encarecendo a conta por 15 anos.",
+  verdict:"Gestão operacional adequada, custo distribuído ao consumidor via tarifa e via inflação no ano seguinte."},
+ {y:2021.92,cat:"fiscal",t:"PEC dos Precatórios",debate:true,
+  claim:"“Bolsonaro deu calote nos precatórios para fabricar espaço fiscal no ano eleitoral.”",
+  data:"As EC 113 e 114 (dez/2021) mudaram o cálculo do teto de gastos — abrindo R$ 62,2 bilhões em 2022 — e adiaram R$ 43,56 bilhões em precatórios de grande valor, parceláveis até 2026. O governo estimava a fatura de precatórios de 2022 em R$ 89,1 bilhões. O espaço foi usado principalmente para o Auxílio Brasil de R$ 400.",
+  pro:"Não é calote: é reescalonamento aprovado por emenda constitucional, com quitação garantida. A alternativa era pagar R$ 89 bilhões estourando o teto ou cortar o Auxílio Brasil em plena saída da pandemia.",
+  con:"Dívida judicial com trânsito em julgado é despesa certa; adiá-la para fora do teto é maquiagem fiscal. O STF depois declarou inconstitucional o subteto, e a conta (R$ 92,4 bilhões) apareceu em dezembro de 2023 nas contas de Lula.",
+  verdict:"Tecnicamente legal, economicamente uma transferência de despesa de 2022 para 2023. Reduz o mérito do superávit de 2022 e aumenta o déficit de 2023 em ~40%. Padrão bipartidário: Lula, em 2025, voltou a tirar precatórios do limite (PEC 66)."},
+ {y:2022.2,cat:"externo",t:"Guerra da Ucrânia",crise:true,ref:"ucrania",
+  data:"Petróleo Brent de US$ 78 (jan/2022) para US$ 128 (mar/2022); trigo e fertilizantes disparam. IPCA de 2022: 5,79%, contra 6,5% nos EUA, 9,2% na zona do euro e 10,5% no Reino Unido. Veja o quadro na seção de crises.",
+  pro:"O Brasil fechou 2022 com inflação menor que a dos EUA e da Europa, sem controle de preços e com a Petrobras seguindo a paridade internacional.",
+  con:"O resultado veio de zerar PIS/Cofins e limitar o ICMS dos combustíveis (LC 194) em ano eleitoral, a um custo acima de R$ 50 bilhões para União e estados, e de trocar quatro presidentes da Petrobras em pressão por preços.",
+  verdict:"Resultado inflacionário bom em comparação internacional, obtido com renúncia fiscal em vez de política de preços — o espelho exato do que Lula faria em 2026 com a Petrobras."},
+ {y:2022.45,cat:"fiscal",t:"Eletrobras, dividendos e desonerações",debate:true,
+  claim:"“O superávit de 2022 foi feito vendendo patrimônio da União.”",
+  data:"A privatização da Eletrobras rendeu ~R$ 26 bilhões ao Tesouro; a Petrobras distribuiu R$ 87,8 bilhões em dividendos, ~R$ 25 bilhões para a União; o BNDES devolveu antecipadamente dezenas de bilhões. O Governo Central fechou com superávit de ~R$ 54 bilhões e o setor público consolidado com +1,2% do PIB. No mesmo ano, o governo zerou PIS/Cofins sobre combustíveis e limitou o ICMS, com custo estimado acima de R$ 50 bilhões, e elevou o Auxílio Brasil a R$ 600.",
+  pro:"Privatizar é política de Estado; o dinheiro reduziu dívida. Dividendos são receita legítima que Lula também recebe. Excluindo Eletrobras, o resultado ainda seria próximo de zero — melhor que qualquer ano desde 2013.",
+  con:"Somando itens não recorrentes chega-se a R$ 90–100 bilhões — mais que o superávit. Sem eles, 2022 seria deficitário, e as desonerações derrubaram a inflação artificialmente antes da eleição.",
+  verdict:"O superávit consolidado é real, mas de metade à totalidade dele depende de receitas extraordinárias. O mesmo critério deve ser aplicado às receitas atípicas de Lula."},
+ {y:2022.95,cat:"fiscal",t:"PEC da Transição",debate:true,
+  claim:"“Lula começou furando o teto em R$ 145 bilhões.”",
+  data:"A EC 126 (dez/2022) elevou o teto de 2023 em R$ 145 bilhões para pagar Bolsa Família de R$ 600, Farmácia Popular e outras despesas. Em 2023 o teto foi substituído pelo arcabouço fiscal.",
+  pro:"O Orçamento de 2023 enviado por Bolsonaro previa Auxílio Brasil de R$ 405 e não cabia nem o piso da enfermagem; a PEC apenas reconheceu o rombo já contratado.",
+  con:"A PEC foi maior do que o necessário e sinalizou que o governo trataria regras fiscais como flexíveis; o arcabouço nasceu com exceções que somaram R$ 324 bilhões até 2025.",
+  verdict:"Metade herança (o Orçamento 2022 era irrealista para 2023), metade escolha (o tamanho e a permanência do gasto adicional)."},
+ {y:2023.92,cat:"fiscal",t:"Pagamento de R$ 92 bi em precatórios",debate:true,
+  claim:"“O déficit de 2023 (−2,3% do PIB) é o pior fora da pandemia.”",
+  data:"O Governo Central fechou 2023 com déficit de R$ 230,5 bilhões. Em dezembro, após o STF derrubar o subteto de precatórios criado em 2021, o governo quitou R$ 92,4 bilhões de uma vez, fora da meta. Sem isso o déficit seria de R$ 138,1 bilhões (~1,3% do PIB).",
+  pro:"Foi Bolsonaro quem adiou; Lula só pagou. Concentrar o pagamento em 2023 limpou o passivo e permitiu cumprir as metas de 2024 e 2025.",
+  con:"O governo escolheu pagar tudo em dezembro de 2023 para que o ano 'sujo' fosse o primeiro do mandato. Mesmo sem precatórios, −1,3% do PIB seria o pior resultado desde 2017.",
+  verdict:"A despesa era herdada, o momento de pagá-la foi decisão política, e o déficit 'limpo' de 2023 já indicava expansão fiscal relevante."},
+ {y:2024.4,cat:"externo",t:"Enchentes no Rio Grande do Sul",crise:true,ref:"rs",
+  claim:"“As expectativas de inflação desancoraram por culpa do governo.”",
+  data:"Maior desastre climático da história do estado: 183 mortos, 2,4 milhões de afetados, 90% dos municípios atingidos. Resposta federal: ~R$ 33 bilhões fora da meta fiscal, suspensão da dívida do estado por 3 anos, Auxílio Reconstrução de R$ 5.100. O déficit de 2024 foi de R$ 11 bilhões no critério da meta e R$ 44 bilhões no total.",
+  pro:"Calamidade real, resposta rápida e proporcional; o governo cumpriu a meta e apresentou pacote de contenção em dezembro.",
+  con:"O pacote de contenção veio junto com a isenção do IR até R$ 5 mil, anulando o sinal fiscal; o mercado leu como falta de compromisso, o dólar foi a R$ 6,19 e a Selic subiu de 10,5% para 15%.",
+  verdict:"Gestão do desastre bem avaliada; o ponto de virada da percepção fiscal do mandato ocorre no mesmo semestre, por outras razões."},
+ {y:2025.5,cat:"externo",t:"Tarifaço dos EUA",crise:true,ref:"tarifaco",
+  data:"Em julho de 2025 os EUA impõem tarifa adicional de 50% a boa parte das exportações brasileiras, com motivação declaradamente política. Resposta: Plano Brasil Soberano (crédito e compras públicas, ~R$ 30 bilhões), diversificação para China, Índia e Oriente Médio. Exportações de 2025 fecham em recorde (US$ 348,7 bilhões); superávit de US$ 68,3 bilhões, terceiro maior da série.",
+  pro:"O país absorveu um choque político sem retaliar, manteve exportações recordes e ganhou mercados asiáticos.",
+  con:"O tarifaço foi consequência do isolamento diplomático do governo (Brics, Venezuela, Israel) e atingiu setores específicos — café, carne, frutas, calçados, aeronaves — que perderam margem mesmo com o agregado positivo.",
+  verdict:"Impacto macro pequeno, impacto setorial real; a discussão relevante é sobre a política externa, não sobre a econômica."},
+ {y:2025.7,cat:"fiscal",t:"PEC 66: precatórios fora do arcabouço",debate:true,
+  claim:"“Lula repetiu a manobra de Bolsonaro com os precatórios.”",
+  data:"Promulgada em setembro de 2025, a PEC 66 exclui precatórios do limite de despesa do arcabouço, retira-os da meta de 2026 (reincorporação gradual de 10% ao ano a partir de 2027) e troca a correção de Selic para IPCA + 2%.",
+  pro:"Dá previsibilidade a estados e municípios sufocados por precatórios e reduz o custo financeiro para a União.",
+  con:"É o mesmo mecanismo criticado em 2021: tirar despesa certa da regra fiscal em véspera de eleição. Analistas do Ibre e do IFI a classificam como postergação que corrói a confiança.",
+  verdict:"Simetria incômoda para os dois lados: quem chamou a PEC de 2021 de 'calote' precisa explicar a de 2025, e vice-versa."},
+ {y:2026.2,cat:"externo",t:"Guerra EUA/Israel–Irã",crise:true,ref:"ira",
+  data:"Ofensiva em março de 2026, fechamento do Estreito de Ormuz, petróleo de US$ 70 para mais de US$ 100. Resposta brasileira: Petrobras segura o diesel em R$ 3,68 (25% abaixo da paridade), subvenção ao diesel e ao GLP por medida provisória, fiscalização da ANP. IPCA-15 de 0,44% em março e 0,89% em abril, desacelerando em maio; IPCA em 12 meses de 4,44% em julho. Quadro completo na seção de crises.",
+  pro:"Combustíveis subiram menos que no resto do mundo, o BC manteve os cortes de juros e a inflação ficou dentro do intervalo da meta.",
+  con:"Segurar preço na Petrobras e subsidiar diesel em ano eleitoral é a política de Dilma em 2012–14, que custou R$ 100 bilhões à estatal; e o subsídio é gasto fiscal como o corte de PIS/Cofins de Bolsonaro em 2022.",
+  verdict:"Mesmo objetivo, mesma época do calendário eleitoral e instrumentos espelhados: Bolsonaro usou impostos, Lula usa a estatal. Os dois transferiram o custo ao Tesouro."},
+ {y:2026.5,cat:"trabalho",t:"Desemprego de 5,3% e pacote eleitoral",debate:true,
+  claim:"“A economia de 2026 vai bem / está sendo estimulada artificialmente.”",
+  data:"Desemprego de 5,3% no trimestre até julho, menor da série; 103,3 milhões de ocupados; informalidade em alta de 0,3 p.p. Selic cortada para 14% em agosto. Dívida em 82,5% do PIB com juros nominais de 8,67% do PIB. Estimativas de mercado apontam até R$ 200 bilhões em estímulos adicionais em 2026.",
+  pro:"Pleno emprego, renda recorde, pobreza mínima, inflação abaixo de qualquer mandato anterior e câmbio estável. A dívida sobe por juros que o BC autônomo escolhe manter altos.",
+  con:"Crescimento desacelerando para ~1,9%, investimento caindo, indústria de transformação em três trimestres negativos e a maior conta de juros da história — sintomas de uma economia estimulada além da capacidade.",
+  verdict:"Fluxo social excelente, estoque fiscal em deterioração. A pergunta eleitoral honesta não é 'quem entregou mais', e sim 'qual fatura você prefere pagar depois'."}
+];
+
+/* ---------- Crises (full comparison cards) ---------- */
+const CRISES=[
+ {id:"pandemia",when:"2020–2021 · governo Bolsonaro",t:"Pandemia de Covid-19",
+  rows:[["Mortes por milhão (oficiais, até 2023)","≈3.300","Mundo ≈870 · EUA ≈3.400 · Reino Unido ≈3.300 · Argentina ≈2.900 · México ≈2.600 · Peru ≈6.600"],
+        ["Subnotificação (excesso de mortes / oficiais, OMS 2020–21)","≈1,1×","Mundo ≈2,7× · México ≈2,0× · Índia ≈10×"],
+        ["Início da vacinação","17/jan/2021","Reino Unido 8/dez/2020 · EUA 14/dez/2020 · Chile 24/dez/2020 · Argentina 29/dez/2020"],
+        ["Esquema completo até fim de 2022","≈80% da população","Mundo ≈64% · EUA ≈69% · Argentina ≈83% · Chile ≈92%"],
+        ["PIB 2020","−3,3%","Mundo −2,7% · América Latina −7,0% · EUA −2,2% · Zona do euro −6,1%"],
+        ["Estímulo fiscal 2020","≈8% do PIB","Emergentes ≈4% · Avançados ≈12% (FMI)"],
+        ["Pobreza 2019 → 2020 → 2021","25,9% → 24,1% → 36,7%","Único país da região onde a pobreza caiu em 2020 (auxílio) e explodiu em 2021"]],
+  src:"Our World in Data, OMS, FMI WEO, IBGE. Comparações internacionais de mortes dependem de testagem e registro; o excesso de mortalidade é a métrica mais robusta.",
+  pro:"Em mortes por habitante o Brasil ficou no mesmo grupo de EUA e Reino Unido, e registrou suas mortes de forma muito mais completa que México ou Índia. A vacinação, apesar de começar tarde, superou os EUA em um ano. O PIB caiu metade da média latino-americana e o auxílio foi um dos maiores do mundo emergente.",
+  con:"O Brasil concentrou ~12% das mortes do mundo com 2,7% da população; teve o segundo maior número absoluto; o presidente desestimulou máscaras e vacinas, atrasou a compra da Pfizer (ofertas de 2020 ignoradas, tema da CPI), e Manaus ficou sem oxigênio em janeiro de 2021. O corte do auxílio em 2021 gerou o pior ano de pobreza da série.",
+  verdict:"Nos indicadores de saúde o Brasil ficou muito pior que a média mundial e que seus vizinhos de renda semelhante (Argentina, México), e semelhante a EUA/Reino Unido. Nos indicadores econômicos de 2020 ficou melhor que a região. A resposta foi forte no dinheiro e fraca na coordenação sanitária."},
+ {id:"ucrania",when:"2022 · governo Bolsonaro",t:"Guerra da Ucrânia e choque de energia e alimentos",
+  rows:[["Brent","US$ 78 → 128 (mar) → 86 (dez)","Choque global; Brasil é exportador líquido de petróleo e importador de diesel e fertilizantes"],
+        ["Inflação 2022","5,79%","EUA 6,5% · Zona do euro 9,2% · Reino Unido 10,5% · Argentina 94,8% · Chile 12,8% · México 7,8%"],
+        ["Inflação 2021 (ano anterior)","10,06%","EUA 7,0% · Zona do euro 5,0% · Reino Unido 5,4%"],
+        ["Resposta","PIS/Cofins zerado, ICMS limitado a 17–18% (LC 194), Auxílio Brasil R$ 600, vale-caminhoneiro","Custo estimado > R$ 50 bilhões para União e estados; Petrobras manteve paridade e reajustou preços"],
+        ["Selic","9,25% → 13,75%","Fed 0,25% → 4,50%; BC brasileiro subiu antes dos pares"]],
+  src:"IBGE, BLS, Eurostat, ONS, Indec, BC.",
+  pro:"O Brasil saiu do choque com inflação abaixo da dos países ricos, sem congelamento de preços e sem quebrar a Petrobras, que pagou dividendos recordes.",
+  con:"A inflação de 2021 já era o dobro da americana antes da guerra; a queda de 2022 veio de renúncia fiscal em ano eleitoral e da pressão política sobre a Petrobras (quatro presidentes em um ano). A conta do ICMS foi paga pelos estados e voltou em 2023 com a reoneração.",
+  verdict:"Resultado inflacionário comparativamente bom, obtido com renúncia fiscal e não com política monetária ou de preços — a mesma família de instrumentos que Lula usaria em 2026."},
+ {id:"hidrica",when:"2021 · governo Bolsonaro",t:"Crise hídrica",
+  rows:[["Reservatórios SE/CO","Mínimo em 91 anos (≈17% em set/2021)","Racionamento de 2001: reservatórios ≈20%"],
+        ["Tarifa","Bandeira escassez hídrica R$ 14,20/100 kWh (set/21–abr/22)","Energia elétrica +21,2% no IPCA de 2021"],
+        ["Apagão ou racionamento","Não","2001: racionamento de 20% por 8 meses"]],
+  src:"ONS, Aneel, IBGE.",
+  pro:"Sem racionamento, ao contrário de 2001, graças a térmicas e importação de energia.",
+  con:"Térmicas acionadas tarde e caras; a MP da Eletrobras embutiu contratação de gás por 15 anos, encarecendo a tarifa estruturalmente.",
+  verdict:"Operação adequada, custo alto repassado à tarifa e à inflação."},
+ {id:"rs",when:"2024 · governo Lula",t:"Enchentes no Rio Grande do Sul",
+  rows:[["Vítimas","183 mortos, 27 desaparecidos, 2,4 milhões de afetados","Maior desastre climático da história do estado"],
+        ["Resposta federal","≈R$ 33 bilhões fora da meta; dívida do estado suspensa por 3 anos; Auxílio Reconstrução R$ 5.100","Equivalente a ~0,3% do PIB; Alemanha (enchentes 2021) destinou €30 bilhões, ~0,8% do PIB"],
+        ["Efeito fiscal","Déficit de 2024: R$ 11 bi no critério da meta, R$ 44 bi no total","Meta cumprida com exclusão das despesas"]],
+  src:"Defesa Civil RS, Tesouro Nacional.",
+  pro:"Resposta rápida, ampla e coordenada com o estado; sem ela, a recessão gaúcha teria sido muito pior.",
+  con:"Parte dos recursos anunciados não foi executada em 2024; o uso da calamidade para abrir exceções na meta reforçou a percepção de regras fiscais flexíveis.",
+  verdict:"Gestão do desastre bem avaliada; o custo fiscal foi modesto em relação ao dano."},
+ {id:"tarifaco",when:"2025 · governo Lula",t:"Tarifaço dos Estados Unidos",
+  rows:[["Tarifa","50% sobre boa parte das exportações a partir de agosto de 2025","Outros países: 10–30%; motivação declarada foi política (Bolsonaro, STF, Pix)"],
+        ["Exportações 2025","US$ 348,7 bilhões (recorde, +3,5%)","Superávit US$ 68,3 bi (−7,9% vs 2024), terceiro maior da série"],
+        ["Exportações para os EUA","≈12% do total; queda em café, carne, frutas, calçados","Aumento para China, Índia e Oriente Médio"],
+        ["Resposta","Plano Brasil Soberano (~R$ 30 bi em crédito e compras públicas), sem retaliação","Negociação bilateral em curso"]],
+  src:"MDIC/Secex, Forbes.",
+  pro:"O país absorveu um choque político sem retaliar, manteve exportações recordes e ganhou mercados asiáticos.",
+  con:"O tarifaço foi consequência do isolamento diplomático do governo; setores específicos perderam margem mesmo com o agregado positivo.",
+  verdict:"Impacto macro pequeno, impacto setorial real; a discussão relevante é sobre a política externa, não sobre a econômica."},
+ {id:"ira",when:"2026 · governo Lula",t:"Guerra EUA/Israel–Irã e choque do petróleo",
+  rows:[["Brent","US$ 70 → >100 (mar) · recuo após acordo (mai)","AIE e G7 liberaram reservas recordes; BCE projetou inflação da zona do euro de 2,6% para até 3,5–4,4%"],
+        ["Diesel na refinaria","Petrobras manteve R$ 3,68; 25% abaixo da paridade em maio","Preços ao consumidor: diesel +16% em abril nas bombas, recuo em maio"],
+        ["IPCA-15","mar 0,44% · abr 0,89% · mai desacelera","IPCA 12 meses em jul/2026: 4,44% (meta 3%, teto 4,5%)"],
+        ["Resposta","Subvenção ao diesel e ao GLP (MP 1.358), benefícios fiscais a QAV e biodiesel, fiscalização da ANP","Custo fiscal não consolidado; Petrobras absorve diferença"],
+        ["Selic","BC seguiu cortando: 15% → 14% (mar–ago)","Fed e BCE mantiveram juros"]],
+  src:"Gazeta do Povo, CartaCapital, Euronews/BCE, Ineep, IBGE, ANP.",
+  pro:"Combustíveis subiram menos que no resto do mundo, não houve desabastecimento e a inflação ficou dentro do intervalo da meta, permitindo que o BC seguisse cortando juros.",
+  con:"Segurar preços na Petrobras e subsidiar diesel em ano eleitoral repete Dilma em 2012–14; o subsídio é gasto fiscal como o corte de PIS/Cofins de Bolsonaro em 2022. A inflação de 2026 ficou mais alta e persistente do que seria sem o choque, corroendo renda.",
+  verdict:"Instrumentos espelhados aos de 2022 (Bolsonaro usou impostos, Lula usa a estatal), ambos em ano eleitoral e ambos com custo ao Tesouro. O resultado inflacionário até aqui é comparável ao de 2022."}
+];
+
+/* ---------- Chart definitions ---------- */
+const CH=[
+ {id:"pib",title:"Crescimento do PIB",sub:"Variação real anual, %",type:"bar",ds:[{d:"pib",l:"Brasil",c:"#0E6B6B"}],note:"Médias: FHC 2,4% · Lula 1–2 4,1% · Dilma 0,4% · Temer 1,6% · Bolsonaro 1,4% · Lula 3 3,0%. Fonte: IBGE."},
+ {id:"mundo",title:"Brasil versus o mundo",sub:"Variação real do PIB, %",type:"line",ds:[{d:"pib",l:"Brasil",c:"#0E6B6B"},{d:"mundo",l:"Mundo (FMI)",c:"#8A3B7D"},{d:"emerg",l:"Emergentes (FMI, desde 2011)",c:"#C8952A",dash:true}],note:"O Brasil cresceu acima do mundo em 2003–2010 e abaixo em 2011–2022; em 2023–25 ficou perto da média mundial e abaixo dos emergentes."},
+ {id:"ipca",title:"Inflação e meta",sub:"IPCA acumulado no ano, %",type:"line",ds:[{d:"ipca",l:"IPCA",c:"#0E6B6B"},{d:"meta",l:"Centro da meta",c:"#8A3B7D",dash:true}],note:"1994 (916%) omitido. A meta caiu de 4,5% para 3% entre 2018 e 2024: Lula 3 tem a menor inflação média de um mandato e nunca cumpriu o centro da meta."},
+ {id:"desemp",title:"Desemprego",sub:"Taxa de desocupação, média anual, %",type:"line",ds:[{d:"desemp",l:"PNAD Contínua",c:"#0E6B6B"}],note:"Julho/2026: 5,3% (trimestre móvel), menor da série. A queda começa em 2021 e atravessa a troca de governo sem inflexão."},
+ {id:"dbgg",title:"Dívida bruta do governo geral",sub:"% do PIB, dezembro de cada ano",type:"line",ds:[{d:"dbgg",l:"DBGG",c:"#0E6B6B"}],note:"Bolsonaro: 75,3 → 71,7 (pico 86,9 em 2020). Lula 3: 71,7 → 82,5 (jul/26). Em 2026, juros somaram 5,7 p.p. e emissões 1,5 p.p."},
+ {id:"prim",title:"Resultado primário",sub:"Setor público consolidado, % do PIB",type:"bar",ds:[{d:"prim",l:"Primário",c:"#0E6B6B"}],note:"Positivo = superávit. Desde 2014 só houve superávit em 2021 e 2022; 2023 é o pior déficit fora da pandemia, do qual ~0,9 p.p. são precatórios herdados."},
+ {id:"selic",title:"Selic",sub:"Meta no fim de cada ano, % a.a.",type:"line",ds:[{d:"selic",l:"Selic",c:"#0E6B6B"}],note:"Bolsonaro: 6,5 → 13,75 (passando pela mínima histórica de 2%). Lula 3: 13,75 → 10,5 (2024) → 15 (2025) → 14 (ago/26)."},
+ {id:"cambio",title:"Câmbio",sub:"R$ por US$, PTAX no fim do ano",type:"line",ds:[{d:"cambio",l:"Dólar",c:"#0E6B6B"}],note:"Bolsonaro: 3,87 → 5,22 (+35%). Lula 3: 5,22 → 5,20, com pico de 6,19 em dez/2024."},
+ {id:"fbcf",title:"Taxa de investimento",sub:"Formação bruta de capital fixo, % do PIB",type:"line",ds:[{d:"fbcf",l:"FBCF/PIB",c:"#0E6B6B"}],note:"Nenhum governo desde 2014 recuperou os 19–20% da década anterior. Bolsonaro média 17,2%; Lula 3 16,7%."},
+ {id:"balanca",title:"Balança comercial",sub:"Saldo anual, US$ bilhões",type:"bar",ds:[{d:"balanca",l:"Saldo",c:"#0E6B6B"}],note:"Recorde de US$ 98,8 bi em 2023; US$ 68,3 bi em 2025 com exportações recordes apesar das tarifas dos EUA. Série ligada a commodities, não a governos."},
+ {id:"smreal",title:"Salário mínimo real",sub:"R$ a preços de janeiro de 2026 (deflacionado pelo IPCA)",type:"line",ds:[{d:"smreal",l:"Mínimo real",c:"#0E6B6B"}],note:"Dobrou entre 2003 e 2015; estável de 2016 a 2022 (reajuste só pela inflação); voltou a subir com a regra INPC + PIB em 2023. Cálculo aproximado."},
+ {id:"pobreza",title:"Pobreza",sub:"% da população abaixo de US$ 6,85/dia (IBGE, linha do Banco Mundial)",type:"line",ds:[{d:"pobreza",l:"Pobreza",c:"#0E6B6B"}],note:"2020 caiu com o Auxílio Emergencial; 2021 é o pior ano da série (36,7%); a queda começa em 2022 sob Bolsonaro e chega ao mínimo de 23,1% em 2024 sob Lula."},
+ {id:"desmat",title:"Desmatamento na Amazônia",sub:"Prodes/Inpe, km² por ano (agosto a julho)",type:"bar",ds:[{d:"desmat",l:"km²",c:"#0E6B6B"}],note:"Pico de 29.059 km² em 1995 e 27.772 em 2004; mínimo de 4.571 em 2012. Bolsonaro: média 11.400 km²/ano, alta de 60% sobre Temer. Lula 3: 5.731 km² em 2025, terceira menor taxa da série."},
+ {id:"rj",title:"Empresas em recuperação judicial",sub:"Serasa Experian, empresas (CNPJs) por ano",type:"bar",ds:[{d:"rj",l:"Recuperações judiciais",c:"#0E6B6B"}],note:"Recorde de 2.466 em 2025 (+13%), puxado por agro (30%) e juros altos; a base de empresas ativas cresceu 6,5%, 13,4% e 22,5% em 2023–25. Nos anos Bolsonaro, o crédito emergencial (Pronampe) e a Selic de 2% derrubaram os pedidos para o menor nível em uma década. 2024–25 na metodologia nova da Serasa; anos anteriores, na antiga."}
+];
+
+/* ---------- Government band plugin ---------- */
+let showBands=true, focusRecent=false;
+const bandColors={"var(--band-a)":"#E9EFF4","var(--band-b)":"#F2EEE4"};
+function labelToYear(l){ if(/^\d{4}$/.test(l)) return +l; const m=l.match(/(\d{2})$/); return m?2000+ +m[1]:null; }
+const bandPlugin={id:"bands",beforeDatasetsDraw(chart){
+  if(!showBands) return;
+  const {ctx,chartArea:{top,bottom,left,right},scales:{x}}=chart;
+  const labels=chart.data.labels; const n=labels.length;
+  const first=labelToYear(labels[0]), last=labelToYear(labels[n-1]);
+  const step=(x.getPixelForValue(n-1)-x.getPixelForValue(0))/Math.max(n-1,1);
+  const px=y=>x.getPixelForValue(0)+(y-first)*step-step/2;
+  ctx.save();
+  GOVS.forEach(g=>{
+    const s=Math.max(g.s,first), e=Math.min(g.e,last+1);
+    if(e<=s) return;
+    let x0=Math.max(left,px(s)), x1=Math.min(right,px(e));
+    if(x1<=x0) return;
+    ctx.fillStyle=bandColors[g.c]||"#eee";
+    if(focusRecent && g.s<2019) ctx.fillStyle="#F7F8F6";
+    ctx.fillRect(x0,top,x1-x0,bottom-top);
+    if(x1-x0>34 && !(focusRecent&&g.s<2019)){ ctx.fillStyle="#5B6675"; ctx.font="11px 'IBM Plex Sans',sans-serif"; ctx.textAlign="left"; ctx.fillText(g.n,x0+4,top+12); }
+  });
+  ctx.restore();
+}};
+if(typeof Chart!=="undefined"){ Chart.register(bandPlugin); Chart.defaults.font.family="'IBM Plex Sans',sans-serif"; Chart.defaults.color="#5B6675"; }
+
+const charts=[];
+function buildCharts(){
+  const grid=document.getElementById("chartgrid");
+  CH.forEach(c=>{
+    const box=document.createElement("div"); box.className="chart";
+    box.innerHTML=`<h3>${c.title}</h3><p class="sub">${c.sub}</p><div class="cv"><canvas role="img" aria-label="${c.title}: ${c.sub}"></canvas></div><p class="note">${c.note}</p>`;
+    grid.appendChild(box);
+    const baseLabels=D[c.ds[0].d].labels;
+    const isBar=c.type==="bar";
+    const datasets=c.ds.map(s=>{
+      const src=D[s.d];
+      const aligned=baseLabels.map(l=>{ const j=src.labels.indexOf(l); return j>=0?src.v[j]:null; });
+      return {label:s.l,data:aligned,borderColor:s.c,backgroundColor:isBar?aligned.map(v=>v<0?"#B8433F":s.c):s.c,borderWidth:isBar?0:2.2,pointRadius:isBar?0:2.5,pointHoverRadius:5,tension:0,spanGaps:false,borderDash:s.dash?[6,4]:[]};
+    });
+    const ch=new Chart(box.querySelector("canvas"),{type:c.type,data:{labels:baseLabels,datasets},options:{
+      responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:"index",intersect:false},
+      plugins:{legend:{display:datasets.length>1,labels:{boxWidth:14,boxHeight:2}},tooltip:{callbacks:{label:t=>` ${t.dataset.label}: ${t.formattedValue}`}}},
+      scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:9}},y:{grid:{color:"#E6EAE8"},border:{display:false},ticks:{maxTicksLimit:6}}}
+    }});
+    charts.push(ch);
+  });
+}
+document.getElementById("bands").addEventListener("change",e=>{showBands=e.target.checked;charts.forEach(c=>c.update());});
+document.getElementById("focus").addEventListener("change",e=>{focusRecent=e.target.checked;charts.forEach(c=>{
+  const lab=c.data.labels;
+  c.data.datasets.forEach(ds=>{
+    if(c.config.type==="bar"){ ds.backgroundColor=lab.map((l,i)=>{const y=labelToYear(l); const v=ds.data[i]; const base=v<0?"#B8433F":"#0E6B6B"; return (!focusRecent||y>=2019)?base:"#C9D1CE";}); }
+    else { ds.pointRadius=lab.map(l=>{const y=labelToYear(l); return (!focusRecent||y>=2019)?2.5:0;});
+           ds.segment={borderColor:ctx=>{const y=labelToYear(lab[ctx.p1DataIndex]); return (!focusRecent||y>=2019)?undefined:"#C9D1CE";}}; }
+  }); c.update();});});
+
+/* ---------- Timeline ---------- */
+const CATS={all:"Tudo",fiscal:"Contas públicas",precos:"Preços e juros",trabalho:"Trabalho e renda",ambiente:"Ambiente",externo:"Crises e choques"};
+let activeCat="all", activeEv=null;
+function buildTimeline(){
+  const tl=document.getElementById("tl"); tl.innerHTML="";
+  GOVS.forEach(g=>{ const b=document.createElement("div"); b.className="band"; b.style.left=pct(g.s)+"%"; b.style.width=(pct(g.e)-pct(g.s))+"%"; b.style.background=g.c; b.innerHTML=`<span>${g.n}</span>`; tl.appendChild(b); });
+  const ax=document.createElement("div"); ax.className="axis"; tl.appendChild(ax);
+  for(let y=1994;y<=2026;y+=2){ const t=document.createElement("div"); t.className="tick"; t.style.left=pct(y+0.5)+"%"; t.textContent=y; ax.appendChild(t); }
+  const list=EV.filter(e=>activeCat==="all"||e.cat===activeCat).sort((a,b)=>a.y-b.y);
+  const lanes=[];
+  list.forEach(e=>{ let lane=0; while(lanes[lane]!==undefined && e.y-lanes[lane]<1.9) lane++; lanes[lane]=e.y; e._lane=lane; });
+  const H=290;
+  list.forEach(e=>{ const b=document.createElement("button"); b.type="button"; b.className="ev"+(e.debate?" debate":"")+(e.crise?" crise":"")+(activeEv===e?" active":""); b.style.left=pct(e.y)+"%"; const top=36+e._lane*34; b.style.top=top+"px"; b.style.setProperty("--drop",(H-26-top-24)+"px"); b.textContent=e.t; b.setAttribute("aria-label",(e.debate?"Contestação: ":e.crise?"Crise: ":"Marco: ")+e.t); b.addEventListener("click",()=>{activeEv=e; buildTimeline(); showDetail(e);}); tl.appendChild(b); });
+  document.getElementById("govlegend").innerHTML=GOVS.map(g=>`<span><i style="background:${g.c}"></i>${g.n} ${Math.floor(g.s)}–${g.e>=2027?"hoje":Math.floor(g.e)}</span>`).join("");
+}
+function buildFilters(){ const f=document.getElementById("filters"); f.innerHTML=Object.entries(CATS).map(([k,v])=>`<button type="button" data-k="${k}" aria-pressed="${k===activeCat}">${v}</button>`).join(""); f.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{activeCat=b.dataset.k; buildFilters(); buildTimeline();})); }
+function showDetail(e){
+  const d=document.getElementById("detail");
+  const yr=Math.floor(e.y); const gov=GOVS.find(g=>e.y>=g.s&&e.y<g.e);
+  let h=`<div class="when">${yr} · governo ${gov?gov.n:""}</div><h3>${e.t}</h3>`;
+  if(e.claim) h+=`<p class="claim">${e.claim}</p>`;
+  h+=`<p class="data"><strong>O que os dados mostram.</strong> ${e.data}</p>`;
+  if(e.pro){ h+=`<div class="sides"><div class="side arg"><h4>Argumento</h4><p>${e.pro}</p></div><div class="side con"><h4>Contra-argumento</h4><p>${e.con}</p></div></div><div class="verdict"><strong>Leitura neutra.</strong> ${e.verdict}</div>`; }
+  if(e.ref) h+=`<p style="margin-top:12px;font-size:.9rem"><a href="#cr_${e.ref}">Ver o quadro comparativo desta crise ↓</a></p>`;
+  d.innerHTML=h;
+  if(window.innerWidth<720) d.scrollIntoView({block:"start"});
+}
+
+/* ---------- Crises section ---------- */
+function buildCrises(){
+  const c=document.getElementById("crises");
+  c.innerHTML=CRISES.map(k=>`<article class="crise" id="cr_${k.id}"><div class="when">${k.when}</div><h3>${k.t}</h3>
+    <div class="grid"><div><div class="table-scroll" style="margin:0"><table><thead><tr><th>Indicador</th><th>Brasil</th><th>Referências</th></tr></thead><tbody>${k.rows.map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div><p class="src">Fontes: ${k.src}</p></div>
+    <div><div class="sides"><div class="side arg"><h4>Argumento</h4><p>${k.pro}</p></div><div class="side con"><h4>Contra-argumento</h4><p>${k.con}</p></div></div><div class="verdict"><strong>Leitura neutra.</strong> ${k.verdict}</div></div></div></article>`).join("");
+}
+
+/* ---------- Scoreboard 0–10 ---------- */
+const PER={ "FHC":[1995,2002], "Lula 1–2":[2003,2010], "Dilma":[2011,2016], "Temer":[2017,2018], "Bolsonaro":[2019,2022], "Lula 3":[2023,2025] };
+function val(series,year){ const j=D[series].labels.indexOf(String(year)); return j>=0?D[series].v[j]:null; }
+function mean(series,a,b,skip){ let s=0,n=0; for(let y=a;y<=b;y++){ if(skip&&skip.includes(y)) continue; const v=val(series,y); if(v!=null){s+=v;n++;} } return n?s/n:null; }
+function delta(series,a,b,override){ const s=val(series,a-1), e=override!=null?override:val(series,b); return (s!=null&&e!=null)?e-s:null; }
+const ATTRS=[
+ {k:"pib",n:"Crescimento",d:"PIB, média anual",u:"% a.a.",hi:true,f:(g,a,b,o)=>mean("pib",a,b,o.ex?[2020]:null)},
+ {k:"ipca",n:"Inflação",d:"IPCA, média anual",u:"%",hi:false,f:(g,a,b)=>mean("ipca",a,b)},
+ {k:"des",sg:true,n:"Emprego",d:"variação do desemprego, média anual (desde 2012)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Dilma") return val("desemp",2016)-val("desemp",2012); return delta("desemp",a,b); }},
+ {k:"pob",sg:true,n:"Pobreza",d:"variação da pobreza (desde 2012)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Dilma") return val("pobreza",2016)-val("pobreza",2013); if(g==="Lula 3") return val("pobreza",2024)-val("pobreza",2022); return delta("pobreza",a,b); }},
+ {k:"sm",sg:true,n:"Salário mínimo real",d:"variação no mandato",u:"%",hi:true,f:(g,a,b)=>{ const s=val("smreal",a), e=val("smreal",b+1); return (s&&e)?(e/s-1)*100:null; }},
+ {k:"prim",n:"Contas públicas",d:"resultado primário, média (% PIB)",u:"% PIB",hi:true,f:(g,a,b,o)=>mean("prim",Math.max(a,1997),b,o.ex?[2020]:null)},
+ {k:"dbgg",sg:true,n:"Dívida bruta",d:"variação no mandato (desde 2006)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Lula 1–2") return val("dbgg",2010)-val("dbgg",2006); if(g==="Lula 3") return 82.5-val("dbgg",2022); return delta("dbgg",a,b); }},
+ {k:"fbcf",n:"Investimento",d:"FBCF/PIB, média",u:"% PIB",hi:true,f:(g,a,b)=>mean("fbcf",a,b)},
+ {k:"bal",n:"Setor externo",d:"saldo comercial médio",u:"US$ bi",hi:true,f:(g,a,b)=>mean("balanca",a,b)},
+ {k:"desm",n:"Desmatamento",d:"Amazônia, média anual",u:"km²",hi:false,f:(g,a,b)=>mean("desmat",a,b)}
+];
+const fmtN=(v,u,signed)=>{ if(v==null) return "—"; const abs=Math.abs(v); const dec=u==="km²"?0:(abs>=100?0:1); const s=v.toLocaleString("pt-BR",{minimumFractionDigits:dec,maximumFractionDigits:dec}); return ((signed&&v>0)?"+":"")+s+" "+u; };
+const GMETA={
+ "FHC":{c:"#6B7A8F",i:"F",p:"1995–2002",d:"Fernando Henrique Cardoso"},
+ "Lula 1–2":{c:"#C8952A",i:"L¹²",p:"2003–2010",d:"Lula, primeiros mandatos"},
+ "Dilma":{c:"#8A3B7D",i:"D",p:"2011–2016",d:"Dilma Rousseff (inclui 2016)"},
+ "Temer":{c:"#5E8C61",i:"T",p:"2017–2018",d:"Michel Temer"},
+ "Bolsonaro":{c:"#2F5D8A",i:"B",p:"2019–2022",d:"Candidato do campo em 2026: Flávio Bolsonaro",dispute:true},
+ "Lula 3":{c:"#A0522D",i:"L³",p:"2023–2026",d:"Candidato à reeleição",dispute:true}
+};
+const ORDER=Object.keys(GMETA);
+function buildHeads(){
+  document.getElementById("heads").innerHTML=ORDER.map(g=>{const m=GMETA[g]; const id="av_"+g.replace(/[^a-z0-9]/gi,"");
+    return `<div class="head ${m.dispute?"dispute":""}"><div class="avatar" id="${id}" style="background:${m.c};border-color:${m.c}"><span>${m.i}</span><img alt="Foto: ${g}"><label>trocar foto<input type="file" accept="image/*" data-av="${id}"></label></div><div class="who"><h3>${g}</h3><p>${m.p}<br>${m.d}</p></div></div>`;}).join("");
+  document.querySelectorAll(".avatar input").forEach(inp=>inp.addEventListener("change",e=>{ const f=e.target.files[0]; if(!f) return; const av=document.getElementById(e.target.dataset.av); const r=new FileReader(); r.onload=()=>{ av.querySelector("img").src=r.result; av.classList.add("has"); }; r.readAsDataURL(f); }));
+}
+function barHTML(g,sc,valTxt,tall){ const m=GMETA[g]; return `<div class="row ${m.dispute?"dispute":""}"><div class="g">${g}</div><div class="bar ${sc==null||sc<2.2?"low":""}"><div class="fill" style="width:${sc!=null?Math.max(sc*10,1):0}%;background:${m.c}"></div><span class="score">${sc!=null?sc.toFixed(1):"sem série"}</span><span class="val">${valTxt}</span></div></div>`; }
+function buildBoard(){
+  const ex=document.getElementById("ex2020").checked;
+  const wrap=document.getElementById("attrs"); wrap.innerHTML="";
+  const totals={}; ORDER.forEach(g=>totals[g]=[]);
+  ATTRS.forEach(at=>{
+    const vals={}; Object.entries(PER).forEach(([g,[a,b]])=>{ const v=at.f(g,a,b,{ex}); if(v!=null&&!isNaN(v)) vals[g]=v; });
+    const arr=Object.values(vals); const mn=Math.min(...arr), mx=Math.max(...arr);
+    const score=v=>{ if(mx===mn) return 5; const s=(v-mn)/(mx-mn)*10; return at.hi?s:10-s; };
+    const row=document.createElement("div"); row.className="attr";
+    row.innerHTML=`<div class="name">${at.n}<small>${at.d}. Unidade: ${at.u}.</small></div><div class="rows">`+
+      ORDER.map(g=>{ const v=vals[g]; const sc=v!=null?score(v):null; if(sc!=null) totals[g].push(sc); return barHTML(g,sc,fmtN(v,at.u,at.sg)); }).join("")+`</div>`;
+    wrap.appendChild(row);
+  });
+  const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  document.getElementById("total").innerHTML=`<div class="name" style="font-weight:600">Média simples<small style="display:block;font-weight:400;color:var(--muted);font-size:.78rem">peso igual por atributo. FHC e Lula 1–2 não têm série de emprego e pobreza; FHC também não tem dívida bruta.</small></div><div class="rows">`+
+    ORDER.map(g=>barHTML(g,avg(totals[g]),`${totals[g].length} atributos`)).join("")+`</div>`;
+}
+document.getElementById("ex2020").addEventListener("change",buildBoard);
+
+/* ---------- Recebeu → entregou table ---------- */
+const SC=[
+ {g:"FHC",p:"1995–2002",pib:"2,4%",ipca:[916,12.5],des:null,dbgg:null,prim:[null,3.2],selic:[null,25.0],cambio:[0.85,3.53],pob:null,desm:[14896,21651]},
+ {g:"Lula 1 e 2",p:"2003–2010",pib:"4,1%",ipca:[12.5,5.9],des:null,dbgg:[55.5,51.8],prim:[3.2,2.6],selic:[25.0,10.75],cambio:[3.53,1.67],pob:null,desm:[21651,7000],note:"dívida: 2006–2010"},
+ {g:"Dilma",p:"2011–ago/2016",pib:"0,4%",ipca:[5.9,6.3],des:[7.4,11.5],dbgg:[51.8,69.8],prim:[2.6,-2.5],selic:[10.75,13.75],cambio:[1.67,3.26],pob:[24.9,27.9],desm:[7000,7893],note:"desemp.: 2012–2016; pobreza: 2013–2016"},
+ {g:"Temer",p:"set/2016–2018",pib:"1,6%",ipca:[6.3,3.75],des:[11.5,12.3],dbgg:[69.8,75.3],prim:[-2.5,-1.5],selic:[13.75,6.5],cambio:[3.26,3.87],pob:[27.9,26.5],desm:[7893,7536]},
+ {g:"Bolsonaro",p:"2019–2022",pib:"1,4%",ipca:[3.75,5.79],des:[12.3,9.3],dbgg:[75.3,71.7],prim:[-1.5,1.2],selic:[6.5,13.75],cambio:[3.87,5.22],pob:[26.5,31.6],desm:[7536,11594]},
+ {g:"Lula 3",p:"2023–hoje",pib:"3,0%",ipca:[5.79,4.44],des:[9.3,5.6],dbgg:[71.7,82.5],prim:[1.2,-0.4],selic:[13.75,14.0],cambio:[5.22,5.20],pob:[31.6,23.1],desm:[11594,5731],note:"IPCA 12m e dívida: 2026; desemprego, primário e desmatamento: 2025; pobreza: 2024"}
+];
+const COLS=[
+ {k:"pib",t:"PIB (média anual)"},
+ {k:"ipca",t:"IPCA (12 meses)",u:"%",better:"down"},
+ {k:"des",t:"Desemprego (média anual)",u:"%",better:"down"},
+ {k:"dbgg",t:"Dívida bruta",u:"% PIB",better:"down"},
+ {k:"prim",t:"Resultado primário",u:"% PIB",better:"up"},
+ {k:"selic",t:"Selic",u:"%"},
+ {k:"cambio",t:"Dólar",u:"R$"},
+ {k:"pob",t:"Pobreza",u:"%",better:"down"},
+ {k:"desm",t:"Desmatamento",u:"km²",better:"down"}
+];
+const fmt=v=>v==null?"—":(typeof v==="number"&&Math.abs(v)>=1000?v.toLocaleString("pt-BR"):String(v).replace(".",","));
+function buildScore(){
+  const t=document.getElementById("sc");
+  let h=`<thead><tr><th>Governo</th>${COLS.map(c=>`<th>${c.t}${c.u?` <span style="font-weight:400">(${c.u})</span>`:""}</th>`).join("")}</tr></thead><tbody>`;
+  SC.forEach(r=>{
+    h+=`<tr><th>${r.g}<small>${r.p}${r.note?" · "+r.note:""}</small></th>`;
+    COLS.forEach(c=>{
+      const v=r[c.k];
+      if(c.k==="pib"){ h+=`<td><span class="v">${v}</span></td>`; return; }
+      if(!v){ h+=`<td>—</td>`; return; }
+      const [a,b]=v; let cls="flat",txt="";
+      if(a!=null&&b!=null){ const diff=+(b-a).toFixed(2); const sgn=diff>0?"+":""; txt=`${sgn}${fmt(Math.abs(diff)>=1000?Math.round(diff):diff)}`;
+        if(c.better){ const good=(c.better==="down"&&diff<0)||(c.better==="up"&&diff>0); cls=diff===0?"flat":(good?"up":"down"); } }
+      h+=`<td><span class="v">${fmt(a)} → ${fmt(b)}</span>${txt?`<span class="d ${cls}">${txt}</span>`:""}</td>`;
+    });
+    h+="</tr>";
+  });
+  h+="</tbody>"; t.innerHTML=h;
+}
+
+buildFilters(); buildTimeline(); buildCrises(); buildHeads(); buildBoard(); buildScore();
+const def=EV.find(e=>e.t.startsWith("PEC dos Precatórios")); if(def){activeEv=def; buildTimeline(); showDetail(def);}
+if(typeof Chart!=="undefined"){ buildCharts(); }
+else { document.getElementById("chartgrid").innerHTML='<p class="intro">Os gráficos precisam de conexão com a internet para carregar a biblioteca de desenho (cdnjs.cloudflare.com). Abra o arquivo conectado e recarregue.</p>'; }
+</script>
+</body>
+</html>
