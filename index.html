@@ -294,7 +294,7 @@ footer{border-top:6px solid var(--ink);padding:22px 0 0;font-size:17px;color:var
       <li>Crescimento: média anual do PIB no mandato. Inflação: média do IPCA. Preço da comida: média anual do IPCA de alimentação no domicílio. Investimento: média da taxa FBCF/PIB. Contas do governo: média do resultado primário do setor público consolidado. Comércio com o mundo: saldo comercial médio. Desmatamento: média anual do Prodes (Amazônia).</li>
       <li>Emprego, pobreza e dívida: variação entre o último ano anterior à posse e o último ano do mandato, em pontos percentuais. Só há série comparável de desemprego e pobreza a partir de 2012, então FHC e Lula 1–2 ficam fora desses assuntos; a dívida bruta começa em 2006 e o valor de Lula 1–2 cobre 2006–2010.</li>
       <li>Salário mínimo real e salário médio real: variação percentual entre dezembro do ano anterior à posse e dezembro do último ano do mandato (Lula 3: agosto de 2026), descontada a inflação. O salário médio é o rendimento médio real habitual de todos os trabalhos da PNAD Contínua (IBGE), comparável só a partir de 2012: FHC e Lula 1–2 ficam fora, e Dilma usa 2012–2016.</li>
-      <li>Dilma inclui 2016 inteiro; Temer, 2017–2018. Lula 3 usa 2023–2025 (dívida: julho de 2026; desemprego: média de 2025).</li>
+      <li>Dilma inclui 2016 inteiro; Temer, 2017–2018. Lula 3 usa 2023–2025 (dívida: agosto de 2026; desemprego: média de 2025).</li>
       <li>A nota final é uma média simples: cada assunto pesa igual. Essa é uma escolha discutível, e é por isso que as barras de cada assunto importam mais que a média.</li>
     </ul>
   </details>
@@ -337,7 +337,7 @@ footer{border-top:6px solid var(--ink);padding:22px 0 0;font-size:17px;color:var
       <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/45968-pib-cresce-2-3-em-2025-e-fecha-o-ano-em-r-12-7-trilhoes">IBGE — PIB cresce 2,3% em 2025</a></li>
       <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/47739-ipca-fica-em-0-07-em-julho">IBGE — IPCA de julho de 2026</a></li>
       <li><a href="https://biblioteca.ibge.gov.br/visualizacao/periodicos/3086/pnacm_2026_jul.pdf">IBGE — PNAD Contínua, maio–julho de 2026</a></li>
-      <li><a href="https://www.poder360.com.br/poder-economia/divida-bruta-chega-a-r-109-tri-e-atinge-825-do-pib/">BC via Poder360 — Dívida bruta em julho de 2026</a></li>
+      <li><a href="https://www3.bcb.gov.br/sgspub/">Banco Central/SGS — Dívida bruta em agosto de 2026 (série 13762), Selic de setembro de 2026 (série 432) e dólar PTAX de 30/9/2026 (série 1)</a></li>
       <li><a href="https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/janeiro/governo-central-cumpre-com-folga-a-meta-fiscal-estabelecida-para-2025-aponta-relatorio-do-tesouro">Tesouro — Resultado primário de 2025</a></li>
       <li><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-01/contas-publicas-tem-deficit-de-r-55021-bilhoes-em-2025">Agência Brasil — Setor público consolidado 2025</a></li>
       <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/45344-8-6-milhoes-de-pessoas-sairam-da-pobreza-entre-2023-e-2024">IBGE — Síntese de Indicadores Sociais 2025</a></li>
@@ -392,11 +392,11 @@ const D={
  ipca:{labels:Y(1995,2025),v:[22.4,9.6,5.2,1.7,8.9,6.0,7.7,12.5,9.3,7.6,5.7,3.1,4.5,5.9,4.3,5.9,6.5,5.8,5.9,6.4,10.7,6.3,2.9,3.7,4.3,4.5,10.1,5.8,4.6,4.8,4.3]},
  meta:{labels:Y(1995,2025),v:[null,null,null,null,8,6,4,3.5,4,5.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.5,4.25,4,3.75,3.5,3.25,3,3]},
  desemp:{labels:Y(2012,2025),v:[7.4,7.1,6.8,8.5,11.5,12.7,12.3,11.9,13.8,13.2,9.3,7.8,6.6,5.6]},
- dbgg:{labels:[...Y(2006,2025),"jul/26"],v:[55.5,56.7,56.0,59.2,51.8,51.3,53.7,51.5,56.3,65.5,69.8,73.7,75.3,74.4,86.9,77.3,71.7,73.8,76.5,78.6,82.5]},
+ dbgg:{labels:[...Y(2006,2025),"ago/26"],v:[55.5,56.7,56.0,59.2,51.8,51.3,53.7,51.5,56.3,65.5,69.8,73.7,75.3,74.4,86.9,77.3,71.7,73.8,76.5,78.6,82.9]},
  prim:{labels:Y(1997,2025),v:[-0.9,0.0,2.9,3.2,3.3,3.2,3.3,3.7,3.7,3.2,3.2,3.3,1.9,2.6,2.9,2.2,1.7,-0.6,-1.9,-2.5,-1.7,-1.5,-0.8,-9.4,0.7,1.2,-2.3,-0.4,-0.4]},
  juros:{labels:[...Y(2003,2025),"ago/26"],v:[8.4,6.6,7.3,6.7,6.0,5.3,5.1,5.0,5.4,4.4,4.7,5.4,8.4,6.5,6.1,5.4,5.0,4.1,5.0,5.8,6.6,8.1,7.9,8.9]},
- selic:{labels:[...Y(1999,2025),"ago/26"],v:[19,15.75,19,25,16.5,17.75,18,13.25,11.25,13.75,8.75,10.75,11,7.25,10,11.75,14.25,13.75,7,6.5,4.5,2,9.25,13.75,11.75,12.25,15,14]},
- cambio:{labels:[...Y(1994,2025),"ago/26"],v:[0.85,0.97,1.04,1.12,1.21,1.79,1.95,2.32,3.53,2.89,2.65,2.34,2.14,1.77,2.34,1.74,1.67,1.88,2.04,2.34,2.66,3.90,3.26,3.31,3.87,4.03,5.20,5.58,5.22,4.84,6.19,5.44,5.20]},
+ selic:{labels:[...Y(1999,2025),"set/26"],v:[19,15.75,19,25,16.5,17.75,18,13.25,11.25,13.75,8.75,10.75,11,7.25,10,11.75,14.25,13.75,7,6.5,4.5,2,9.25,13.75,11.75,12.25,15,13.75]},
+ cambio:{labels:[...Y(1994,2025),"set/26"],v:[0.85,0.97,1.04,1.12,1.21,1.79,1.95,2.32,3.53,2.89,2.65,2.34,2.14,1.77,2.34,1.74,1.67,1.88,2.04,2.34,2.66,3.90,3.26,3.31,3.87,4.03,5.20,5.58,5.22,4.84,6.19,5.44,5.18]},
  fbcf:{labels:Y(1995,2025),v:[18.0,16.9,17.4,17.0,15.7,16.8,17.0,16.4,15.3,16.1,15.9,16.4,17.4,19.1,18.1,19.5,19.3,19.4,19.7,19.9,17.6,15.0,14.6,15.5,15.5,16.6,18.9,17.8,16.4,16.9,16.8]},
  balanca:{labels:Y(1994,2025),v:[10.5,-3.5,-5.6,-6.8,-6.6,-1.3,-0.7,2.7,13.1,24.8,33.6,44.7,46.5,40.0,24.8,25.3,20.1,29.8,19.4,2.3,-4.0,19.7,47.7,67.0,58.0,48.0,50.4,61.4,61.8,98.8,74.2,68.3]},
  smreal:{labels:[...Y(1994,2025),"ago/26"],v:[512,597,610,621,662,636,666,738,728,800,805,879,994,1033,1066,1145,1185,1189,1282,1320,1325,1303,1369,1416,1389,1393,1396,1335,1391,1448,1477,1523,1577]},
@@ -580,11 +580,11 @@ const CH=[
  {id:"mundo",title:"Brasil versus o mundo",sub:"Variação real do PIB, %",type:"line",ds:[{d:"pib",l:"Brasil",c:"#15120F"},{d:"mundo",l:"Mundo (FMI)",c:"#8A3B7D"},{d:"emerg",l:"Emergentes (FMI, desde 2011)",c:"#C8952A",dash:true}],note:"O Brasil cresceu acima do mundo em 2003–2010 e abaixo em 2011–2022; em 2023–25 ficou perto da média mundial e abaixo dos emergentes."},
  {id:"ipca",title:"Inflação e meta",sub:"IPCA acumulado no ano, %",type:"line",ds:[{d:"ipca",l:"IPCA",c:"#15120F"},{d:"meta",l:"Centro da meta",c:"#8A3B7D",dash:true}],note:"1994 (916%) omitido. A meta caiu de 4,5% para 3% entre 2018 e 2024. Desde 1999, o IPCA só fechou abaixo do centro da meta em 2006, 2009, 2017 e 2018."},
  {id:"desemp",title:"Desemprego",sub:"Taxa de desocupação, média anual, %",type:"line",ds:[{d:"desemp",l:"PNAD Contínua",c:"#15120F"}],note:"Julho/2026: 5,3% (trimestre móvel), menor da série. A queda começa em 2021 e atravessa a troca de governo sem inflexão."},
- {id:"dbgg",title:"Dívida bruta do governo geral",sub:"% do PIB, dezembro de cada ano",type:"line",ds:[{d:"dbgg",l:"DBGG",c:"#15120F"}],note:"Bolsonaro: 75,3 → 71,7 (pico 86,9 em 2020). Lula 3: 71,7 → 82,5 (jul/26). Em 2026, juros somaram 5,7 p.p. e emissões 1,5 p.p."},
+ {id:"dbgg",title:"Dívida bruta do governo geral",sub:"% do PIB, dezembro de cada ano",type:"line",ds:[{d:"dbgg",l:"DBGG",c:"#15120F"}],note:"Bolsonaro: 75,3 → 71,7 (pico 86,9 em 2020). Lula 3: 71,7 → 82,9 (ago/26)."},
  {id:"prim",title:"Resultado primário",sub:"Setor público consolidado, % do PIB",type:"bar",ds:[{d:"prim",l:"Primário",c:"#15120F"}],note:"Positivo = superávit. Desde 2014 só houve superávit em 2021 e 2022; 2023 é o segundo pior déficit fora da pandemia, atrás de 2016; ~0,9 p.p. dele são precatórios herdados."},
  {id:"juros",title:"Juros da dívida e resultado primário",sub:"% do PIB por ano. Juros: quanto o governo pagou pela dívida. Primário: quanto sobrou (+) ou faltou (−) nas contas, sem contar os juros",type:"line",ds:[{d:"juros",l:"Juros pagos",c:"#15120F"},{d:"prim",l:"Resultado primário",c:"#8A3B7D",dash:true}],note:"Os juros variaram entre 4,1% do PIB (2020) e 8,4% (2003 e 2015); foram 7,9% em 2025 e 8,9% nos 12 meses até agosto de 2026. O resultado primário ficou entre +3,7% (2004 e 2005) e −9,4% (2020). Fonte: Banco Central (NFSP, setor público consolidado)."},
- {id:"selic",title:"Selic",sub:"Meta no fim de cada ano, % a.a.",type:"line",ds:[{d:"selic",l:"Selic",c:"#15120F"}],note:"Bolsonaro: 6,5 → 13,75 (passando pela mínima histórica de 2%). Lula 3: 13,75 → 10,5 (2024) → 15 (2025) → 14 (ago/26)."},
- {id:"cambio",title:"Câmbio",sub:"R$ por US$, PTAX no fim do ano",type:"line",ds:[{d:"cambio",l:"Dólar",c:"#15120F"}],note:"Bolsonaro: 3,87 → 5,22 (+35%). Lula 3: 5,22 → 5,20, com pico de 6,19 em dez/2024."},
+ {id:"selic",title:"Selic",sub:"Meta no fim de cada ano, % a.a.",type:"line",ds:[{d:"selic",l:"Selic",c:"#15120F"}],note:"Bolsonaro: 6,5 → 13,75 (passando pela mínima histórica de 2%). Lula 3: 13,75 → 10,5 (2024) → 15 (2025) → 13,75 (set/26)."},
+ {id:"cambio",title:"Câmbio",sub:"R$ por US$, PTAX no fim do ano",type:"line",ds:[{d:"cambio",l:"Dólar",c:"#15120F"}],note:"Bolsonaro: 3,87 → 5,22 (+35%). Lula 3: 5,22 → 5,18 (set/26), com pico de 6,19 em dez/2024."},
  {id:"fbcf",title:"Taxa de investimento",sub:"Formação bruta de capital fixo, % do PIB",type:"line",ds:[{d:"fbcf",l:"FBCF/PIB",c:"#15120F"}],note:"Nenhum governo desde 2014 recuperou os 19–20% da década anterior. Bolsonaro média 17,2%; Lula 3 16,7%."},
  {id:"balanca",title:"Balança comercial",sub:"Saldo anual, US$ bilhões",type:"bar",ds:[{d:"balanca",l:"Saldo",c:"#15120F"}],note:"Recorde de US$ 98,8 bi em 2023; US$ 68,3 bi em 2025 com exportações recordes apesar das tarifas dos EUA. Série ligada a commodities, não a governos."},
  {id:"smreal",title:"Salário mínimo real",sub:"Valor de dezembro de cada ano, em R$ de janeiro de 2026 (descontado o IPCA)",type:"line",ds:[{d:"smreal",l:"Mínimo real",c:"#15120F"}],note:"De R$ 728 em 2002 para R$ 1.325 em 2014; entre R$ 1.303 e R$ 1.416 de 2015 a 2022; R$ 1.577 em agosto de 2026. Cálculo aproximado."},
@@ -616,7 +616,7 @@ const ATTRS=[
  {k:"salm",sg:true,n:"Salário médio real",d:"rendimento médio real de quem trabalha, variação de dezembro a dezembro (desde 2012)",u:"%",hi:true,f:(g,a,b)=>{ if(g==="Dilma") return (val("salmedio",2016)/val("salmedio",2012)-1)*100; const s=val("salmedio",a-1), e=g==="Lula 3"?D.salmedio.v[D.salmedio.v.length-1]:val("salmedio",b); return (s&&e)?(e/s-1)*100:null; }},
  {k:"sm",sg:true,n:"Salário mínimo real",d:"variação de dezembro a dezembro",u:"%",hi:true,f:(g,a,b)=>{ const s=val("smreal",a-1), e=g==="Lula 3"?D.smreal.v[D.smreal.v.length-1]:val("smreal",b); return (s&&e)?(e/s-1)*100:null; }},
  {k:"prim",n:"Contas do governo",d:"resultado primário, média (% do PIB)",u:"% PIB",hi:true,f:(g,a,b,o)=>mean("prim",Math.max(a,1997),b,o.ex?[2020]:null)},
- {k:"dbgg",sg:true,n:"Dívida do governo",d:"dívida bruta, variação no mandato (desde 2006)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Lula 1–2") return val("dbgg",2010)-val("dbgg",2006); if(g==="Lula 3") return 82.5-val("dbgg",2022); return delta("dbgg",a,b); }},
+ {k:"dbgg",sg:true,n:"Dívida do governo",d:"dívida bruta, variação no mandato (desde 2006)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Lula 1–2") return val("dbgg",2010)-val("dbgg",2006); if(g==="Lula 3") return D.dbgg.v[D.dbgg.v.length-1]-val("dbgg",2022); return delta("dbgg",a,b); }},
  {k:"fbcf",n:"Investimento",d:"máquinas, obras e equipamentos (FBCF/PIB), média",u:"% PIB",hi:true,f:(g,a,b)=>mean("fbcf",a,b)},
  {k:"bal",n:"Comércio com o mundo",d:"exportações menos importações, média anual",u:"US$ bi",hi:true,f:(g,a,b)=>mean("balanca",a,b)},
  {k:"desm",n:"Desmatamento",d:"Amazônia, média anual",u:"km²",hi:false,f:(g,a,b)=>mean("desmat",a,b)}
@@ -639,7 +639,7 @@ const SC=[
  {g:"Dilma",p:"2011–ago/2016",pib:"0,4%",ipca:[5.9,6.3],des:[7.4,11.5],dbgg:[51.8,69.8],prim:[2.6,-2.5],selic:[10.75,13.75],cambio:[1.67,3.26],pob:[24.9,27.9],desm:[7000,7893],note:"desemp.: 2012–2016; pobreza: 2013–2016"},
  {g:"Temer",p:"set/2016–2018",pib:"1,6%",ipca:[6.3,3.75],des:[11.5,12.3],dbgg:[69.8,75.3],prim:[-2.5,-1.5],selic:[13.75,6.5],cambio:[3.26,3.87],pob:[27.9,26.5],desm:[7893,7536]},
  {g:"Bolsonaro",p:"2019–2022",pib:"1,4%",ipca:[3.75,5.79],des:[12.3,9.3],dbgg:[75.3,71.7],prim:[-1.5,1.2],selic:[6.5,13.75],cambio:[3.87,5.22],pob:[26.5,31.6],desm:[7536,11594]},
- {g:"Lula 3",p:"2023–hoje",pib:"3,0%",ipca:[5.79,4.44],des:[9.3,5.6],dbgg:[71.7,82.5],prim:[1.2,-0.4],selic:[13.75,14.0],cambio:[5.22,5.20],pob:[31.6,23.1],desm:[11594,5731],note:"IPCA 12m e dívida: 2026; desemprego, primário e desmatamento: 2025; pobreza: 2024"}
+ {g:"Lula 3",p:"2023–hoje",pib:"3,0%",ipca:[5.79,4.44],des:[9.3,5.6],dbgg:[71.7,82.9],prim:[1.2,-0.4],selic:[13.75,13.75],cambio:[5.22,5.18],pob:[31.6,23.1],desm:[11594,5731],note:"IPCA 12m e dívida: 2026; desemprego, primário e desmatamento: 2025; pobreza: 2024"}
 ];
 const COLS=[
  {k:"pib",t:"Crescimento da economia"},
@@ -716,8 +716,8 @@ const Q=[
   lede:"A dívida pública cresce quando falta dinheiro nas contas do governo e também pelos juros que ele paga sobre a própria dívida. As barras de cima mostram quantos pontos a dívida subiu ou caiu em cada governo, comparada ao tamanho da economia (PIB); as de baixo, quanto o governo pagou de juros por ano.",
   m:[{t:"Dívida: quanto subiu ou caiu",f:attr("dbgg"),fmt:"pts",div:true,tags:["maior alta","maior queda"]},
      {t:"Juros pagos por ano",f:(g,a,b)=>mean("juros",a,b),fmt:"saldoj",tags:["mais juros","menos juros"]}],
-  obs:"Dívida: Lula 1 e 2 de 2006 a 2010; Lula 3 até julho de 2026. Juros: só há dado comparável a partir de 2003.",
-  sum:"A dívida caiu 3,7 pontos com Lula 1 e 2 e 3,6 com Bolsonaro; subiu 18,0 com Dilma, 5,5 com Temer e 10,8 com Lula 3 (até julho de 2026). O pico foi 86,9% do PIB em 2020; o valor mais recente é 82,5%. Os juros custaram, por ano, 6,3% do PIB com Lula 1 e 2, 5,8% com Dilma e com Temer, 5,0% com Bolsonaro e 7,5% com Lula 3. Somando juros e contas do governo, o rombo por ano foi de 3,2% do PIB com Lula 1 e 2, 5,5% com Dilma, 7,3% com Temer, 7,0% com Bolsonaro e 8,5% com Lula 3.",
+  obs:"Dívida: Lula 1 e 2 de 2006 a 2010; Lula 3 até agosto de 2026. Juros: só há dado comparável a partir de 2003.",
+  sum:"A dívida caiu 3,7 pontos com Lula 1 e 2 e 3,6 com Bolsonaro; subiu 18,0 com Dilma, 5,5 com Temer e 11,2 com Lula 3 (até agosto de 2026). O pico foi 86,9% do PIB em 2020; o valor mais recente é 82,9%. Os juros custaram, por ano, 6,3% do PIB com Lula 1 e 2, 5,8% com Dilma e com Temer, 5,0% com Bolsonaro e 7,5% com Lula 3. Somando juros e contas do governo, o rombo por ano foi de 3,2% do PIB com Lula 1 e 2, 5,5% com Dilma, 7,3% com Temer, 7,0% com Bolsonaro e 8,5% com Lula 3.",
   ch:["dbgg","juros","selic","cambio"],ev:["Reforma da Previdência","Autonomia do Banco Central","Eletrobras, dividendos e desonerações"]},
  {id:"amazonia",q:"O desmatamento caiu?",
   lede:"Quanta floresta foi derrubada na Amazônia <b>por ano</b>, em média. Para comparar: a cidade de São Paulo tem cerca de 1.500 km².",
