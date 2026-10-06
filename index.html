@@ -3,249 +3,337 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trinta anos do Real em números — uma análise para as eleições de 2026</title>
+<title>O Brasil melhorou ou piorou? 30 anos do Real em números simples</title>
+<meta name="description" content="Comida, gasolina, emprego, salário, dívida: como cada governo desde o Plano Real se saiu, com números oficiais, em palavras simples e sempre com os dois lados.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="O Brasil melhorou ou piorou?">
+<meta property="og:description" content="Comida, gasolina, emprego, salário, dívida: como cada governo se saiu desde 1994. Números oficiais, em palavras simples, com os dois lados.">
+<meta property="og:url" content="https://datadriven-life.github.io/30-anos-real/">
+<meta property="og:image" content="https://datadriven-life.github.io/30-anos-real/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F5F7F4; --ink:#16243B; --muted:#5B6675; --rule:#D5DBD9; --card:#FFFFFF;
-  --teal:#0E6B6B; --plum:#8A3B7D; --ochre:#C8952A; --brick:#B8433F;
-  --band-a:#E9EFF4; --band-b:#F2EEE4;
-  --arg:#F6EEF4; --arg-ink:#5E2A55; --con:#E9F3F2; --con-ink:#0B4D4D;
-  --bolso:#2F5D8A; --lula:#A0522D; --lula12:#C8952A;
-  --maxw:1120px;
+  --paper:#FBF6EC; --ink:#15120F; --mark:#FFD84D; --card:#FFFFFF; --soft:#EDE5D3; --muted:#5A5347;
+  --good:#0E6B6B; --bad:#A8322E;
+  --gut:22px; --col:760px; --bw:3px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important}}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:500;line-height:1.15;margin:0}
-h1{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.01em}
-h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:.4rem}
-h3{font-size:1.25rem;font-weight:600}
-p{margin:.4rem 0 .9rem;max-width:72ch}
-a{color:var(--teal)}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
-header{padding:56px 0 28px;border-bottom:1px solid var(--rule)}
-header p.lead{font-size:1.15rem;color:var(--muted);max-width:66ch}
-.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:22px}
-.howto div{border-left:3px solid var(--teal);padding-left:12px;font-size:.95rem;color:var(--muted)}
-.howto strong{color:var(--ink);display:block;margin-bottom:2px}
-nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:.92rem}
-nav.toc a{text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:1px}
-section{padding:44px 0 12px}
-section + section{border-top:1px solid var(--rule)}
-.intro{color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;font-size:20px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+body.menu-open{overflow:hidden}
+h1,h2,h3,h4{margin:0;font-weight:900;font-stretch:78%;line-height:1;text-transform:uppercase}
+h1{font-size:clamp(52px,15.5vw,112px);line-height:.94}
+h2{font-size:clamp(34px,9.4vw,60px)}
+h3{font-size:clamp(26px,6.6vw,34px)}
+h4{font-size:18px;font-stretch:92%;letter-spacing:.03em}
+p{margin:0 0 14px}
+a{color:inherit;text-decoration-thickness:2px;text-underline-offset:3px}
+mark{background:var(--mark);color:inherit;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);padding:14px 18px;font-weight:800;z-index:60}
+.skip:focus{left:0}
 
-.govlegend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 18px;font-size:.88rem;color:var(--muted)}
-.govlegend span{display:inline-flex;align-items:center;gap:6px}
-.govlegend i{width:14px;height:14px;border:1px solid var(--rule);display:inline-block}
+/* Estrutura */
+main{max-width:calc(var(--col) + 2*var(--gut));margin:0 auto;padding:0 var(--gut) 120px}
+section,.q,.crise-card{scroll-margin-top:14px}
+.deep{border-top:6px solid var(--ink);padding:30px 0 44px}
+.deep>h2{margin-bottom:14px}
+.intro{margin:0 0 20px}
 
-/* Timeline */
-.tl-scroll{overflow-x:auto;padding-bottom:6px}
-.tl{position:relative;min-width:1040px;height:290px;margin-top:8px}
-.tl .band{position:absolute;top:0;bottom:0;border-left:1px solid #fff}
-.tl .band span{position:absolute;top:8px;left:8px;font-size:.8rem;color:var(--muted);white-space:nowrap}
-.tl .axis{position:absolute;left:0;right:0;bottom:0;height:26px;border-top:1px solid var(--ink)}
-.tl .tick{position:absolute;bottom:0;font-size:.74rem;color:var(--muted);transform:translateX(-50%)}
-.tl .tick::before{content:"";position:absolute;top:-8px;left:50%;width:1px;height:6px;background:var(--ink)}
-.tl .ev{position:absolute;transform:translateX(-50%);background:var(--card);border:1.5px solid var(--ink);border-radius:999px;padding:3px 10px;font:500 .78rem "IBM Plex Sans",sans-serif;color:var(--ink);cursor:pointer;white-space:nowrap;line-height:1.3}
-.tl .ev::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;background:var(--ink);height:var(--drop,14px)}
-.tl .ev.debate{border-color:var(--plum);color:var(--arg-ink)}
-.tl .ev.debate::after{background:var(--plum)}
-.tl .ev.crise{border-color:var(--ochre);color:#6B4E0E}
-.tl .ev.crise::after{background:var(--ochre)}
-.tl .ev:hover,.tl .ev:focus-visible{background:var(--ink);color:#fff;outline:none}
-.tl .ev.debate:hover,.tl .ev.debate:focus-visible{background:var(--plum)}
-.tl .ev.crise:hover,.tl .ev.crise:focus-visible{background:var(--ochre)}
-.tl .ev.active{background:var(--ink);color:#fff}
-.tl .ev.debate.active{background:var(--plum)}
-.tl .ev.crise.active{background:var(--ochre)}
-.tl-filters{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
-.tl-filters button{font:500 .85rem "IBM Plex Sans",sans-serif;border:1px solid var(--rule);background:var(--card);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer}
-.tl-filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.detail{margin-top:18px;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;min-height:120px}
-.detail .when{font-size:.9rem;color:var(--muted)}
-.detail h3{margin:2px 0 8px;font-size:1.45rem}
-.detail .claim{font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:1.15rem;margin:0 0 12px;max-width:70ch}
-.detail .data{margin:0 0 14px;max-width:78ch}
-.sides{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.side{padding:14px 16px;border-radius:8px;font-size:.95rem}
-.side h4{margin:0 0 6px;font:600 .82rem "IBM Plex Sans",sans-serif;letter-spacing:.02em}
-.side p{margin:0;max-width:none}
-.side.arg{background:var(--arg);color:var(--arg-ink)}
-.side.con{background:var(--con);color:var(--con-ink)}
-.side.arg h4{color:var(--plum)} .side.con h4{color:var(--teal)}
-.verdict{margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule);font-size:.95rem}
-.verdict strong{color:var(--ink)}
-.detail .empty{color:var(--muted);font-style:italic}
-@media (max-width:720px){.sides{grid-template-columns:1fr}}
+/* Menu: folha em tela cheia no celular, coluna fixa no computador */
+#nav{position:fixed;top:0;right:0;bottom:0;left:0;z-index:40;display:none;overflow:auto;background:var(--paper);padding:22px var(--gut) 110px}
+#nav.open{display:block}
+.nav-brand{font-weight:900;font-stretch:78%;font-size:26px;text-transform:uppercase;border-bottom:4px solid var(--ink);padding-bottom:10px;margin:0 0 6px}
+.nav-h{font-weight:800;font-size:16px;color:var(--muted);margin:20px 0 4px}
+#nav ol,#nav ul{list-style:none;margin:0;padding:0}
+#nav ol{counter-reset:q}
+#nav ol li{counter-increment:q}
+#nav a{display:flex;gap:10px;align-items:baseline;padding:12px 10px;min-height:48px;font-size:19px;font-weight:600;line-height:1.25;text-decoration:none;border-bottom:2px solid var(--soft)}
+#nav ol a::before{content:counter(q);flex:none;width:26px;font-weight:900;font-variant-numeric:tabular-nums}
+#nav a.cur{background:var(--mark)}
+#nav a.nav-conc{border:var(--bw) solid var(--ink);background:var(--card);font-weight:800}
+#nav a.nav-conc::before{content:"★";margin-right:4px}
+#nav a.nav-conc.cur{background:var(--mark)}
+#menu-btn{position:fixed;right:14px;bottom:14px;z-index:50;min-height:58px;min-width:108px;padding:0 22px;border:var(--bw) solid var(--paper);background:var(--ink);color:var(--paper);font-weight:800;font-size:20px;cursor:pointer;box-shadow:0 0 0 var(--bw) var(--ink)}
+@media (min-width:1100px){
+  .shell{display:grid;grid-template-columns:300px minmax(0,var(--col));gap:56px;justify-content:center;padding:0 32px}
+  main{max-width:none;margin:0;padding:0 0 90px}
+  #nav{position:sticky;top:0;right:auto;bottom:auto;left:auto;z-index:auto;display:block;height:100vh;padding:28px 0 28px;background:none}
+  #nav a{padding:8px 10px;min-height:0;font-size:17px;border-bottom:0}
+  #menu-btn{display:none}
+  body{font-size:21px}
+  body.menu-open{overflow:auto}
+  main{pointer-events:auto}
+}
 
-/* Charts */
-.chartgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px 28px;margin-top:10px}
-@media (max-width:860px){.chartgrid{grid-template-columns:1fr}}
-.chart{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 16px 10px}
-.chart h3{font-size:1.1rem;margin-bottom:2px}
-.chart .sub{font-size:.85rem;color:var(--muted);margin:0 0 8px;max-width:none}
-.chart .cv{position:relative;height:260px}
-.chart .note{font-size:.82rem;color:var(--muted);margin:8px 0 0;max-width:none}
-.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:.9rem;color:var(--muted);margin:6px 0 4px}
-.controls label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+/* Abertura */
+.hero{padding:22px 0 38px}
+.mast{display:flex;justify-content:space-between;gap:12px;border-bottom:4px solid var(--ink);padding-bottom:10px;font-weight:800;font-size:16px;letter-spacing:.06em;text-transform:uppercase}
+.mast span:last-child{font-weight:500;letter-spacing:0}
+@media (min-width:1100px){.mast span:first-child{visibility:hidden}}
+.hero h1{margin:26px 0 20px}
+.lead{font-size:clamp(22px,5.7vw,27px);font-weight:500;line-height:1.32;margin:0 0 24px}
+.how{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:12px}
+.how li{border-left:8px solid var(--mark);padding-left:14px}
+.govs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 28px}
+@media (min-width:700px){.govs{grid-template-columns:repeat(3,1fr)}}
+.gov-chip{display:flex;align-items:center;gap:10px;border:var(--bw) solid var(--ink);background:var(--card);padding:9px 10px;font-weight:800;font-size:18px;line-height:1.15}
+.gov-chip i{flex:none;width:22px;height:22px;border:2px solid var(--ink)}
+.gov-chip span{display:block;font-weight:400;font-size:16px;color:var(--muted)}
+.btn{display:block;text-align:center;background:var(--ink);color:var(--paper);font-weight:800;font-size:22px;padding:18px;text-decoration:none}
+.btn-2{background:var(--mark);color:var(--ink);border:var(--bw) solid var(--ink);margin-top:10px;font-size:20px}
+
+/* Pergunta */
+.q{border-top:6px solid var(--ink);padding:26px 0 44px}
+.q-n{display:inline-block;background:var(--ink);color:var(--paper);font-weight:800;font-size:16px;padding:5px 10px;margin:0 0 14px}
+.q h2{margin-bottom:14px}
+.q-lede{margin:0 0 20px}
+.bars{display:grid;gap:14px}
+.bars-t{margin:18px 0 0;font-size:26px}
+.bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"who val" "track track";gap:5px 12px;align-items:end}
+.who{grid-area:who;font-size:20px;line-height:1.2}
+.who b{font-weight:800}
+.who span{font-size:16px;color:var(--muted);margin-left:4px;white-space:nowrap}
+.tag{display:inline-block;background:var(--mark);font-style:normal;font-weight:800;font-size:16px;padding:1px 7px;white-space:nowrap}
+.val{grid-area:val;text-align:right;font-weight:900;font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.val small{font-weight:500;font-size:16px}
+.track{grid-area:track;position:relative;height:34px;border:var(--bw) solid var(--ink);background:var(--card)}
+.fill{position:absolute;top:0;bottom:0}
+.track.div::after{content:"";position:absolute;top:-7px;bottom:-7px;left:50%;width:3px;margin-left:-1.5px;background:var(--ink)}
+.sem-dado .track{border-style:dashed;border-color:var(--muted);background:none}
+.sem-dado .val{font-weight:500;font-size:17px;color:var(--muted);white-space:normal}
+.sem-dado .who{color:var(--muted)}
+@media (max-width:379px){.bar-row{grid-template-columns:minmax(0,1fr);grid-template-areas:"who" "val" "track"}.val{text-align:left}}
+@media (min-width:700px){
+  .bar-row{grid-template-columns:200px 1fr 215px;grid-template-areas:"who track val";align-items:center;gap:14px}
+  .who span{display:block;margin-left:0}
+  .who .tag{margin-top:3px}
+}
+.obs{font-size:17px;color:var(--muted);margin:14px 0 0}
+.sum{background:var(--mark);border-left:8px solid var(--ink);padding:16px 18px;margin:24px 0 16px}
+.acts{display:grid;gap:10px}
+@media (min-width:700px){.acts{grid-template-columns:repeat(3,1fr)}}
+.act,.briga-btn{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:12px 16px;border:var(--bw) solid var(--ink);background:var(--card);font-weight:800;font-size:20px;line-height:1.2;text-align:left;cursor:pointer}
+.act::after,.briga-btn::after{content:"+";margin-left:auto;font-weight:500;font-size:30px;line-height:.8}
+.act[aria-expanded="true"],.briga-btn[aria-expanded="true"]{background:var(--ink);color:var(--paper)}
+.act[aria-expanded="true"]::after,.briga-btn[aria-expanded="true"]::after{content:"−"}
+.act.share::after{content:none}
+.act.share{justify-content:center;background:none}
+.panel{border:var(--bw) solid var(--ink);background:var(--card);padding:18px 16px 20px;margin-top:10px}
+@media (min-width:700px){.panel{padding:24px 26px 26px}}
+.wait{margin:0;font-weight:600}
+
+/* Um episódio: o que aconteceu, quem defende, quem critica, o que os números mostram */
+.item + .item{border-top:6px solid var(--ink);margin-top:24px;padding-top:22px}
+.when{font-weight:700;font-size:16px;color:var(--muted);margin:0 0 4px}
+.item h3,.crise-card h3{margin-bottom:12px}
+.claim{font-style:italic;font-weight:500;font-size:22px;line-height:1.3;border-left:8px solid var(--mark);padding-left:14px}
+.sides{display:grid;gap:12px;margin:18px 0 12px}
+@media (min-width:900px){.sides{grid-template-columns:1fr 1fr}}
+.side{border-top:6px solid var(--ink);background:var(--paper);padding:12px 14px 14px}
+.side h4,.verdict h4{margin-bottom:8px}
+.side p,.verdict p{margin:0}
+.verdict{background:var(--mark);padding:14px 16px 16px}
+.more{margin:14px 0 0;font-weight:700}
+
+/* As grandes brigas */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+.chip{min-height:48px;padding:8px 14px;border:var(--bw) solid var(--ink);background:var(--card);font-weight:700;font-size:18px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.gov-h{display:flex;align-items:center;gap:10px;margin:28px 0 2px;font-size:26px}
+.gov-h i{flex:none;width:22px;height:22px;border:2px solid var(--ink)}
+.gov-h span{font-weight:500;font-stretch:100%;font-size:17px;color:var(--muted)}
+.briga{margin-top:8px}
+.briga-btn{font-weight:700;align-items:flex-start}
+.yr{flex:none;min-width:62px;font-weight:900;font-size:22px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kind{display:table;margin-top:5px;padding:1px 8px;background:var(--soft);color:var(--ink);font-style:normal;font-weight:700;font-size:16px}
+.is-debate .kind{background:var(--mark)}
+.is-crise .kind{background:var(--ink);color:var(--paper)}
+.is-crise .briga-btn[aria-expanded="true"] .kind{background:var(--paper);color:var(--ink)}
 
 /* Crises */
-.crises{display:grid;gap:22px;margin-top:10px}
-.crise{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;border-top:4px solid var(--ochre)}
-.crise .when{font-size:.9rem;color:var(--muted)}
-.crise h3{font-size:1.4rem;margin:2px 0 10px}
-.crise .grid{display:grid;grid-template-columns:minmax(260px,1fr) 1.4fr;gap:20px;align-items:start}
-@media (max-width:820px){.crise .grid{grid-template-columns:1fr}}
-.crise table{min-width:0;font-size:.9rem}
-.crise td,.crise th{padding:6px 8px}
-.crise thead th{font-size:.78rem}
-.crise .src{font-size:.8rem;color:var(--muted);margin-top:6px}
-.crise .sides{margin-top:12px}
+.crise-card{margin-top:10px}
+.crise-card .briga-btn .t small{display:block;font-weight:500;font-size:16px;margin-top:3px}
+.crow{padding:14px 0;border-bottom:2px solid var(--soft)}
+.crow p{margin:0}
+.crow .lab{font-weight:700;font-size:18px;line-height:1.25}
+.crow .br{font-weight:900;font-size:26px;line-height:1.2;margin:4px 0}
+.crow .br span{display:inline-block;background:var(--mark);font-weight:800;font-size:16px;padding:1px 7px;vertical-align:middle;margin-right:4px}
+.crow .ref{font-size:18px;color:var(--muted)}
+.src{font-size:16px;color:var(--muted);margin:12px 0 0}
 
-/* Scoreboard */
-.board{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:26px 28px;margin-top:12px}
-.heads{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:18px}
-@media (max-width:980px){.heads{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:560px){.heads{grid-template-columns:repeat(2,1fr)}}
-.head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
-.avatar{position:relative;width:64px;height:64px;border-radius:50%;flex:none;display:grid;place-items:center;font:600 1.15rem "Newsreader",serif;color:#fff;overflow:hidden;border:3px solid}
-.avatar img{width:100%;height:100%;object-fit:cover;display:none}
-.avatar.has img{display:block} .avatar.has span{display:none}
-.avatar label{position:absolute;inset:auto 0 0 0;background:rgba(22,36,59,.75);color:#fff;font:500 .6rem "IBM Plex Sans",sans-serif;text-align:center;padding:2px 0;cursor:pointer}
-.avatar input{display:none}
-.head .who h3{font-size:1rem}
-.head .who p{margin:0;font-size:.78rem;color:var(--muted);max-width:none;line-height:1.35}
-.head.dispute .who h3{text-decoration:underline;text-decoration-color:var(--ochre);text-decoration-thickness:2px;text-underline-offset:4px}
-.attr{display:grid;grid-template-columns:190px 1fr;gap:10px 22px;align-items:start;padding:14px 0;border-top:1px solid var(--rule)}
-@media (max-width:760px){.attr{grid-template-columns:1fr;gap:6px}}
-.attr .name{font-weight:600}
-.attr .name small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;line-height:1.35}
-.rows{display:grid;gap:5px}
-.row{display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center}
-.row .g{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap}
-.row.dispute .g{color:var(--ink);font-weight:600}
-.bar{position:relative;height:22px;background:#EEF1EF;border-radius:5px;overflow:hidden}
-.bar .fill{height:100%;border-radius:5px;transition:width .35s ease}
-.bar .val{position:absolute;right:8px;top:0;line-height:22px;font-size:.78rem;font-variant-numeric:tabular-nums;color:var(--ink)}
-.bar .score{position:absolute;left:8px;top:0;line-height:22px;font-size:.78rem;font-weight:600;color:#fff}
-.bar.low .score{color:var(--ink)}
-.total{display:grid;grid-template-columns:190px 1fr;gap:10px 22px;align-items:start;padding:16px 0 4px;border-top:2px solid var(--ink);margin-top:6px}
-@media (max-width:760px){.total{grid-template-columns:1fr}}
-.total .bar{height:28px} .total .bar .val,.total .bar .score{line-height:28px;font-size:.9rem}
-.method{font-size:.85rem;color:var(--muted);margin-top:14px;max-width:none}
-.method summary{cursor:pointer;color:var(--ink);font-weight:500}
-.method ul{padding-left:18px;margin:6px 0}
-.legend-bars{display:none}
+/* Conclusão: ranking e placar */
+.conclusao{border-top-width:14px}
+.conclusao>.q-n{background:var(--mark);color:var(--ink);font-size:18px}
+#ranking{display:grid;gap:10px;margin:0 0 16px}
+.rank-row{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:10px;align-items:center;border:var(--bw) solid var(--ink);background:var(--card);padding:12px 12px}
+.rank-row .pos{font-weight:900;font-stretch:78%;font-size:28px;width:34px;line-height:1}
+.avatar{flex:none;width:52px;height:52px;display:grid;place-items:center;color:#fff;font-weight:900;font-stretch:78%;font-size:24px;border:2px solid var(--ink)}
+.rank-row h3{font-size:24px}
+.rank-row p{margin:2px 0 0;font-size:16px;line-height:1.3;color:var(--muted)}
+.rank-row .nota{font-weight:900;font-size:36px;line-height:1;font-variant-numeric:tabular-nums;text-align:right}
+.rank-row .nota small{display:block;font-weight:500;font-size:16px;color:var(--muted)}
+.rank-row .rbar{grid-column:1/-1;height:16px;border:var(--bw) solid var(--ink);background:var(--card);position:relative}
+.rank-row.dispute{box-shadow:inset 0 -10px 0 var(--mark)}
+.sub-h{margin:30px 0 10px}
+.check{display:flex;gap:12px;align-items:center;min-height:48px;margin:0 0 6px;font-size:18px;line-height:1.25;cursor:pointer}
+.check input{flex:none;width:26px;height:26px;margin:0;accent-color:var(--ink)}
+.attr,.total{border-top:var(--bw) solid var(--ink);padding:18px 0}
+.total{border-top-width:6px}
+.name{font-weight:900;font-stretch:80%;font-size:26px;line-height:1.05;text-transform:uppercase}
+.name small{display:block;font-weight:400;font-stretch:100%;font-size:16px;line-height:1.3;text-transform:none;color:var(--muted);margin:4px 0 12px}
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:center}
+.row .g{font-weight:700;font-size:17px;line-height:1.1}
+.row.dispute .g{font-weight:900}
+.pbar{position:relative;height:38px;border:var(--bw) solid var(--ink);background:var(--card)}
+.pbar .fill{left:0}
+.pbar span{position:absolute;top:50%;transform:translateY(-50%);background:var(--card);padding:0 6px;line-height:1.3;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pbar .score{left:6px;font-weight:900;font-size:20px}
+.pbar .raw{right:6px;font-size:16px}
+@media (min-width:700px){.row{grid-template-columns:130px 1fr}.row .g{font-size:19px}}
+details{margin-top:18px}
+summary{display:flex;align-items:center;min-height:58px;padding:12px 16px;border:var(--bw) solid var(--ink);background:var(--card);font-weight:800;font-size:20px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-left:auto;font-weight:500;font-size:30px;line-height:.8}
+details[open] summary{background:var(--ink);color:var(--paper)}
+details[open] summary::after{content:"−"}
+details>ul,details>ol,details>p{border:var(--bw) solid var(--ink);border-top:0;background:var(--card);margin:0;padding:18px 18px 18px 40px;font-size:18px}
+details>p{padding-left:18px;border-bottom:0}
+details li{margin:0 0 12px}
+details li:last-child{margin-bottom:0}
 
-/* Table */
-.table-scroll{overflow-x:auto;margin-top:12px}
-table{border-collapse:collapse;width:100%;min-width:860px;font-size:.92rem;font-variant-numeric:tabular-nums}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
-thead th{font:600 .8rem "IBM Plex Sans",sans-serif;color:var(--muted);border-bottom:2px solid var(--ink)}
-tbody th{font-weight:600;white-space:nowrap}
-tbody th small{display:block;font-weight:400;color:var(--muted);font-size:.78rem}
-td .v{white-space:nowrap}
-td .d{font-size:.78rem;display:block;margin-top:2px}
-.up{color:var(--teal)} .down{color:var(--brick)} .flat{color:var(--muted)}
-.legend-sc{font-size:.85rem;color:var(--muted);margin-top:8px}
+/* Como pegou, como deixou: a tabela vira um cartão por governo */
+#sc{display:grid;gap:12px;width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+#sc thead{position:absolute;left:-9999px}
+#sc tbody{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media (min-width:900px){#sc tbody{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#sc tr{display:block;border:var(--bw) solid var(--ink);background:var(--card);padding:4px 14px 8px}
+#sc tbody th{display:block;text-align:left;font-weight:900;font-stretch:80%;font-size:28px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:var(--bw) solid var(--ink)}
+#sc tbody th small{display:block;font-weight:500;font-stretch:100%;font-size:16px;text-transform:none;color:var(--muted);margin-top:2px}
+#sc td{display:grid;grid-template-columns:minmax(45%,1fr) minmax(0,auto);gap:2px 12px;align-items:baseline;padding:10px 0;border-bottom:2px solid var(--soft);font-size:18px}
+#sc td:last-child{border-bottom:0}
+#sc td::before{content:attr(data-l);font-weight:700;line-height:1.25}
+#sc .v{text-align:right;font-weight:800;white-space:nowrap}
+#sc .v.nd,#sc .nota .v{font-weight:400;color:var(--muted);white-space:normal}
+#sc .d{grid-column:2;text-align:right;font-weight:800;font-size:16px}
+#sc td.nota{display:block}
+#sc td.nota::before{display:block;margin-bottom:2px}
+.up{color:var(--good)} .down{color:var(--bad)} .flat{color:var(--muted)}
+.legend-sc{font-size:17px;color:var(--muted);margin:14px 0 0}
 
-.sources ol{padding-left:20px;columns:2;column-gap:32px;font-size:.9rem}
-@media (max-width:760px){.sources ol{columns:1}}
-.sources li{margin:0 0 8px;break-inside:avoid}
-footer{padding:28px 0 60px;color:var(--muted);font-size:.85rem}
+/* Gráficos (carregados só quando alguém abre "ano a ano") */
+.controls{display:grid;margin:0 0 10px}
+.chart + .chart{border-top:var(--bw) solid var(--ink);margin-top:24px;padding-top:22px}
+.chart h3{font-size:26px}
+.chart .sub{font-size:16px;color:var(--muted);margin:4px 0 10px}
+.cv{position:relative;height:300px}
+.chart .note{font-size:17px;margin:12px 0 0}
+
+footer{border-top:6px solid var(--ink);padding:22px 0 0;font-size:17px;color:var(--muted)}
 </style>
 </head>
 <body>
+<a class="skip" href="#perguntas">Pular para as perguntas</a>
+<div class="shell">
 
-<header>
-  <div class="wrap">
-    <h1>Trinta anos do Real em números — uma análise para as eleições de 2026</h1>
-    <p class="lead">Séries anuais de 1994 a 2026 do IBGE, do Banco Central, do Tesouro, do Inpe e da Serasa, com cada governo sombreado no mesmo lugar em todos os gráficos, as contestações posicionadas na linha do tempo, a gestão das grandes crises comparada com o resto do mundo e um placar de 0 a 10 para os dois governos em disputa.</p>
-    <div class="howto">
-      <div><strong>Linha do tempo</strong>Roxo abre uma contestação com argumento e contra-argumento; amarelo, uma crise; preto, um marco de contexto.</div>
-      <div><strong>Gráficos</strong>Passe o mouse para ver o valor do ano. O sombreamento alternado marca a troca de presidente.</div>
-      <div><strong>Placar 0–10</strong>Zero é o pior resultado entre os seis governos desde 1995; dez é o melhor. Todos os governos lado a lado.</div>
-    </div>
-    <nav class="toc" aria-label="Seções">
-      <a href="#timeline">Linha do tempo</a><a href="#charts">Séries</a><a href="#crises">Gestão de crises</a><a href="#board">Placar 0–10</a><a href="#scorecard">Recebeu → entregou</a><a href="#sources">Fontes</a>
-    </nav>
-  </div>
+<nav id="nav" aria-label="Menu da página">
+  <p class="nav-brand">30 anos do Real</p>
+  <p class="nav-h">As 11 perguntas</p>
+  <ol id="nav-q"></ol>
+  <p class="nav-h">Conclusão</p>
+  <ul>
+    <li><a class="nav-conc" href="#placar">A nota de cada governo</a></li>
+  </ul>
+  <p class="nav-h">Para ir mais fundo</p>
+  <ul>
+    <li><a href="#brigas">As grandes brigas</a></li>
+    <li><a href="#crises">O Brasil nas crises</a></li>
+    <li><a href="#tabela">Como pegou, como deixou</a></li>
+    <li><a href="#fontes">De onde vêm os números</a></li>
+  </ul>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="mast"><span>30 anos do Real</span><span>1994–2026</span></div>
+  <h1>O Brasil <mark>melhorou</mark> ou <mark>piorou</mark>?</h1>
+  <p class="lead">Comida, gasolina, emprego, salário, dívida. Veja como cada governo se saiu, com números oficiais e em palavras simples. Sempre com os dois lados.</p>
+  <ul class="how">
+    <li><b>Uma pergunta por vez.</b> Cada barra é um governo, sempre na mesma cor.</li>
+    <li><b>Quer saber mais?</b> Toque em “Ver os dois lados” ou em “Ver ano a ano”.</li>
+    <li><b>Ninguém governa sozinho.</b> Crises, o Congresso e o resto do mundo também pesam nos números.</li>
+  </ul>
+  <div class="govs" id="govs"></div>
+  <a class="btn" href="#comida">Começar pela comida</a>
+  <a class="btn btn-2" href="#placar">Ir direto para a conclusão: a nota de cada governo</a>
 </header>
 
-<section id="timeline">
-  <div class="wrap">
-    <h2>Linha do tempo das contestações</h2>
-    <p class="intro">Um número fiscal ou social quase nunca é só resultado de quem estava no cargo: choques externos, decisões do Congresso, do STF e do Banco Central e contas herdadas se acumulam. Cada marcador situa uma dessas decisões no ano em que ocorreu.</p>
-    <div class="govlegend" id="govlegend"></div>
-    <div class="tl-filters" id="filters" role="group" aria-label="Filtrar marcadores por tema"></div>
-    <div class="tl-scroll"><div class="tl" id="tl" aria-live="polite"></div></div>
-    <div class="detail" id="detail"><p class="empty">Selecione um marcador na linha do tempo.</p></div>
-  </div>
+<section id="perguntas" aria-label="As 11 perguntas"></section>
+
+<section id="placar" class="deep conclusao">
+  <p class="q-n">Conclusão</p>
+  <h2>A nota de cada governo</h2>
+  <p class="intro">Em cada um dos 12 assuntos desta página, o governo com o melhor resultado entre os seis recebe nota 10 e o com o pior, nota 0; os outros ficam no meio, na proporção. A nota final é a média simples desses assuntos. Vale lembrar: de 2003 a 2010 o mundo viveu o maior boom de matérias-primas em um século, e 2020 foi o ano da pandemia.</p>
+  <div id="ranking"></div>
+  <p class="obs">Cada assunto pesa igual na média. FHC e Lula 1 e 2 não têm números comparáveis de emprego, pobreza e salário médio; FHC também não tem de dívida. Quem dá mais valor ao emprego e quem dá mais valor à dívida chegariam a notas finais diferentes: por isso as notas por assunto, abaixo, importam mais que a média.</p>
+  <h3 class="sub-h">Nota por assunto</h3>
+  <label class="check"><input type="checkbox" id="ex2020"> Tirar 2020, o ano da pandemia, das contas de crescimento e de contas do governo</label>
+  <div id="attrs"></div>
+  <details>
+    <summary>Como as notas são calculadas</summary>
+    <ul>
+      <li>Crescimento: média anual do PIB no mandato. Inflação: média do IPCA. Preço da comida: média anual do IPCA de alimentação no domicílio. Investimento: média da taxa FBCF/PIB. Contas do governo: média do resultado primário do setor público consolidado. Comércio com o mundo: saldo comercial médio. Desmatamento: média anual do Prodes (Amazônia).</li>
+      <li>Emprego, pobreza e dívida: variação entre o último ano anterior à posse e o último ano do mandato, em pontos percentuais. Só há série comparável de desemprego e pobreza a partir de 2012, então FHC e Lula 1–2 ficam fora desses assuntos; a dívida bruta começa em 2006 e o valor de Lula 1–2 cobre 2006–2010.</li>
+      <li>Salário mínimo real e salário médio real: variação percentual entre dezembro do ano anterior à posse e dezembro do último ano do mandato (Lula 3: agosto de 2026), descontada a inflação. O salário médio é o rendimento médio real habitual de todos os trabalhos da PNAD Contínua (IBGE), comparável só a partir de 2012: FHC e Lula 1–2 ficam fora, e Dilma usa 2012–2016.</li>
+      <li>Dilma inclui 2016 inteiro; Temer, 2017–2018. Lula 3 usa 2023–2025 (dívida: julho de 2026; desemprego: média de 2025).</li>
+      <li>A nota final é uma média simples: cada assunto pesa igual. Essa é uma escolha discutível, e é por isso que as barras de cada assunto importam mais que a média.</li>
+    </ul>
+  </details>
 </section>
 
-<section id="charts">
-  <div class="wrap">
-    <h2>As séries, ano a ano</h2>
-    <p class="intro">Valores de 1994 a 2024 são das séries oficiais em suas versões mais recentes (sujeitas a revisões de até ±0,5 p.p. em PIB e dívida). Os de 2025 e 2026 vêm das divulgações de 2026 listadas nas fontes. Onde a série oficial começa mais tarde, o gráfico começa junto com ela — séries anteriores usavam outra metodologia.</p>
-    <div class="controls">
-      <label><input type="checkbox" id="bands" checked> Sombrear governos</label>
-      <label><input type="checkbox" id="focus"> Destacar apenas 2019–2026</label>
-    </div>
-    <div class="chartgrid" id="chartgrid"></div>
-  </div>
+<section id="brigas" class="deep">
+  <h2>As grandes brigas</h2>
+  <p class="intro">Um número quase nunca é só resultado de quem estava no governo. Crises de fora, o Congresso, a Justiça e contas herdadas também pesam. Aqui estão as decisões e os choques mais discutidos desde 1994. Toque em um deles para ver o que aconteceu, o que diz quem defende e o que diz quem critica.</p>
+  <div class="chips" id="filters" role="group" aria-label="Filtrar por assunto"></div>
+  <div id="brigas-list"></div>
 </section>
 
-<section id="crises">
-  <div class="wrap">
-    <h2>Gestão de crises: Brasil versus o mundo</h2>
-    <p class="intro">Crises são o teste mais duro e o mais fácil de distorcer, porque cada lado escolhe o país de comparação que lhe convém. Abaixo, para cada choque, os mesmos indicadores para o Brasil e para referências fixas (mundo, EUA, zona do euro, América Latina), com a resposta do governo e a leitura dos dois lados.</p>
-    <div class="crises" id="crises"></div>
-  </div>
+<section id="crises" class="deep">
+  <h2>Nas crises, o Brasil foi melhor ou pior que o mundo?</h2>
+  <p class="intro">Em toda crise, cada lado escolhe o país que lhe convém para comparar. Aqui a comparação é sempre a mesma: o Brasil ao lado do mundo, dos Estados Unidos, da Europa e dos vizinhos.</p>
+  <div id="crises-list"></div>
 </section>
 
-<section id="board">
-  <div class="wrap">
-    <h2>Placar 0–10: os seis governos desde o Real</h2>
-    <p class="intro">Cada atributo é uma nota relativa: 0 para o pior resultado entre os seis governos desde 1995 e 10 para o melhor, calculada ao vivo a partir das séries deste documento. Os dois governos em disputa em 2026 aparecem sublinhados e em negrito; os demais dão a régua histórica. Lembre que 2003–2010 coincidiu com o maior boom de commodities em um século e que 2020 foi a pandemia.</p>
-    <div class="board">
-      <div class="heads" id="heads"></div>
-      <div class="controls">
-        <label><input type="checkbox" id="ex2020"> Excluir 2020 (pandemia) das médias de PIB e resultado primário</label>
-      </div>
-      <div id="attrs"></div>
-      <div class="total" id="total"></div>
-      
-      <details class="method"><summary>Como as notas são calculadas</summary>
-        <ul>
-          <li>Crescimento: média anual do PIB no mandato. Inflação: média do IPCA. Investimento: média da taxa FBCF/PIB. Contas públicas: média do resultado primário consolidado. Setor externo: saldo comercial médio. Desmatamento: média anual do Prodes (Amazônia).</li>
-          <li>Emprego, pobreza e dívida: variação entre o último ano anterior à posse e o último ano do mandato (em pontos percentuais). Só há série comparável de desemprego e pobreza a partir de 2012, então FHC e Lula 1–2 ficam fora desses atributos; a dívida bruta começa em 2006 e o valor de Lula 1–2 cobre 2006–2010.</li>
-          <li>Salário mínimo real: variação percentual entre o valor do primeiro ano do mandato e o do primeiro ano do mandato seguinte, deflacionado pelo IPCA.</li>
-          <li>Dilma inclui 2016 inteiro; Temer, 2017–2018. Lula 3 usa 2023–2025 (dívida: julho/2026; desemprego: média de 2025).</li>
-          <li>A média final é simples: cada atributo pesa igual. Isso é uma escolha discutível — um eleitor que prioriza emprego e outro que prioriza dívida chegariam a totais diferentes, e é exatamente por isso que as barras individuais importam mais que a média.</li>
-        </ul>
-      </details>
-    </div>
-  </div>
+
+<section id="tabela" class="deep">
+  <h2>Como pegou, como deixou</h2>
+  <p class="intro">“Pegou” é como o número estava no fim do ano antes da posse. “Deixou” é como ficou no fim do último ano completo do governo (para Lula 3, o dado mais recente). O crescimento é a média por ano.</p>
+  <table id="sc"></table>
+  <p class="legend-sc">“Melhorou” e “piorou” seguem a direção que a maioria dos economistas considera boa. Juros e dólar não recebem essa marca: se subir é bom ou ruim depende do objetivo.</p>
 </section>
 
-<section id="scorecard">
-  <div class="wrap">
-    <h2>Recebeu → entregou, seis governos</h2>
-    <p class="intro">"Recebeu" é o valor de dezembro do ano anterior à posse; "entregou" é o de dezembro do último ano completo (para Lula 3, o dado mais recente). O PIB é a média anual do período.</p>
-    <div class="table-scroll"><table id="sc"></table></div>
-    <p class="legend-sc">Verde indica melhora e vermelho piora na direção economicamente desejável. Câmbio e Selic não recebem cor: sua direção "boa" depende do objetivo.</p>
-  </div>
-</section>
-
-<section id="sources" class="sources">
-  <div class="wrap">
-    <h2>Fontes</h2>
-    <p class="intro">Séries históricas: IBGE (Contas Nacionais, IPCA, PNAD Contínua, Síntese de Indicadores Sociais), Banco Central (DBGG, resultado primário, Selic, PTAX), MDIC/Secex (balança), Inpe/Prodes (desmatamento), Serasa Experian (recuperações judiciais), FMI/WEO (PIB mundial) e Our World in Data (Covid). O salário mínimo real foi deflacionado pelo IPCA anual a preços de janeiro de 2026. Abaixo, as divulgações usadas para 2025–2026 e para os episódios.</p>
+<section id="fontes" class="deep">
+  <h2>De onde vêm os números</h2>
+  <p class="intro">Séries históricas: IBGE (Contas Nacionais, IPCA e seus itens, PNAD Contínua, Síntese de Indicadores Sociais), Banco Central (dívida bruta, resultado primário, Selic, dólar, salário mínimo), ANP (preços da gasolina e do botijão de gás), DIEESE (cesta básica), MDIC/Secex (balança comercial), Inpe/Prodes (desmatamento), FMI (PIB mundial), FRED/EIA (petróleo Brent) e Our World in Data (Covid). O salário mínimo real foi calculado descontando o IPCA, a preços de janeiro de 2026.</p>
+  <details>
+    <summary>Ver a lista de fontes</summary>
     <ol>
+      <li><a href="https://sidra.ibge.gov.br/tabela/6390">IBGE/SIDRA — Rendimento médio real habitual de todos os trabalhos, PNAD Contínua (tabela 6390)</a></li>
+      <li><a href="https://sidra.ibge.gov.br/tabela/7060">IBGE/SIDRA — IPCA por item: comida em casa, gasolina, gás de botijão e energia elétrica (tabelas 58, 655, 2938, 1419 e 7060)</a></li>
+      <li><a href="https://www.gov.br/anp/pt-br/assuntos/precos-e-defesa-da-concorrencia/precos/precos-revenda-e-de-distribuicao-combustiveis/serie-historica-do-levantamento-de-precos">ANP — Série histórica do levantamento de preços (gasolina e botijão de 13 kg)</a></li>
+      <li><a href="https://www3.bcb.gov.br/sgspub/">Banco Central/SGS — Salário mínimo (série 1619), cesta básica do DIEESE em São Paulo (série 7493) e juros nominais do setor público em % do PIB (série 5760)</a></li>
+      <li><a href="https://www.dieese.org.br/cesta/">DIEESE — Pesquisa Nacional da Cesta Básica de Alimentos</a></li>
+      <li><a href="https://fred.stlouisfed.org/series/MCOILBRENTEU">FRED/EIA — Petróleo Brent, US$ por barril, média mensal (série MCOILBRENTEU); convertido para reais pelo dólar médio mensal do Banco Central (SGS 3698)</a></li>
+      <li><a href="https://cidades.ibge.gov.br/brasil/sp/sao-paulo/panorama">IBGE Cidades — Área do município de São Paulo (1.521 km²)</a></li>
       <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/45968-pib-cresce-2-3-em-2025-e-fecha-o-ano-em-r-12-7-trilhoes">IBGE — PIB cresce 2,3% em 2025</a></li>
       <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/47739-ipca-fica-em-0-07-em-julho">IBGE — IPCA de julho de 2026</a></li>
       <li><a href="https://biblioteca.ibge.gov.br/visualizacao/periodicos/3086/pnacm_2026_jul.pdf">IBGE — PNAD Contínua, maio–julho de 2026</a></li>
@@ -258,8 +346,6 @@ footer{padding:28px 0 60px;color:var(--muted);font-size:.85rem}
       <li><a href="https://forbes.com.br/forbes-money/2026/01/brasil-tem-superavit-comercial-de-us-683-bi-em-2025/">Forbes/MDIC — Balança comercial 2025</a></li>
       <li><a href="https://www.gov.br/inpe/pt-br/assuntos/ultimas-noticias/novos-dados-do-prodes-sao-atualizados-pelo-programa-biomasbr">Inpe — Prodes 2025 consolidado (5.731 km²)</a></li>
       <li><a href="https://agenciagov.ebc.com.br/noticias/202510/em-2025-desmatamento-tem-reducao-de-11-08-na-amazonia-e-11-49-no-cerrado-1">Agência Gov — Desmatamento 2025, Amazônia e Cerrado</a></li>
-      <li><a href="https://www.serasaexperian.com.br/sala-de-imprensa/indicadores/recuperacoes-judiciais-avancam-no-brasil-e-atingem-25-mil-empresas-em-2025-maior-nivel-da-serie-aponta-serasa-experian/">Serasa Experian — Recuperações judiciais 2025</a></li>
-      <li><a href="https://forbes.com.br/forbes-money/2026/04/recorde-no-numero-de-recuperacoes-judiciais-esconde-mudanca-critica-aponta-indicador-da-serasa-experian/">Forbes — RJ recorde e crescimento da base de empresas</a></li>
       <li><a href="https://agenciabrasil.ebc.com.br/politica/noticia/2021-12/o-que-muda-com-pec-dos-precatorios">Agência Brasil — PEC dos Precatórios (2021)</a></li>
       <li><a href="https://diariodocomercio.com.br/economia/governo-considera-facil-obter-mais-de-r-100-bi-em-dividendos-apos-recorde-da-petrobras/">Diário do Comércio — Eletrobras e dividendos em 2022</a></li>
       <li><a href="https://www.jb.com.br/colunistas/o-outro-lado-da-moeda/2024/01/1048497-deficit-e-de-lula-ou-bolsonaro.html">Jornal do Brasil — Déficit de 2023</a></li>
@@ -276,24 +362,26 @@ footer{padding:28px 0 60px;color:var(--muted);font-size:.85rem}
       <li><a href="https://www.forte.jor.br/2026/08/20/jair-bolsonaro-da-onda-antipolitica-ao-planalto-pandemia-recuperacao-economica-e-transformacao-das-forcas-armadas/">Forças Terrestres — Balanço do governo Bolsonaro</a></li>
       <li><a href="https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%A3o_presidencial_no_Brasil_em_2026">Wikipédia — Eleição presidencial de 2026 (candidaturas)</a></li>
     </ol>
-  </div>
+  </details>
 </section>
 
-<footer><div class="wrap">Documento elaborado em setembro de 2026 e publicado em outubro de 2026. Dados de 2026 são parciais. Fotos: o documento não inclui imagens de pessoas reais; use "trocar foto" para carregar uma imagem do seu computador — ela fica só na sua tela e não é enviada a lugar nenhum.</div></footer>
+<footer>Página feita em setembro de 2026 e atualizada em outubro de 2026. Os números de 2026 ainda são parciais.</footer>
+</main>
+</div>
+
+<button type="button" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
 
 <script>
-/* ---------- Governments ---------- */
+/* ---------- Governos ---------- */
 const GOVS=[
- {n:"Itamar",s:1994,e:1995,c:"var(--band-b)"},
- {n:"FHC",s:1995,e:2003,c:"var(--band-a)"},
- {n:"Lula 1 e 2",s:2003,e:2011,c:"var(--band-b)"},
- {n:"Dilma",s:2011,e:2016.67,c:"var(--band-a)"},
- {n:"Temer",s:2016.67,e:2019,c:"var(--band-b)"},
- {n:"Bolsonaro",s:2019,e:2023,c:"var(--band-a)"},
- {n:"Lula 3",s:2023,e:2027,c:"var(--band-b)"}
+ {n:"Itamar",s:1994,e:1995,h:"#9A958A"},
+ {n:"FHC",s:1995,e:2003,h:"#6B7A8F"},
+ {n:"Lula 1 e 2",s:2003,e:2011,h:"#C8952A"},
+ {n:"Dilma",s:2011,e:2016.67,h:"#8A3B7D"},
+ {n:"Temer",s:2016.67,e:2019,h:"#5E8C61"},
+ {n:"Bolsonaro",s:2019,e:2023,h:"#2F5D8A"},
+ {n:"Lula 3",s:2023,e:2027,h:"#A0522D"}
 ];
-const T0=1994,T1=2027;
-const pct=y=>((y-T0)/(T1-T0)*100);
 
 /* ---------- Data series ---------- */
 const Y=(a,b)=>{const r=[];for(let i=a;i<=b;i++)r.push(String(i));return r};
@@ -306,14 +394,25 @@ const D={
  desemp:{labels:Y(2012,2025),v:[7.4,7.1,6.8,8.5,11.5,12.7,12.3,11.9,13.8,13.2,9.3,7.8,6.6,5.6]},
  dbgg:{labels:[...Y(2006,2025),"jul/26"],v:[55.5,56.7,56.0,59.2,51.8,51.3,53.7,51.5,56.3,65.5,69.8,73.7,75.3,74.4,86.9,77.3,71.7,73.8,76.5,78.6,82.5]},
  prim:{labels:Y(1997,2025),v:[-0.9,0.0,2.9,3.2,3.3,3.2,3.3,3.7,3.7,3.2,3.2,3.3,1.9,2.6,2.9,2.2,1.7,-0.6,-1.9,-2.5,-1.7,-1.5,-0.8,-9.4,0.7,1.2,-2.3,-0.4,-0.4]},
+ juros:{labels:[...Y(2003,2025),"ago/26"],v:[8.4,6.6,7.3,6.7,6.0,5.3,5.1,5.0,5.4,4.4,4.7,5.4,8.4,6.5,6.1,5.4,5.0,4.1,5.0,5.8,6.6,8.1,7.9,8.9]},
  selic:{labels:[...Y(1999,2025),"ago/26"],v:[19,15.75,19,25,16.5,17.75,18,13.25,11.25,13.75,8.75,10.75,11,7.25,10,11.75,14.25,13.75,7,6.5,4.5,2,9.25,13.75,11.75,12.25,15,14]},
  cambio:{labels:[...Y(1994,2025),"ago/26"],v:[0.85,0.97,1.04,1.12,1.21,1.79,1.95,2.32,3.53,2.89,2.65,2.34,2.14,1.77,2.34,1.74,1.67,1.88,2.04,2.34,2.66,3.90,3.26,3.31,3.87,4.03,5.20,5.58,5.22,4.84,6.19,5.44,5.20]},
  fbcf:{labels:Y(1995,2025),v:[18.0,16.9,17.4,17.0,15.7,16.8,17.0,16.4,15.3,16.1,15.9,16.4,17.4,19.1,18.1,19.5,19.3,19.4,19.7,19.9,17.6,15.0,14.6,15.5,15.5,16.6,18.9,17.8,16.4,16.9,16.8]},
  balanca:{labels:Y(1994,2025),v:[10.5,-3.5,-5.6,-6.8,-6.6,-1.3,-0.7,2.7,13.1,24.8,33.6,44.7,46.5,40.0,24.8,25.3,20.1,29.8,19.4,2.3,-4.0,19.7,47.7,67.0,58.0,48.0,50.4,61.4,61.8,98.8,74.2,68.3]},
- smreal:{labels:Y(1995,2026),v:[728,666,652,671,690,704,792,817,871,863,926,1022,1076,1125,1190,1251,1263,1353,1393,1405,1437,1450,1453,1437,1449,1454,1464,1466,1509,1543,1583,1621]},
+ smreal:{labels:[...Y(1994,2025),"ago/26"],v:[512,597,610,621,662,636,666,738,728,800,805,879,994,1033,1066,1145,1185,1189,1282,1320,1325,1303,1369,1416,1389,1393,1396,1335,1391,1448,1477,1523,1577]},
+ salmedio:{labels:[...Y(2012,2025),"ago/26"],v:[3189,3289,3348,3239,3260,3306,3351,3361,3442,3068,3317,3418,3563,3742,3777]},
  pobreza:{labels:Y(2012,2024),v:[26.5,24.9,24.1,26.7,27.9,27.7,26.5,25.9,24.1,36.7,31.6,27.3,23.1]},
  desmat:{labels:Y(1994,2025),v:[14896,29059,18161,13227,17383,17259,18226,18165,21651,25396,27772,19014,14286,11651,12911,7464,7000,6418,4571,5891,5012,6207,7893,6947,7536,10129,10851,13038,11594,9064,6288,5731]},
- rj:{labels:Y(2010,2025),v:[475,515,757,874,828,1287,1863,1420,1408,1387,1179,891,833,1405,2182,2466]}
+ comida:{labels:Y(1995,2025),v:[4.2,1.5,1.6,2.8,10.2,3.1,9.6,21.6,6.7,2.6,0.6,-0.1,12.4,10.7,0.9,10.7,5.4,10.0,7.6,7.1,12.9,9.4,-4.9,4.5,7.8,18.2,8.2,13.2,-0.5,8.2,1.4]},
+ gasolina:{labels:Y(1995,2025),v:[7.6,21.3,16.3,-0.3,52.0,30.7,7.2,12.1,1.2,14.7,7.8,2.9,-0.7,-0.3,2.1,1.7,6.9,-0.4,6.5,2.9,20.1,2.5,10.3,7.2,4.0,-0.2,47.5,-25.8,12.1,9.7,1.9]},
+ gas:{labels:Y(1995,2025),v:[null,11.1,16.0,32.8,44.5,21.0,15.6,48.3,2.9,7.1,0.2,7.5,0.1,2.4,13.7,2.1,2.0,4.9,6.5,4.9,22.6,2.1,16.0,4.9,1.3,9.2,37.0,6.3,-6.9,7.0,2.5]},
+ luz:{labels:Y(1995,2025),v:[null,1.6,10.1,2.7,19.9,12.7,17.9,19.9,21.4,9.6,8.1,0.3,-6.2,1.1,4.7,3.0,4.0,2.9,-15.7,17.1,51.0,-10.7,10.4,8.7,5.0,9.1,21.2,-19.0,9.5,-0.4,12.3]},
+ gasolinaRS:{labels:[...Y(2002,2025),"set/26"],v:[1.73,2.07,2.14,2.34,2.55,2.51,2.50,2.51,2.57,2.73,2.74,2.85,2.98,3.34,3.68,3.77,4.41,4.38,4.28,5.78,6.11,5.50,5.93,6.24,6.54]},
+ botijaoRS:{labels:[...Y(2002,2025),"set/26"],v:[24.26,29.20,30.95,30.11,32.16,32.92,33.15,35.70,38.20,38.47,39.30,41.16,43.21,48.29,54.07,59.00,67.99,69.08,70.74,90.51,109.86,104.22,103.59,108.58,114.33]},
+ litrosSM:{labels:[...Y(2002,2025),"set/26"],v:[112,111,119,122,132,149,164,184,199,199,227,238,243,236,239,249,216,228,244,190,198,239,238,243,248]},
+ gasolinaIdx:{labels:[...Y(2002,2025),"ago/26"],v:[100,119,123,135,147,145,144,145,148,157,158,165,172,193,212,217,254,252,247,333,352,317,342,360,376]},
+ petroleoIdx:{labels:[...Y(2002,2025),"ago/26"],v:[100,121,151,178,192,189,231,163,189,252,295,317,313,233,204,234,352,344,287,516,702,558,586,524,635]},
+ cestasSM:{labels:[...Y(1999,2024),"jun/25"],v:[1.25,1.28,1.37,1.42,1.37,1.47,1.60,1.91,1.93,1.73,2.01,2.06,2.03,2.12,2.06,2.10,2.02,1.93,2.15,2.15,2.04,1.87,1.68,1.59,1.71,1.74,1.72]}
 };
 
 /* ---------- Timeline events ---------- */
@@ -477,130 +576,49 @@ const CRISES=[
 
 /* ---------- Chart definitions ---------- */
 const CH=[
- {id:"pib",title:"Crescimento do PIB",sub:"Variação real anual, %",type:"bar",ds:[{d:"pib",l:"Brasil",c:"#0E6B6B"}],note:"Médias: FHC 2,4% · Lula 1–2 4,1% · Dilma 0,4% · Temer 1,6% · Bolsonaro 1,4% · Lula 3 3,0%. Fonte: IBGE."},
- {id:"mundo",title:"Brasil versus o mundo",sub:"Variação real do PIB, %",type:"line",ds:[{d:"pib",l:"Brasil",c:"#0E6B6B"},{d:"mundo",l:"Mundo (FMI)",c:"#8A3B7D"},{d:"emerg",l:"Emergentes (FMI, desde 2011)",c:"#C8952A",dash:true}],note:"O Brasil cresceu acima do mundo em 2003–2010 e abaixo em 2011–2022; em 2023–25 ficou perto da média mundial e abaixo dos emergentes."},
- {id:"ipca",title:"Inflação e meta",sub:"IPCA acumulado no ano, %",type:"line",ds:[{d:"ipca",l:"IPCA",c:"#0E6B6B"},{d:"meta",l:"Centro da meta",c:"#8A3B7D",dash:true}],note:"1994 (916%) omitido. A meta caiu de 4,5% para 3% entre 2018 e 2024: Lula 3 tem a menor inflação média de um mandato e nunca cumpriu o centro da meta."},
- {id:"desemp",title:"Desemprego",sub:"Taxa de desocupação, média anual, %",type:"line",ds:[{d:"desemp",l:"PNAD Contínua",c:"#0E6B6B"}],note:"Julho/2026: 5,3% (trimestre móvel), menor da série. A queda começa em 2021 e atravessa a troca de governo sem inflexão."},
- {id:"dbgg",title:"Dívida bruta do governo geral",sub:"% do PIB, dezembro de cada ano",type:"line",ds:[{d:"dbgg",l:"DBGG",c:"#0E6B6B"}],note:"Bolsonaro: 75,3 → 71,7 (pico 86,9 em 2020). Lula 3: 71,7 → 82,5 (jul/26). Em 2026, juros somaram 5,7 p.p. e emissões 1,5 p.p."},
- {id:"prim",title:"Resultado primário",sub:"Setor público consolidado, % do PIB",type:"bar",ds:[{d:"prim",l:"Primário",c:"#0E6B6B"}],note:"Positivo = superávit. Desde 2014 só houve superávit em 2021 e 2022; 2023 é o pior déficit fora da pandemia, do qual ~0,9 p.p. são precatórios herdados."},
- {id:"selic",title:"Selic",sub:"Meta no fim de cada ano, % a.a.",type:"line",ds:[{d:"selic",l:"Selic",c:"#0E6B6B"}],note:"Bolsonaro: 6,5 → 13,75 (passando pela mínima histórica de 2%). Lula 3: 13,75 → 10,5 (2024) → 15 (2025) → 14 (ago/26)."},
- {id:"cambio",title:"Câmbio",sub:"R$ por US$, PTAX no fim do ano",type:"line",ds:[{d:"cambio",l:"Dólar",c:"#0E6B6B"}],note:"Bolsonaro: 3,87 → 5,22 (+35%). Lula 3: 5,22 → 5,20, com pico de 6,19 em dez/2024."},
- {id:"fbcf",title:"Taxa de investimento",sub:"Formação bruta de capital fixo, % do PIB",type:"line",ds:[{d:"fbcf",l:"FBCF/PIB",c:"#0E6B6B"}],note:"Nenhum governo desde 2014 recuperou os 19–20% da década anterior. Bolsonaro média 17,2%; Lula 3 16,7%."},
- {id:"balanca",title:"Balança comercial",sub:"Saldo anual, US$ bilhões",type:"bar",ds:[{d:"balanca",l:"Saldo",c:"#0E6B6B"}],note:"Recorde de US$ 98,8 bi em 2023; US$ 68,3 bi em 2025 com exportações recordes apesar das tarifas dos EUA. Série ligada a commodities, não a governos."},
- {id:"smreal",title:"Salário mínimo real",sub:"R$ a preços de janeiro de 2026 (deflacionado pelo IPCA)",type:"line",ds:[{d:"smreal",l:"Mínimo real",c:"#0E6B6B"}],note:"Dobrou entre 2003 e 2015; estável de 2016 a 2022 (reajuste só pela inflação); voltou a subir com a regra INPC + PIB em 2023. Cálculo aproximado."},
- {id:"pobreza",title:"Pobreza",sub:"% da população abaixo de US$ 6,85/dia (IBGE, linha do Banco Mundial)",type:"line",ds:[{d:"pobreza",l:"Pobreza",c:"#0E6B6B"}],note:"2020 caiu com o Auxílio Emergencial; 2021 é o pior ano da série (36,7%); a queda começa em 2022 sob Bolsonaro e chega ao mínimo de 23,1% em 2024 sob Lula."},
- {id:"desmat",title:"Desmatamento na Amazônia",sub:"Prodes/Inpe, km² por ano (agosto a julho)",type:"bar",ds:[{d:"desmat",l:"km²",c:"#0E6B6B"}],note:"Pico de 29.059 km² em 1995 e 27.772 em 2004; mínimo de 4.571 em 2012. Bolsonaro: média 11.400 km²/ano, alta de 60% sobre Temer. Lula 3: 5.731 km² em 2025, terceira menor taxa da série."},
- {id:"rj",title:"Empresas em recuperação judicial",sub:"Serasa Experian, empresas (CNPJs) por ano",type:"bar",ds:[{d:"rj",l:"Recuperações judiciais",c:"#0E6B6B"}],note:"Recorde de 2.466 em 2025 (+13%), puxado por agro (30%) e juros altos; a base de empresas ativas cresceu 6,5%, 13,4% e 22,5% em 2023–25. Nos anos Bolsonaro, o crédito emergencial (Pronampe) e a Selic de 2% derrubaram os pedidos para o menor nível em uma década. 2024–25 na metodologia nova da Serasa; anos anteriores, na antiga."}
+ {id:"pib",title:"Crescimento do PIB",sub:"Variação real anual, %",type:"bar",ds:[{d:"pib",l:"Brasil",c:"#15120F"}],note:"Médias: FHC 2,4% · Lula 1–2 4,1% · Dilma 0,4% · Temer 1,6% · Bolsonaro 1,4% · Lula 3 3,0%. Fonte: IBGE."},
+ {id:"mundo",title:"Brasil versus o mundo",sub:"Variação real do PIB, %",type:"line",ds:[{d:"pib",l:"Brasil",c:"#15120F"},{d:"mundo",l:"Mundo (FMI)",c:"#8A3B7D"},{d:"emerg",l:"Emergentes (FMI, desde 2011)",c:"#C8952A",dash:true}],note:"O Brasil cresceu acima do mundo em 2003–2010 e abaixo em 2011–2022; em 2023–25 ficou perto da média mundial e abaixo dos emergentes."},
+ {id:"ipca",title:"Inflação e meta",sub:"IPCA acumulado no ano, %",type:"line",ds:[{d:"ipca",l:"IPCA",c:"#15120F"},{d:"meta",l:"Centro da meta",c:"#8A3B7D",dash:true}],note:"1994 (916%) omitido. A meta caiu de 4,5% para 3% entre 2018 e 2024. Desde 1999, o IPCA só fechou abaixo do centro da meta em 2006, 2009, 2017 e 2018."},
+ {id:"desemp",title:"Desemprego",sub:"Taxa de desocupação, média anual, %",type:"line",ds:[{d:"desemp",l:"PNAD Contínua",c:"#15120F"}],note:"Julho/2026: 5,3% (trimestre móvel), menor da série. A queda começa em 2021 e atravessa a troca de governo sem inflexão."},
+ {id:"dbgg",title:"Dívida bruta do governo geral",sub:"% do PIB, dezembro de cada ano",type:"line",ds:[{d:"dbgg",l:"DBGG",c:"#15120F"}],note:"Bolsonaro: 75,3 → 71,7 (pico 86,9 em 2020). Lula 3: 71,7 → 82,5 (jul/26). Em 2026, juros somaram 5,7 p.p. e emissões 1,5 p.p."},
+ {id:"prim",title:"Resultado primário",sub:"Setor público consolidado, % do PIB",type:"bar",ds:[{d:"prim",l:"Primário",c:"#15120F"}],note:"Positivo = superávit. Desde 2014 só houve superávit em 2021 e 2022; 2023 é o segundo pior déficit fora da pandemia, atrás de 2016; ~0,9 p.p. dele são precatórios herdados."},
+ {id:"juros",title:"Juros da dívida e resultado primário",sub:"% do PIB por ano. Juros: quanto o governo pagou pela dívida. Primário: quanto sobrou (+) ou faltou (−) nas contas, sem contar os juros",type:"line",ds:[{d:"juros",l:"Juros pagos",c:"#15120F"},{d:"prim",l:"Resultado primário",c:"#8A3B7D",dash:true}],note:"Os juros variaram entre 4,1% do PIB (2020) e 8,4% (2003 e 2015); foram 7,9% em 2025 e 8,9% nos 12 meses até agosto de 2026. O resultado primário ficou entre +3,7% (2004 e 2005) e −9,4% (2020). Fonte: Banco Central (NFSP, setor público consolidado)."},
+ {id:"selic",title:"Selic",sub:"Meta no fim de cada ano, % a.a.",type:"line",ds:[{d:"selic",l:"Selic",c:"#15120F"}],note:"Bolsonaro: 6,5 → 13,75 (passando pela mínima histórica de 2%). Lula 3: 13,75 → 10,5 (2024) → 15 (2025) → 14 (ago/26)."},
+ {id:"cambio",title:"Câmbio",sub:"R$ por US$, PTAX no fim do ano",type:"line",ds:[{d:"cambio",l:"Dólar",c:"#15120F"}],note:"Bolsonaro: 3,87 → 5,22 (+35%). Lula 3: 5,22 → 5,20, com pico de 6,19 em dez/2024."},
+ {id:"fbcf",title:"Taxa de investimento",sub:"Formação bruta de capital fixo, % do PIB",type:"line",ds:[{d:"fbcf",l:"FBCF/PIB",c:"#15120F"}],note:"Nenhum governo desde 2014 recuperou os 19–20% da década anterior. Bolsonaro média 17,2%; Lula 3 16,7%."},
+ {id:"balanca",title:"Balança comercial",sub:"Saldo anual, US$ bilhões",type:"bar",ds:[{d:"balanca",l:"Saldo",c:"#15120F"}],note:"Recorde de US$ 98,8 bi em 2023; US$ 68,3 bi em 2025 com exportações recordes apesar das tarifas dos EUA. Série ligada a commodities, não a governos."},
+ {id:"smreal",title:"Salário mínimo real",sub:"Valor de dezembro de cada ano, em R$ de janeiro de 2026 (descontado o IPCA)",type:"line",ds:[{d:"smreal",l:"Mínimo real",c:"#15120F"}],note:"De R$ 728 em 2002 para R$ 1.325 em 2014; entre R$ 1.303 e R$ 1.416 de 2015 a 2022; R$ 1.577 em agosto de 2026. Cálculo aproximado."},
+ {id:"pobreza",title:"Pobreza",sub:"% da população abaixo de US$ 6,85/dia (IBGE, linha do Banco Mundial)",type:"line",ds:[{d:"pobreza",l:"Pobreza",c:"#15120F"}],note:"2020 caiu com o Auxílio Emergencial; 2021 é o pior ano da série (36,7%); a queda começa em 2022 sob Bolsonaro e chega ao mínimo de 23,1% em 2024 sob Lula."},
+ {id:"desmat",title:"Desmatamento na Amazônia",sub:"Prodes/Inpe, km² por ano (agosto a julho)",type:"bar",ds:[{d:"desmat",l:"km²",c:"#15120F"}],note:"Pico de 29.059 km² em 1995 e 27.772 em 2004; mínimo de 4.571 em 2012. Bolsonaro: média 11.400 km²/ano, alta de 60% sobre Temer. Lula 3: 5.731 km² em 2025, terceira menor taxa da série."},
+ {id:"comida",title:"Preço da comida em casa",sub:"IPCA, alimentação no domicílio, variação no ano, %",type:"bar",ds:[{d:"comida",l:"Comida em casa",c:"#15120F"}],note:"Maiores altas: 21,6% em 2002, 18,2% em 2020 e 13,2% em 2022. Quedas em 2006 (−0,1%), 2017 (−4,9%) e 2023 (−0,5%). De janeiro a agosto de 2026: +3,4%. Fonte: IBGE."},
+ {id:"gasolina",title:"Preço da gasolina",sub:"IPCA, gasolina, variação no ano, %",type:"bar",ds:[{d:"gasolina",l:"Gasolina",c:"#15120F"}],note:"Maiores altas: 52,0% em 1999, 47,5% em 2021 e 30,7% em 2000. Maior queda: −25,8% em 2022. De janeiro a agosto de 2026: +4,3%. Fonte: IBGE."},
+ {id:"gasolinaRS",title:"Gasolina no posto",sub:"R$ por litro, média do ano (sem descontar a inflação)",type:"line",ds:[{d:"gasolinaRS",l:"Gasolina comum",c:"#15120F"}],note:"De R$ 1,73 em 2002 a R$ 6,54 em setembro de 2026. A pesquisa de preços da ANP começa em julho de 2001. Fonte: ANP."},
+ {id:"petroleo",title:"Gasolina no Brasil e petróleo no mundo",sub:"Quanto cada um subiu desde 2002 (2002 = 100). O petróleo Brent é convertido para reais pelo dólar médio do mês",type:"line",ds:[{d:"gasolinaIdx",l:"Gasolina no posto",c:"#15120F"},{d:"petroleoIdx",l:"Petróleo em reais",c:"#8A3B7D",dash:true}],note:"De 2002 a agosto de 2026, a gasolina no posto multiplicou por 3,8 e o petróleo em reais por 6,3. Em 2021, o petróleo em reais subiu 80% e a gasolina, 35%; em 2022, 36% e 6%; em 2023, caíram 21% e 10%. Em 2026, até agosto, o petróleo está 20% acima da média de 2025 e a gasolina, 5%. Cálculo próprio com dados da ANP, do Banco Central e do FRED/EIA."},
+ {id:"litrosSM",title:"Litros de gasolina que um salário mínimo compra",sub:"Salário mínimo dividido pelo preço médio do litro",type:"line",ds:[{d:"litrosSM",l:"Litros por salário mínimo",c:"#15120F"}],note:"112 litros em 2002; 249 em 2017, o ponto mais alto; 190 em 2021; 248 em setembro de 2026. Cálculo próprio com dados do Banco Central e da ANP."},
+ {id:"gas",title:"Preço do gás de cozinha",sub:"IPCA, gás de botijão, variação no ano, %",type:"bar",ds:[{d:"gas",l:"Gás de botijão",c:"#15120F"}],note:"Maiores altas: 48,3% em 2002, 44,5% em 1999 e 37,0% em 2021. Única queda: −6,9% em 2023. Série completa a partir de 1996. Fonte: IBGE."},
+ {id:"botijaoRS",title:"Botijão de gás",sub:"R$ por botijão de 13 kg, média do ano (sem descontar a inflação)",type:"line",ds:[{d:"botijaoRS",l:"Botijão de 13 kg",c:"#15120F"}],note:"De R$ 24,26 em 2002 a R$ 114,33 em setembro de 2026. Fonte: ANP."},
+ {id:"luz",title:"Preço da conta de luz",sub:"IPCA, energia elétrica residencial, variação no ano, %",type:"bar",ds:[{d:"luz",l:"Conta de luz",c:"#15120F"}],note:"Maiores altas: 51,0% em 2015, 21,4% em 2003 e 21,2% em 2021. Maiores quedas: −19,0% em 2022 e −15,7% em 2013. Série completa a partir de 1996. Fonte: IBGE."},
+ {id:"salmedio",title:"Salário médio real",sub:"Rendimento médio de quem trabalha, trimestre outubro–dezembro de cada ano, descontada a inflação (IBGE, PNAD Contínua)",type:"line",ds:[{d:"salmedio",l:"Salário médio real",c:"#15120F"}],note:"R$ 3.189 em 2012; R$ 3.442 em 2020; R$ 3.068 em 2021, o ponto mais baixo; R$ 3.777 no trimestre até agosto de 2026, o mais alto. Valores a preços de meados de 2026, na deflação do próprio IBGE. Só há série comparável a partir de 2012. Fonte: IBGE."},
+ {id:"cestasSM",title:"Cestas básicas que um salário mínimo compra",sub:"Salário mínimo dividido pelo custo da cesta básica em São Paulo",type:"line",ds:[{d:"cestasSM",l:"Cestas por salário mínimo",c:"#15120F"}],note:"1,25 cesta em 1999; 2,15 em 2017 e 2018, o ponto mais alto; 1,59 em 2022; 1,72 em junho de 2025, último dado na série do Banco Central. Cálculo próprio com dados do DIEESE e do Banco Central."}
 ];
 
-/* ---------- Government band plugin ---------- */
-let showBands=true, focusRecent=false;
-const bandColors={"var(--band-a)":"#E9EFF4","var(--band-b)":"#F2EEE4"};
-function labelToYear(l){ if(/^\d{4}$/.test(l)) return +l; const m=l.match(/(\d{2})$/); return m?2000+ +m[1]:null; }
-const bandPlugin={id:"bands",beforeDatasetsDraw(chart){
-  if(!showBands) return;
-  const {ctx,chartArea:{top,bottom,left,right},scales:{x}}=chart;
-  const labels=chart.data.labels; const n=labels.length;
-  const first=labelToYear(labels[0]), last=labelToYear(labels[n-1]);
-  const step=(x.getPixelForValue(n-1)-x.getPixelForValue(0))/Math.max(n-1,1);
-  const px=y=>x.getPixelForValue(0)+(y-first)*step-step/2;
-  ctx.save();
-  GOVS.forEach(g=>{
-    const s=Math.max(g.s,first), e=Math.min(g.e,last+1);
-    if(e<=s) return;
-    let x0=Math.max(left,px(s)), x1=Math.min(right,px(e));
-    if(x1<=x0) return;
-    ctx.fillStyle=bandColors[g.c]||"#eee";
-    if(focusRecent && g.s<2019) ctx.fillStyle="#F7F8F6";
-    ctx.fillRect(x0,top,x1-x0,bottom-top);
-    if(x1-x0>34 && !(focusRecent&&g.s<2019)){ ctx.fillStyle="#5B6675"; ctx.font="11px 'IBM Plex Sans',sans-serif"; ctx.textAlign="left"; ctx.fillText(g.n,x0+4,top+12); }
-  });
-  ctx.restore();
-}};
-if(typeof Chart!=="undefined"){ Chart.register(bandPlugin); Chart.defaults.font.family="'IBM Plex Sans',sans-serif"; Chart.defaults.color="#5B6675"; }
-
-const charts=[];
-function buildCharts(){
-  const grid=document.getElementById("chartgrid");
-  CH.forEach(c=>{
-    const box=document.createElement("div"); box.className="chart";
-    box.innerHTML=`<h3>${c.title}</h3><p class="sub">${c.sub}</p><div class="cv"><canvas role="img" aria-label="${c.title}: ${c.sub}"></canvas></div><p class="note">${c.note}</p>`;
-    grid.appendChild(box);
-    const baseLabels=D[c.ds[0].d].labels;
-    const isBar=c.type==="bar";
-    const datasets=c.ds.map(s=>{
-      const src=D[s.d];
-      const aligned=baseLabels.map(l=>{ const j=src.labels.indexOf(l); return j>=0?src.v[j]:null; });
-      return {label:s.l,data:aligned,borderColor:s.c,backgroundColor:isBar?aligned.map(v=>v<0?"#B8433F":s.c):s.c,borderWidth:isBar?0:2.2,pointRadius:isBar?0:2.5,pointHoverRadius:5,tension:0,spanGaps:false,borderDash:s.dash?[6,4]:[]};
-    });
-    const ch=new Chart(box.querySelector("canvas"),{type:c.type,data:{labels:baseLabels,datasets},options:{
-      responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:"index",intersect:false},
-      plugins:{legend:{display:datasets.length>1,labels:{boxWidth:14,boxHeight:2}},tooltip:{callbacks:{label:t=>` ${t.dataset.label}: ${t.formattedValue}`}}},
-      scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:9}},y:{grid:{color:"#E6EAE8"},border:{display:false},ticks:{maxTicksLimit:6}}}
-    }});
-    charts.push(ch);
-  });
-}
-document.getElementById("bands").addEventListener("change",e=>{showBands=e.target.checked;charts.forEach(c=>c.update());});
-document.getElementById("focus").addEventListener("change",e=>{focusRecent=e.target.checked;charts.forEach(c=>{
-  const lab=c.data.labels;
-  c.data.datasets.forEach(ds=>{
-    if(c.config.type==="bar"){ ds.backgroundColor=lab.map((l,i)=>{const y=labelToYear(l); const v=ds.data[i]; const base=v<0?"#B8433F":"#0E6B6B"; return (!focusRecent||y>=2019)?base:"#C9D1CE";}); }
-    else { ds.pointRadius=lab.map(l=>{const y=labelToYear(l); return (!focusRecent||y>=2019)?2.5:0;});
-           ds.segment={borderColor:ctx=>{const y=labelToYear(lab[ctx.p1DataIndex]); return (!focusRecent||y>=2019)?undefined:"#C9D1CE";}}; }
-  }); c.update();});});
-
-/* ---------- Timeline ---------- */
-const CATS={all:"Tudo",fiscal:"Contas públicas",precos:"Preços e juros",trabalho:"Trabalho e renda",ambiente:"Ambiente",externo:"Crises e choques"};
-let activeCat="all", activeEv=null;
-function buildTimeline(){
-  const tl=document.getElementById("tl"); tl.innerHTML="";
-  GOVS.forEach(g=>{ const b=document.createElement("div"); b.className="band"; b.style.left=pct(g.s)+"%"; b.style.width=(pct(g.e)-pct(g.s))+"%"; b.style.background=g.c; b.innerHTML=`<span>${g.n}</span>`; tl.appendChild(b); });
-  const ax=document.createElement("div"); ax.className="axis"; tl.appendChild(ax);
-  for(let y=1994;y<=2026;y+=2){ const t=document.createElement("div"); t.className="tick"; t.style.left=pct(y+0.5)+"%"; t.textContent=y; ax.appendChild(t); }
-  const list=EV.filter(e=>activeCat==="all"||e.cat===activeCat).sort((a,b)=>a.y-b.y);
-  const lanes=[];
-  list.forEach(e=>{ let lane=0; while(lanes[lane]!==undefined && e.y-lanes[lane]<1.9) lane++; lanes[lane]=e.y; e._lane=lane; });
-  const H=290;
-  list.forEach(e=>{ const b=document.createElement("button"); b.type="button"; b.className="ev"+(e.debate?" debate":"")+(e.crise?" crise":"")+(activeEv===e?" active":""); b.style.left=pct(e.y)+"%"; const top=36+e._lane*34; b.style.top=top+"px"; b.style.setProperty("--drop",(H-26-top-24)+"px"); b.textContent=e.t; b.setAttribute("aria-label",(e.debate?"Contestação: ":e.crise?"Crise: ":"Marco: ")+e.t); b.addEventListener("click",()=>{activeEv=e; buildTimeline(); showDetail(e);}); tl.appendChild(b); });
-  document.getElementById("govlegend").innerHTML=GOVS.map(g=>`<span><i style="background:${g.c}"></i>${g.n} ${Math.floor(g.s)}–${g.e>=2027?"hoje":Math.floor(g.e)}</span>`).join("");
-}
-function buildFilters(){ const f=document.getElementById("filters"); f.innerHTML=Object.entries(CATS).map(([k,v])=>`<button type="button" data-k="${k}" aria-pressed="${k===activeCat}">${v}</button>`).join(""); f.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{activeCat=b.dataset.k; buildFilters(); buildTimeline();})); }
-function showDetail(e){
-  const d=document.getElementById("detail");
-  const yr=Math.floor(e.y); const gov=GOVS.find(g=>e.y>=g.s&&e.y<g.e);
-  let h=`<div class="when">${yr} · governo ${gov?gov.n:""}</div><h3>${e.t}</h3>`;
-  if(e.claim) h+=`<p class="claim">${e.claim}</p>`;
-  h+=`<p class="data"><strong>O que os dados mostram.</strong> ${e.data}</p>`;
-  if(e.pro){ h+=`<div class="sides"><div class="side arg"><h4>Argumento</h4><p>${e.pro}</p></div><div class="side con"><h4>Contra-argumento</h4><p>${e.con}</p></div></div><div class="verdict"><strong>Leitura neutra.</strong> ${e.verdict}</div>`; }
-  if(e.ref) h+=`<p style="margin-top:12px;font-size:.9rem"><a href="#cr_${e.ref}">Ver o quadro comparativo desta crise ↓</a></p>`;
-  d.innerHTML=h;
-  if(window.innerWidth<720) d.scrollIntoView({block:"start"});
-}
-
-/* ---------- Crises section ---------- */
-function buildCrises(){
-  const c=document.getElementById("crises");
-  c.innerHTML=CRISES.map(k=>`<article class="crise" id="cr_${k.id}"><div class="when">${k.when}</div><h3>${k.t}</h3>
-    <div class="grid"><div><div class="table-scroll" style="margin:0"><table><thead><tr><th>Indicador</th><th>Brasil</th><th>Referências</th></tr></thead><tbody>${k.rows.map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div><p class="src">Fontes: ${k.src}</p></div>
-    <div><div class="sides"><div class="side arg"><h4>Argumento</h4><p>${k.pro}</p></div><div class="side con"><h4>Contra-argumento</h4><p>${k.con}</p></div></div><div class="verdict"><strong>Leitura neutra.</strong> ${k.verdict}</div></div></div></article>`).join("");
-}
-
-/* ---------- Scoreboard 0–10 ---------- */
-const PER={ "FHC":[1995,2002], "Lula 1–2":[2003,2010], "Dilma":[2011,2016], "Temer":[2017,2018], "Bolsonaro":[2019,2022], "Lula 3":[2023,2025] };
+/* ---------- Placar: períodos, cálculos e atributos ---------- */
+const PER={ "FHC":[1995,2002], "Lula 1–2":[2003,2010], "Dilma":[2011,2016], "Temer":[2017,2018], "Bolsonaro":[2019,2022], "Lula 3":[2023,2025] };  // Lula 3: salário mínimo e dívida usam o dado mais recente de 2026
 function val(series,year){ const j=D[series].labels.indexOf(String(year)); return j>=0?D[series].v[j]:null; }
 function mean(series,a,b,skip){ let s=0,n=0; for(let y=a;y<=b;y++){ if(skip&&skip.includes(y)) continue; const v=val(series,y); if(v!=null){s+=v;n++;} } return n?s/n:null; }
 function delta(series,a,b,override){ const s=val(series,a-1), e=override!=null?override:val(series,b); return (s!=null&&e!=null)?e-s:null; }
 const ATTRS=[
- {k:"pib",n:"Crescimento",d:"PIB, média anual",u:"% a.a.",hi:true,f:(g,a,b,o)=>mean("pib",a,b,o.ex?[2020]:null)},
+ {k:"pib",n:"Crescimento",d:"PIB, média anual",u:"% ao ano",hi:true,f:(g,a,b,o)=>mean("pib",a,b,o.ex?[2020]:null)},
  {k:"ipca",n:"Inflação",d:"IPCA, média anual",u:"%",hi:false,f:(g,a,b)=>mean("ipca",a,b)},
- {k:"des",sg:true,n:"Emprego",d:"variação do desemprego, média anual (desde 2012)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Dilma") return val("desemp",2016)-val("desemp",2012); return delta("desemp",a,b); }},
+ {k:"comida",n:"Preço da comida",d:"alimentação no domicílio (IPCA), média anual",u:"%",hi:false,f:(g,a,b)=>mean("comida",a,b)},
+ {k:"des",sg:true,n:"Emprego",d:"variação da taxa de desemprego (desde 2012)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Dilma") return val("desemp",2016)-val("desemp",2012); return delta("desemp",a,b); }},
  {k:"pob",sg:true,n:"Pobreza",d:"variação da pobreza (desde 2012)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Dilma") return val("pobreza",2016)-val("pobreza",2013); if(g==="Lula 3") return val("pobreza",2024)-val("pobreza",2022); return delta("pobreza",a,b); }},
- {k:"sm",sg:true,n:"Salário mínimo real",d:"variação no mandato",u:"%",hi:true,f:(g,a,b)=>{ const s=val("smreal",a), e=val("smreal",b+1); return (s&&e)?(e/s-1)*100:null; }},
- {k:"prim",n:"Contas públicas",d:"resultado primário, média (% PIB)",u:"% PIB",hi:true,f:(g,a,b,o)=>mean("prim",Math.max(a,1997),b,o.ex?[2020]:null)},
- {k:"dbgg",sg:true,n:"Dívida bruta",d:"variação no mandato (desde 2006)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Lula 1–2") return val("dbgg",2010)-val("dbgg",2006); if(g==="Lula 3") return 82.5-val("dbgg",2022); return delta("dbgg",a,b); }},
- {k:"fbcf",n:"Investimento",d:"FBCF/PIB, média",u:"% PIB",hi:true,f:(g,a,b)=>mean("fbcf",a,b)},
- {k:"bal",n:"Setor externo",d:"saldo comercial médio",u:"US$ bi",hi:true,f:(g,a,b)=>mean("balanca",a,b)},
+ {k:"salm",sg:true,n:"Salário médio real",d:"rendimento médio real de quem trabalha, variação de dezembro a dezembro (desde 2012)",u:"%",hi:true,f:(g,a,b)=>{ if(g==="Dilma") return (val("salmedio",2016)/val("salmedio",2012)-1)*100; const s=val("salmedio",a-1), e=g==="Lula 3"?D.salmedio.v[D.salmedio.v.length-1]:val("salmedio",b); return (s&&e)?(e/s-1)*100:null; }},
+ {k:"sm",sg:true,n:"Salário mínimo real",d:"variação de dezembro a dezembro",u:"%",hi:true,f:(g,a,b)=>{ const s=val("smreal",a-1), e=g==="Lula 3"?D.smreal.v[D.smreal.v.length-1]:val("smreal",b); return (s&&e)?(e/s-1)*100:null; }},
+ {k:"prim",n:"Contas do governo",d:"resultado primário, média (% do PIB)",u:"% PIB",hi:true,f:(g,a,b,o)=>mean("prim",Math.max(a,1997),b,o.ex?[2020]:null)},
+ {k:"dbgg",sg:true,n:"Dívida do governo",d:"dívida bruta, variação no mandato (desde 2006)",u:"p.p.",hi:false,f:(g,a,b)=>{ if(g==="Lula 1–2") return val("dbgg",2010)-val("dbgg",2006); if(g==="Lula 3") return 82.5-val("dbgg",2022); return delta("dbgg",a,b); }},
+ {k:"fbcf",n:"Investimento",d:"máquinas, obras e equipamentos (FBCF/PIB), média",u:"% PIB",hi:true,f:(g,a,b)=>mean("fbcf",a,b)},
+ {k:"bal",n:"Comércio com o mundo",d:"exportações menos importações, média anual",u:"US$ bi",hi:true,f:(g,a,b)=>mean("balanca",a,b)},
  {k:"desm",n:"Desmatamento",d:"Amazônia, média anual",u:"km²",hi:false,f:(g,a,b)=>mean("desmat",a,b)}
 ];
 const fmtN=(v,u,signed)=>{ if(v==null) return "—"; const abs=Math.abs(v); const dec=u==="km²"?0:(abs>=100?0:1); const s=v.toLocaleString("pt-BR",{minimumFractionDigits:dec,maximumFractionDigits:dec}); return ((signed&&v>0)?"+":"")+s+" "+u; };
@@ -613,32 +631,8 @@ const GMETA={
  "Lula 3":{c:"#A0522D",i:"L³",p:"2023–2026",d:"Candidato à reeleição",dispute:true}
 };
 const ORDER=Object.keys(GMETA);
-function buildHeads(){
-  document.getElementById("heads").innerHTML=ORDER.map(g=>{const m=GMETA[g]; const id="av_"+g.replace(/[^a-z0-9]/gi,"");
-    return `<div class="head ${m.dispute?"dispute":""}"><div class="avatar" id="${id}" style="background:${m.c};border-color:${m.c}"><span>${m.i}</span><img alt="Foto: ${g}"><label>trocar foto<input type="file" accept="image/*" data-av="${id}"></label></div><div class="who"><h3>${g}</h3><p>${m.p}<br>${m.d}</p></div></div>`;}).join("");
-  document.querySelectorAll(".avatar input").forEach(inp=>inp.addEventListener("change",e=>{ const f=e.target.files[0]; if(!f) return; const av=document.getElementById(e.target.dataset.av); const r=new FileReader(); r.onload=()=>{ av.querySelector("img").src=r.result; av.classList.add("has"); }; r.readAsDataURL(f); }));
-}
-function barHTML(g,sc,valTxt,tall){ const m=GMETA[g]; return `<div class="row ${m.dispute?"dispute":""}"><div class="g">${g}</div><div class="bar ${sc==null||sc<2.2?"low":""}"><div class="fill" style="width:${sc!=null?Math.max(sc*10,1):0}%;background:${m.c}"></div><span class="score">${sc!=null?sc.toFixed(1):"sem série"}</span><span class="val">${valTxt}</span></div></div>`; }
-function buildBoard(){
-  const ex=document.getElementById("ex2020").checked;
-  const wrap=document.getElementById("attrs"); wrap.innerHTML="";
-  const totals={}; ORDER.forEach(g=>totals[g]=[]);
-  ATTRS.forEach(at=>{
-    const vals={}; Object.entries(PER).forEach(([g,[a,b]])=>{ const v=at.f(g,a,b,{ex}); if(v!=null&&!isNaN(v)) vals[g]=v; });
-    const arr=Object.values(vals); const mn=Math.min(...arr), mx=Math.max(...arr);
-    const score=v=>{ if(mx===mn) return 5; const s=(v-mn)/(mx-mn)*10; return at.hi?s:10-s; };
-    const row=document.createElement("div"); row.className="attr";
-    row.innerHTML=`<div class="name">${at.n}<small>${at.d}. Unidade: ${at.u}.</small></div><div class="rows">`+
-      ORDER.map(g=>{ const v=vals[g]; const sc=v!=null?score(v):null; if(sc!=null) totals[g].push(sc); return barHTML(g,sc,fmtN(v,at.u,at.sg)); }).join("")+`</div>`;
-    wrap.appendChild(row);
-  });
-  const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
-  document.getElementById("total").innerHTML=`<div class="name" style="font-weight:600">Média simples<small style="display:block;font-weight:400;color:var(--muted);font-size:.78rem">peso igual por atributo. FHC e Lula 1–2 não têm série de emprego e pobreza; FHC também não tem dívida bruta.</small></div><div class="rows">`+
-    ORDER.map(g=>barHTML(g,avg(totals[g]),`${totals[g].length} atributos`)).join("")+`</div>`;
-}
-document.getElementById("ex2020").addEventListener("change",buildBoard);
 
-/* ---------- Recebeu → entregou table ---------- */
+/* ---------- Como pegou, como deixou: valores escritos à mão ---------- */
 const SC=[
  {g:"FHC",p:"1995–2002",pib:"2,4%",ipca:[916,12.5],des:null,dbgg:null,prim:[null,3.2],selic:[null,25.0],cambio:[0.85,3.53],pob:null,desm:[14896,21651]},
  {g:"Lula 1 e 2",p:"2003–2010",pib:"4,1%",ipca:[12.5,5.9],des:null,dbgg:[55.5,51.8],prim:[3.2,2.6],selic:[25.0,10.75],cambio:[3.53,1.67],pob:null,desm:[21651,7000],note:"dívida: 2006–2010"},
@@ -648,40 +642,355 @@ const SC=[
  {g:"Lula 3",p:"2023–hoje",pib:"3,0%",ipca:[5.79,4.44],des:[9.3,5.6],dbgg:[71.7,82.5],prim:[1.2,-0.4],selic:[13.75,14.0],cambio:[5.22,5.20],pob:[31.6,23.1],desm:[11594,5731],note:"IPCA 12m e dívida: 2026; desemprego, primário e desmatamento: 2025; pobreza: 2024"}
 ];
 const COLS=[
- {k:"pib",t:"PIB (média anual)"},
- {k:"ipca",t:"IPCA (12 meses)",u:"%",better:"down"},
- {k:"des",t:"Desemprego (média anual)",u:"%",better:"down"},
- {k:"dbgg",t:"Dívida bruta",u:"% PIB",better:"down"},
- {k:"prim",t:"Resultado primário",u:"% PIB",better:"up"},
- {k:"selic",t:"Selic",u:"%"},
+ {k:"pib",t:"Crescimento da economia"},
+ {k:"ipca",t:"Inflação em 12 meses",u:"%",better:"down"},
+ {k:"des",t:"Desemprego",u:"%",better:"down"},
+ {k:"dbgg",t:"Dívida do governo",u:"% PIB",better:"down"},
+ {k:"prim",t:"Contas do governo",u:"% PIB",better:"up"},
+ {k:"selic",t:"Juros (Selic)",u:"%"},
  {k:"cambio",t:"Dólar",u:"R$"},
  {k:"pob",t:"Pobreza",u:"%",better:"down"},
  {k:"desm",t:"Desmatamento",u:"km²",better:"down"}
 ];
 const fmt=v=>v==null?"—":(typeof v==="number"&&Math.abs(v)>=1000?v.toLocaleString("pt-BR"):String(v).replace(".",","));
-function buildScore(){
-  const t=document.getElementById("sc");
-  let h=`<thead><tr><th>Governo</th>${COLS.map(c=>`<th>${c.t}${c.u?` <span style="font-weight:400">(${c.u})</span>`:""}</th>`).join("")}</tr></thead><tbody>`;
-  SC.forEach(r=>{
-    h+=`<tr><th>${r.g}<small>${r.p}${r.note?" · "+r.note:""}</small></th>`;
-    COLS.forEach(c=>{
-      const v=r[c.k];
-      if(c.k==="pib"){ h+=`<td><span class="v">${v}</span></td>`; return; }
-      if(!v){ h+=`<td>—</td>`; return; }
-      const [a,b]=v; let cls="flat",txt="";
-      if(a!=null&&b!=null){ const diff=+(b-a).toFixed(2); const sgn=diff>0?"+":""; txt=`${sgn}${fmt(Math.abs(diff)>=1000?Math.round(diff):diff)}`;
-        if(c.better){ const good=(c.better==="down"&&diff<0)||(c.better==="up"&&diff>0); cls=diff===0?"flat":(good?"up":"down"); } }
-      h+=`<td><span class="v">${fmt(a)} → ${fmt(b)}</span>${txt?`<span class="d ${cls}">${txt}</span>`:""}</td>`;
-    });
-    h+="</tr>";
-  });
-  h+="</tbody>"; t.innerHTML=h;
+
+/* ---------- As 11 perguntas ----------
+   Cada pergunta mostra uma ou mais medidas (m) em seis barras, uma por governo.
+   f reaproveita o cálculo do placar (ATTRS) quando o assunto é o mesmo.
+   tags = rótulo do maior e do menor valor; sum e obs são escritos à mão: revisar junto com D. */
+const attr=k=>ATTRS.find(a=>a.k===k).f;
+const Q=[
+ {id:"comida",q:"A comida ficou mais cara?",
+  lede:"Quanto o preço da comida de casa subiu <b>por ano</b>, em média, em cada governo.",
+  m:[{f:attr("comida"),fmt:"ano",tags:["maior alta","única queda"]}],
+  sum:"Por ano, a comida subiu mais com Bolsonaro (11,9%) e Dilma (8,7%) e menos com Temer (caiu 0,2%) e Lula 3 (3,0%). Os anos de maior alta foram 2002 (21,6%), 2020 (18,2%) e 2022 (13,2%). De janeiro a agosto de 2026, subiu 3,4%.",
+  ch:["comida"],ev:["Guerra da Ucrânia","Pandemia"]},
+ {id:"gasolina",q:"E a gasolina?",
+  lede:"Quanto o preço da gasolina subiu <b>por ano</b>, em média, em cada governo.",
+  m:[{f:(g,a,b)=>mean("gasolina",a,b),fmt:"ano",tags:["maior alta","menor alta"]}],
+  sum:"A maior alta por ano foi com FHC (18,4%); nos outros governos ficou entre 3,7% e 8,8%. Em 2021 a gasolina subiu 47,5% e em 2022 caiu 25,8%. Comparando com o petróleo em reais: em 2021 o petróleo subiu 80% e a gasolina no posto, 35%; em 2026, até agosto, o petróleo está 20% acima da média de 2025 e a gasolina, 5%.",
+  ch:["gasolina","gasolinaRS","petroleo","litrosSM"],ev:["Guerra da Ucrânia","Guerra EUA/Israel–Irã","Eletrobras, dividendos e desonerações"]},
+ {id:"gasluz",q:"E o gás de cozinha e a conta de luz?",
+  lede:"Quanto cada um subiu <b>por ano</b>, em média, em cada governo.",
+  m:[{t:"Gás de cozinha",f:(g,a,b)=>mean("gas",a,b),fmt:"ano",tags:["maior alta","menor alta"]},
+     {t:"Conta de luz",f:(g,a,b)=>mean("luz",a,b),fmt:"ano",tags:["maior alta","menor alta"]}],
+  obs:"FHC: média de 1996 a 2002.",
+  sum:"O gás de cozinha subiu mais por ano com FHC (27,0%) e menos com Lula 3 (0,9%). A conta de luz subiu mais com FHC (12,1%) e menos com Bolsonaro (4,1%). Anos fora da curva da luz: caiu 15,7% em 2013 e 19,0% em 2022; subiu 51,0% em 2015 e 21,2% em 2021.",
+  ch:["gas","botijaoRS","luz"],ev:["Crise hídrica e bandeira de escassez","Guerra da Ucrânia"]},
+ {id:"precos",q:"Os preços em geral subiram muito?",
+  lede:"A inflação oficial (IPCA) junta tudo o que uma família compra. Aqui, quanto ela subiu <b>por ano</b>, em média.",
+  m:[{f:attr("ipca"),fmt:"ano",tags:["maior alta","menor alta"]}],
+  sum:"A inflação média por ano foi maior com FHC (9,3%) e menor com Temer (3,3%); Lula 3 (4,6%) tem a segunda menor. Os anos de maior alta desde 1995 foram 1995 (22,4%), 2002 (12,5%), 2015 (10,7%) e 2021 (10,1%).",
+  ch:["ipca"],ev:["Plano Real","Câmbio flutuante e metas de inflação","Guerra da Ucrânia"]},
+ {id:"salario",q:"O salário compra mais?",
+  lede:"Quanto o salário mínimo e o salário médio de quem trabalha subiram <b>além da inflação</b> em cada governo. É o ganho de verdade, o que sobra depois que os preços sobem.",
+  m:[{t:"Salário mínimo",f:attr("sm"),fmt:"pct",div:true,tags:["maior ganho","menor ganho"]},
+     {t:"Salário médio",f:attr("salm"),fmt:"pct",div:true,tags:["maior ganho","única perda"]}],
+  obs:"Compara dezembro do ano anterior à posse com dezembro do último ano do governo (Lula 3: agosto de 2026). Salário médio: só há dado comparável desde 2012 (Dilma: de 2012 a 2016). O salário mínimo real é cálculo próprio, aproximado.",
+  sum:"Descontada a inflação, o salário mínimo subiu mais com Lula 1 e 2 (62,8%) e FHC (42,2%); depois, Dilma (15,5%) e Lula 3 (13,4%, até agosto de 2026). Com Temer subiu 1,5% e com Bolsonaro, 0,1%. O salário médio de quem trabalha subiu 2,2% com Dilma (de 2012 a 2016), 2,8% com Temer e 13,9% com Lula 3; com Bolsonaro, caiu 1,0%.",
+  ch:["smreal","salmedio","cestasSM"]},
+ {id:"emprego",q:"O desemprego caiu?",
+  lede:"A taxa de desemprego é a parcela de quem procura trabalho e não encontra. Aqui, quantos pontos ela subiu ou caiu em cada governo. Só existe número comparável a partir de 2012.",
+  m:[{f:attr("des"),fmt:"pts",div:true,tags:["maior alta","maior queda"]}],
+  obs:"Dilma: de 2012 a 2016. Lula 3: até 2025.",
+  sum:"O desemprego subiu 4,1 pontos com Dilma e 0,8 com Temer; caiu 3,0 com Bolsonaro e 3,7 com Lula 3. O pico foi 13,8% em 2020; em 2025, a taxa foi 5,6%, a menor desde 2012.",
+  ch:["desemp"],ev:["Reforma trabalhista","Desemprego de 5,3% e pacote eleitoral"]},
+ {id:"pobreza",q:"Tem menos gente pobre?",
+  lede:"Quanto a parcela de brasileiros na pobreza subiu ou caiu em cada governo. Só existe número comparável a partir de 2012.",
+  m:[{f:attr("pob"),fmt:"pts",div:true,tags:["maior alta","maior queda"]}],
+  obs:"Dilma: de 2013 a 2016. Lula 3: até 2024, o último dado.",
+  sum:"A pobreza subiu 3,0 pontos com Dilma e 5,1 com Bolsonaro; caiu 1,4 com Temer e 8,5 com Lula 3. Ano a ano: 24,1% em 2020, 36,7% em 2021 (o pior da série), 31,6% em 2022 e 23,1% em 2024 (o melhor).",
+  ch:["pobreza"],ev:["Pandemia"]},
+ {id:"economia",q:"A economia cresceu?",
+  lede:"Quanto a produção do país (PIB) cresceu <b>por ano</b>, em média. Quando a economia cresce, costuma haver mais emprego e mais renda.",
+  m:[{f:attr("pib"),fmt:"ano",tags:["cresceu mais","cresceu menos"]}],
+  sum:"A economia cresceu mais por ano com Lula 1 e 2 (4,1%) e Lula 3 (3,0%) e menos com Dilma (0,4%), Bolsonaro (1,4%) e Temer (1,6%). Os piores anos foram 2015 (−3,5%), 2016 (−3,3%) e 2020 (−3,3%); o melhor, 2010 (7,5%).",
+  ch:["pib","mundo","fbcf","balanca"],ev:["Crise financeira global","Pandemia","Tarifaço dos EUA"]},
+ {id:"contas",q:"O governo gastou mais do que arrecadou?",
+  lede:"Quanto sobrou ou faltou nas contas públicas por ano, em média, comparado ao tamanho da economia (PIB). Não entram aqui os juros da dívida.",
+  m:[{f:attr("prim"),fmt:"saldo",div:true,tags:["maior sobra","maior falta"]}],
+  obs:"FHC: média de 1997 a 2002.",
+  sum:"Sobrou dinheiro, por ano, com Lula 1 e 2 (3,1% do PIB), FHC (2,0%) e Dilma (0,3%). Faltou com Temer (1,6%), Bolsonaro (2,1%) e Lula 3 (1,0%). O pior ano foi 2020 (faltaram 9,4%); sem ele, a média de Bolsonaro seria uma sobra de 0,4%. Em 2023 faltaram 2,3%; em 2024 e 2025, 0,4%.",
+  ch:["prim"],ev:["Pedaladas e fim do superávit","Teto de gastos","PEC dos Precatórios","PEC da Transição","Pagamento de R$ 92 bi em precatórios","PEC 66: precatórios fora do arcabouço"]},
+ {id:"divida",q:"A dívida do governo aumentou?",
+  lede:"A dívida pública cresce quando falta dinheiro nas contas do governo e também pelos juros que ele paga sobre a própria dívida. As barras de cima mostram quantos pontos a dívida subiu ou caiu em cada governo, comparada ao tamanho da economia (PIB); as de baixo, quanto o governo pagou de juros por ano.",
+  m:[{t:"Dívida: quanto subiu ou caiu",f:attr("dbgg"),fmt:"pts",div:true,tags:["maior alta","maior queda"]},
+     {t:"Juros pagos por ano",f:(g,a,b)=>mean("juros",a,b),fmt:"saldoj",tags:["mais juros","menos juros"]}],
+  obs:"Dívida: Lula 1 e 2 de 2006 a 2010; Lula 3 até julho de 2026. Juros: só há dado comparável a partir de 2003.",
+  sum:"A dívida caiu 3,7 pontos com Lula 1 e 2 e 3,6 com Bolsonaro; subiu 18,0 com Dilma, 5,5 com Temer e 10,8 com Lula 3 (até julho de 2026). O pico foi 86,9% do PIB em 2020; o valor mais recente é 82,5%. Os juros custaram, por ano, 6,3% do PIB com Lula 1 e 2, 5,8% com Dilma e com Temer, 5,0% com Bolsonaro e 7,5% com Lula 3. Somando juros e contas do governo, o rombo por ano foi de 3,2% do PIB com Lula 1 e 2, 5,5% com Dilma, 7,3% com Temer, 7,0% com Bolsonaro e 8,5% com Lula 3.",
+  ch:["dbgg","juros","selic","cambio"],ev:["Reforma da Previdência","Autonomia do Banco Central","Eletrobras, dividendos e desonerações"]},
+ {id:"amazonia",q:"O desmatamento caiu?",
+  lede:"Quanta floresta foi derrubada na Amazônia <b>por ano</b>, em média. Para comparar: a cidade de São Paulo tem cerca de 1.500 km².",
+  m:[{f:attr("desm"),fmt:"km2",tags:["maior área","menor área"]}],
+  sum:"Por ano, o desmatamento foi maior com FHC (19.141 km²) e Lula 1 e 2 (15.687 km²) e menor com Dilma (5.999 km²), Lula 3 (7.028 km²) e Temer (7.242 km²). Caiu de 27.772 km² em 2004 para 4.571 em 2012, subiu até 13.038 em 2021 e caiu para 5.731 em 2025.",
+  ch:["desmat"],ev:["Pico do desmatamento e PPCDAm","Desmatamento volta a subir"]}
+];
+
+/* ---------- Utilidades ---------- */
+const $=id=>document.getElementById(id);
+const nome=g=>g.replace("1–2","1 e 2");
+const n1=v=>Math.abs(v).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
+const zero=v=>Math.abs(v)<0.05;
+// valor em palavras: [destaque, complemento]
+const FMT={
+ ano:v=>[(v<=-0.05?"−":"")+n1(v)+"%","ao ano"],
+ pts:v=>zero(v)?["não mudou",""]:[(v>0?"subiu ":"caiu ")+n1(v),"pontos"],
+ pct:v=>zero(v)?["não mudou",""]:[(v>0?"subiu ":"caiu ")+n1(v)+"%",""],
+ saldo:v=>zero(v)?["empatou",""]:[(v>0?"sobrou ":"faltou ")+n1(v)+"%","do PIB"],
+ km2:v=>[Math.round(v).toLocaleString("pt-BR")+" km²","por ano"],
+ saldoj:v=>[n1(v)+"%","do PIB"]
+};
+const fimGov=g=>g.e>=2027?"hoje":Math.ceil(g.e)-1;
+const periodo=g=>{ const a=Math.floor(g.s), b=fimGov(g); return a===b?String(a):`${a}–${b}`; };
+
+function toggle(btn){
+  const p=$(btn.getAttribute("aria-controls")); const abrir=p.hidden;
+  p.hidden=!abrir; btn.setAttribute("aria-expanded",String(abrir));
+  return abrir;
 }
 
-buildFilters(); buildTimeline(); buildCrises(); buildHeads(); buildBoard(); buildScore();
-const def=EV.find(e=>e.t.startsWith("PEC dos Precatórios")); if(def){activeEv=def; buildTimeline(); showDetail(def);}
-if(typeof Chart!=="undefined"){ buildCharts(); }
-else { document.getElementById("chartgrid").innerHTML='<p class="intro">Os gráficos precisam de conexão com a internet para carregar a biblioteca de desenho (cdnjs.cloudflare.com). Abra o arquivo conectado e recarregue.</p>'; }
+/* ---------- Episódios: o que aconteceu, quem defende, quem critica ---------- */
+function sidesHTML(x){
+  return `<div class="sides"><div class="side"><h4>Quem defende diz</h4><p>${x.pro}</p></div><div class="side"><h4>Quem critica diz</h4><p>${x.con}</p></div></div><div class="verdict"><h4>O que os números mostram</h4><p>${x.verdict}</p></div>`;
+}
+function evHTML(e,semTitulo){
+  const gov=GOVS.find(g=>e.y>=g.s&&e.y<g.e);
+  const cr=e.ref?CRISES.find(c=>c.id===e.ref):null;
+  let h=semTitulo?"":`<p class="when">${Math.floor(e.y)}, governo ${gov?gov.n:""}</p><h3>${e.t}</h3>`;
+  if(e.claim) h+=`<p class="claim">${e.claim}</p>`;
+  h+=`<p><b>O que aconteceu.</b> ${e.data}</p>`;
+  const lados=e.pro?e:cr;
+  if(lados) h+=sidesHTML(lados);
+  if(cr) h+=`<p class="more"><a href="#cr_${cr.id}">Ver a comparação do Brasil com outros países nesta crise</a></p>`;
+  return h;
+}
+const temDoisLados=e=>!!(e.pro||e.ref);
+
+/* ---------- Perguntas ---------- */
+function barsHTML(m){
+  const vals=ORDER.map(g=>{ const [a,b]=PER[g]; const v=m.f(g,a,b,{ex:false}); return (v==null||isNaN(v))?null:v; });
+  const ok=vals.filter(v=>v!=null); const mx=Math.max(...ok), mn=Math.min(...ok);
+  const topo=Math.max(...ok.map(Math.abs))||1;
+  return `<div class="bars">${m.t?`<h3 class="bars-t">${m.t}</h3>`:""}`+ORDER.map((g,i)=>{
+    const v=vals[i], [a,b]=PER[g];
+    const quem=`<b>${nome(g)}</b> <span>${a}–${b}</span>`;
+    if(v==null) return `<div class="bar-row sem-dado"><div class="who">${quem}</div><div class="val">sem dado comparável</div><div class="track"></div></div>`;
+    const [destaque,resto]=FMT[m.fmt](v);
+    const tag=v===mx?m.tags[0]:v===mn?m.tags[1]:"";
+    const w=Math.max(Math.abs(v)/topo*(m.div?50:100),1).toFixed(1);
+    const lado=m.div?(v<0?"right:50%":"left:50%"):"left:0";
+    const fill=(m.div?!zero(v):v>0)?`<i class="fill" style="${lado};width:${w}%;background:${GMETA[g].c}"></i>`:"";
+    return `<div class="bar-row"><div class="who">${quem}${tag?` <em class="tag">${tag}</em>`:""}</div><div class="val">${destaque}${resto?` <small>${resto}</small>`:""}</div><div class="track${m.div?" div":""}">${fill}</div></div>`;
+  }).join("")+`</div>`;
+}
+function buildQuestions(){
+  $("perguntas").innerHTML=Q.map((q,i)=>{
+    const eps=(q.ev||[]).map(t=>EV.find(e=>e.t===t)).filter(Boolean);
+    return `<article class="q" id="${q.id}">
+      <p class="q-n">Pergunta ${i+1} de ${Q.length}</p>
+      <h2>${q.q}</h2>
+      <p class="q-lede">${q.lede}</p>
+      ${q.m.map(barsHTML).join("")}
+      ${q.obs?`<p class="obs">${q.obs}</p>`:""}
+      <p class="sum"><b>Resumindo:</b> ${q.sum}</p>
+      <div class="acts">
+        ${eps.length?`<button type="button" class="act" data-kind="lados" aria-expanded="false" aria-controls="${q.id}-lados">${eps.some(temDoisLados)?"Ver os dois lados":"Ver o contexto"}</button>`:""}
+        <button type="button" class="act" data-kind="anos" aria-expanded="false" aria-controls="${q.id}-anos">Ver ano a ano</button>
+        <button type="button" class="act share" data-kind="share">Compartilhar</button>
+      </div>
+      ${eps.length?`<div class="panel" id="${q.id}-lados" hidden>${eps.map(e=>`<div class="item">${evHTML(e)}</div>`).join("")}</div>`:""}
+      <div class="panel" id="${q.id}-anos" hidden></div>
+    </article>`;
+  }).join("");
+  $("nav-q").innerHTML=Q.map(q=>`<li><a href="#${q.id}">${q.q}</a></li>`).join("");
+  $("govs").innerHTML=ORDER.map(g=>`<div class="gov-chip"><i style="background:${GMETA[g].c}"></i><div>${nome(g)}<span>${GMETA[g].p}</span></div></div>`).join("");
+}
+function share(q){
+  const url=location.href.split("#")[0]+"#"+q.id;
+  const texto=`${q.q} Veja como cada governo se saiu, com números oficiais:`;
+  if(navigator.share) navigator.share({title:document.title,text:texto,url}).catch(()=>{});
+  else window.open("https://wa.me/?text="+encodeURIComponent(texto+" "+url),"_blank","noopener");
+}
+
+/* ---------- As grandes brigas ---------- */
+const CATS={all:"Tudo",fiscal:"Contas públicas",precos:"Preços e juros",trabalho:"Trabalho e renda",ambiente:"Ambiente",externo:"Crises e choques"};
+function buildBrigas(){
+  $("filters").innerHTML=Object.entries(CATS).map(([k,v])=>`<button type="button" class="chip" data-k="${k}" aria-pressed="${k==="all"}">${v}</button>`).join("");
+  $("brigas-list").innerHTML=GOVS.map(g=>{
+    const eps=EV.filter(e=>e.y>=g.s&&e.y<g.e).sort((a,b)=>a.y-b.y);
+    if(!eps.length) return "";
+    return `<div class="gov-grp"><h3 class="gov-h"><i style="background:${g.h}"></i>${g.n} <span>${periodo(g)}</span></h3>`+eps.map(e=>{
+      const i=EV.indexOf(e), tipo=e.debate?"Contestação":e.crise?"Crise":"Marco";
+      return `<div class="briga${e.debate?" is-debate":""}${e.crise?" is-crise":""}" data-cat="${e.cat}"><button type="button" class="briga-btn" aria-expanded="false" aria-controls="briga-${i}"><span class="yr">${Math.floor(e.y)}</span><span class="t">${e.t}<em class="kind">${tipo}</em></span></button><div class="panel item" id="briga-${i}" hidden>${evHTML(e,true)}</div></div>`;
+    }).join("")+`</div>`;
+  }).join("");
+  $("filters").addEventListener("click",ev=>{
+    const b=ev.target.closest(".chip"); if(!b) return;
+    $("filters").querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(c===b)));
+    document.querySelectorAll(".briga").forEach(x=>{ x.hidden=!(b.dataset.k==="all"||x.dataset.cat===b.dataset.k); });
+    document.querySelectorAll(".gov-grp").forEach(g=>{ g.hidden=!g.querySelector(".briga:not([hidden])"); });
+  });
+}
+
+/* ---------- Crises: Brasil × mundo ---------- */
+function buildCrises(){
+  $("crises-list").innerHTML=CRISES.map(k=>`<article class="crise-card" id="cr_${k.id}"><button type="button" class="briga-btn" aria-expanded="false" aria-controls="cr_${k.id}-p"><span class="t">${k.t}<small>${k.when}</small></span></button>
+    <div class="panel" id="cr_${k.id}-p" hidden>${k.rows.map(r=>`<div class="crow"><p class="lab">${r[0]}</p><p class="br"><span>Brasil</span> ${r[1]}</p><p class="ref">${r[2]}</p></div>`).join("")}
+    <p class="src">Fontes: ${k.src}</p>${sidesHTML(k)}</div></article>`).join("");
+}
+
+/* ---------- Placar 0–10 ---------- */
+const nota=sc=>sc.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
+function barHTML(g,sc,txt){
+  const m=GMETA[g];
+  return `<div class="row${m.dispute?" dispute":""}"><div class="g">${nome(g)}</div><div class="pbar">${sc!=null?`<i class="fill" style="width:${Math.max(sc*10,1)}%;background:${m.c}"></i>`:""}<span class="score">${sc!=null?nota(sc):"sem dado"}</span>${txt?`<span class="raw">${txt}</span>`:""}</div></div>`;
+}
+function buildBoard(){
+  const ex=$("ex2020").checked;
+  const totais={}; ORDER.forEach(g=>totais[g]=[]);
+  $("attrs").innerHTML=ATTRS.map(at=>{
+    const vals={}; Object.entries(PER).forEach(([g,[a,b]])=>{ const v=at.f(g,a,b,{ex}); if(v!=null&&!isNaN(v)) vals[g]=v; });
+    const arr=Object.values(vals), mn=Math.min(...arr), mx=Math.max(...arr);
+    const score=v=>{ if(mx===mn) return 5; const s=(v-mn)/(mx-mn)*10; return at.hi?s:10-s; };
+    return `<div class="attr"><div class="name">${at.n}<small>${at.d}. Unidade: ${at.u}</small></div><div class="rows">`+
+      ORDER.map(g=>{ const v=vals[g], sc=v!=null?score(v):null; if(sc!=null) totais[g].push(sc); return barHTML(g,sc,v!=null?fmtN(v,at.u,at.sg):""); }).join("")+`</div></div>`;
+  }).join("");
+  const media=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  const ordem=[...ORDER].sort((a,b)=>media(totais[b])-media(totais[a]));
+  $("ranking").innerHTML=ordem.map((g,i)=>{ const m=GMETA[g], sc=media(totais[g]);
+    return `<div class="rank-row${m.dispute?" dispute":""}"><div class="pos">${i+1}º</div><div class="avatar" style="background:${m.c}" aria-hidden="true">${m.i}</div><div><h3>${nome(g)}</h3><p>${m.p}. ${m.d}</p></div><div class="nota">${nota(sc)}<small>em ${totais[g].length} assuntos</small></div><div class="rbar"><i class="fill" style="left:0;width:${Math.max(sc*10,1)}%;background:${m.c}"></i></div></div>`; }).join("");
+}
+
+/* ---------- Como pegou, como deixou ---------- */
+function buildScore(){
+  $("sc").innerHTML=`<thead><tr><th>Governo</th>${COLS.map(c=>`<th>${c.t}</th>`).join("")}</tr></thead><tbody>`+SC.map(r=>
+    `<tr><th scope="row">${r.g}<small>${r.p}</small></th>`+COLS.map(c=>{
+      const v=r[c.k], rot=c.t+(c.u?` (${c.u})`:"");
+      if(c.k==="pib") return `<td data-l="${rot}"><span class="v">${v} ao ano</span></td>`;
+      if(!v) return `<td data-l="${rot}"><span class="v nd">sem dado comparável</span></td>`;
+      const [a,b]=v; let marca="";
+      if(a!=null&&b!=null&&c.better){ const dif=+(b-a).toFixed(2);
+        marca=dif===0?`<span class="d flat">igual</span>`:((c.better==="down")===(dif<0))?`<span class="d up">✔ melhorou</span>`:`<span class="d down">✘ piorou</span>`; }
+      return `<td data-l="${rot}"><span class="v">${fmt(a)} → ${fmt(b)}</span>${marca}</td>`;
+    }).join("")+(r.note?`<td class="nota" data-l="Observação"><span class="v">${r.note}</span></td>`:"")+`</tr>`).join("")+`</tbody>`;
+}
+
+/* ---------- Gráficos, carregados só quando alguém abre "ano a ano" ---------- */
+const CHART_SRC="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js";
+const TINTA="#15120F", APAGADO="#C9C2B4";
+let showBands=true, focusRecent=false, chartLib=null;
+const charts=[];
+function labelToYear(l){ if(/^\d{4}$/.test(l)) return +l; const m=l.match(/(\d{2})$/); return m?2000+ +m[1]:null; }
+const emFoco=l=>!focusRecent||labelToYear(l)>=2019;
+// Faixa de cada governo atrás do gráfico, na cor do próprio governo
+const bandPlugin={id:"bands",beforeDatasetsDraw(chart){
+  if(!showBands) return;
+  const {ctx,chartArea:{top,bottom,left,right},scales:{x}}=chart;
+  const labels=chart.data.labels, n=labels.length;
+  const first=labelToYear(labels[0]), last=labelToYear(labels[n-1]);
+  const step=(x.getPixelForValue(n-1)-x.getPixelForValue(0))/Math.max(n-1,1);
+  const px=y=>x.getPixelForValue(0)+(y-first)*step-step/2;
+  ctx.save();
+  GOVS.forEach(g=>{
+    const s=Math.max(g.s,first), e=Math.min(g.e,last+1);
+    if(e<=s) return;
+    const x0=Math.max(left,px(s)), x1=Math.min(right,px(e));
+    if(x1<=x0) return;
+    const apagado=focusRecent&&g.s<2019;
+    ctx.globalAlpha=apagado?0.05:0.2; ctx.fillStyle=g.h; ctx.fillRect(x0,top,x1-x0,bottom-top);
+    ctx.globalAlpha=1; ctx.font="16px Archivo, sans-serif"; ctx.fillStyle="#5A5347"; ctx.textAlign="left";
+    if(!apagado && ctx.measureText(g.n).width<x1-x0-8) ctx.fillText(g.n,x0+4,top+18);
+  });
+  ctx.restore();
+}};
+function loadChart(){
+  if(window.Chart&&charts.ready) return Promise.resolve();
+  if(!chartLib) chartLib=new Promise((ok,erro)=>{
+    const s=document.createElement("script"); s.src=CHART_SRC;
+    s.onload=()=>{ try{ Chart.register(bandPlugin); Chart.defaults.font.family="Archivo, sans-serif"; Chart.defaults.font.size=16; Chart.defaults.color="#5A5347"; Chart.defaults.locale="pt-BR"; charts.ready=true; ok(); }catch(e){ s.onerror(); } };
+    s.onerror=()=>{ s.remove(); chartLib=null; erro(); };
+    document.head.appendChild(s);
+  });
+  return chartLib;
+}
+function pintar(ch){
+  const lab=ch.data.labels;
+  ch.data.datasets.forEach(ds=>{
+    if(ch.config.type==="bar") ds.backgroundColor=lab.map(l=>emFoco(l)?ds._cor:APAGADO);
+    else { ds.pointRadius=lab.map(l=>emFoco(l)?3:0); ds.segment={borderColor:c=>emFoco(lab[c.p1DataIndex])?undefined:APAGADO}; }
+  });
+}
+function makeChart(c,canvas){
+  const rotulos=D[c.ds[0].d].labels, barra=c.type==="bar";
+  const datasets=c.ds.map(s=>{
+    const src=D[s.d];
+    const dados=rotulos.map(l=>{ const j=src.labels.indexOf(l); return j>=0?src.v[j]:null; });
+    return {label:s.l,data:dados,_cor:s.c,borderColor:s.c,backgroundColor:s.c,borderWidth:barra?0:3,pointRadius:barra?0:3,pointHoverRadius:6,tension:0,spanGaps:false,borderDash:s.dash?[7,5]:[]};
+  });
+  const ch=new Chart(canvas,{type:c.type,data:{labels:rotulos,datasets},options:{
+    responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:"index",intersect:false},
+    plugins:{legend:{display:datasets.length>1,labels:{boxWidth:18,boxHeight:3}},tooltip:{callbacks:{label:t=>` ${t.dataset.label}: ${t.formattedValue}`}}},
+    scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:6}},y:{grid:{color:"#E6DFCF"},border:{display:false},ticks:{maxTicksLimit:6}}}
+  }});
+  pintar(ch); ch.update(); charts.push(ch);
+}
+function openCharts(q,p){
+  if(p.dataset.pronto) return;
+  p.innerHTML=`<p class="wait">Carregando os gráficos…</p>`;
+  loadChart().then(()=>{
+    p.dataset.pronto="1";
+    p.innerHTML=`<div class="controls"><label class="check"><input type="checkbox" class="c-bands"${showBands?" checked":""}> Pintar o fundo com a cor de cada governo</label><label class="check"><input type="checkbox" class="c-focus"${focusRecent?" checked":""}> Destacar só de 2019 para cá</label></div>`+
+      q.ch.map(id=>{ const c=CH.find(x=>x.id===id); return `<div class="chart"><h3>${c.title}</h3><p class="sub">${c.sub}</p><div class="cv"><canvas role="img" aria-label="${c.title}: ${c.sub}. ${c.note}"></canvas></div><p class="note">${c.note}</p></div>`; }).join("");
+    const telas=p.querySelectorAll("canvas");
+    q.ch.forEach((id,i)=>makeChart(CH.find(x=>x.id===id),telas[i]));
+  }).catch(()=>{ p.innerHTML=`<p class="wait">Os gráficos precisam de internet para aparecer. Conecte-se, feche este painel e abra de novo.</p>`; });
+}
+document.addEventListener("change",ev=>{
+  const c=ev.target;
+  if(c.classList.contains("c-bands")) showBands=c.checked;
+  else if(c.classList.contains("c-focus")) focusRecent=c.checked;
+  else return;
+  document.querySelectorAll(".c-bands").forEach(x=>x.checked=showBands);
+  document.querySelectorAll(".c-focus").forEach(x=>x.checked=focusRecent);
+  charts.forEach(ch=>{ pintar(ch); ch.update(); });
+});
+
+/* ---------- Cliques: painéis que abrem no lugar, compartilhar, menu ---------- */
+const menuBtn=$("menu-btn"), nav=$("nav");
+function menu(abrir){
+  nav.classList.toggle("open",abrir); document.body.classList.toggle("menu-open",abrir);
+  menuBtn.setAttribute("aria-expanded",String(abrir)); menuBtn.textContent=abrir?"Fechar":"Menu";
+  document.querySelector("main").inert=abrir;
+  if(abrir) nav.querySelector("a").focus(); else menuBtn.focus();
+}
+document.addEventListener("click",ev=>{
+  const t=ev.target;
+  if(t.closest("#menu-btn")) return menu(!nav.classList.contains("open"));
+  if(t.closest("#nav a")) return menu(false);
+  const b=t.closest("button[aria-controls]");
+  if(b){
+    const q=Q.find(x=>b.closest(".q")&&x.id===b.closest(".q").id);
+    if(toggle(b)&&b.dataset.kind==="anos") openCharts(q,$(b.getAttribute("aria-controls")));
+    return;
+  }
+  const s=t.closest(".share");
+  if(s) return share(Q.find(x=>x.id===s.closest(".q").id));
+  const a=t.closest('a[href^="#cr_"]');   // link para uma crise: abre o cartão de destino
+  if(a){ const alvo=$(a.getAttribute("href").slice(1)), botao=alvo&&alvo.querySelector(".briga-btn"); if(botao&&botao.getAttribute("aria-expanded")==="false") toggle(botao); }
+});
+document.addEventListener("keydown",ev=>{ if(ev.key==="Escape"&&nav.classList.contains("open")){ menu(false); menuBtn.focus(); } });
+$("ex2020").addEventListener("change",buildBoard);
+
+buildQuestions(); buildBrigas(); buildCrises(); buildBoard(); buildScore();
+
+// link direto para uma pergunta (#gasolina): os cartões só existem depois do script
+if(location.hash){ const alvo=$(decodeURIComponent(location.hash.slice(1))); if(alvo){ const ir=()=>alvo.scrollIntoView({behavior:"instant"}); ir(); if(document.fonts) document.fonts.ready.then(ir); } }
+// marca no menu a pergunta ou seção que está na tela
+if("IntersectionObserver" in window){
+  const links=new Map([...nav.querySelectorAll("a")].map(a=>[a.getAttribute("href").slice(1),a]));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.classList.remove("cur")); const a=links.get(e.target.id); if(a) a.classList.add("cur"); } }),{rootMargin:"-15% 0px -75% 0px"});
+  links.forEach((a,id)=>{ const el=$(id); if(el) io.observe(el); });
+}
 </script>
 </body>
 </html>
