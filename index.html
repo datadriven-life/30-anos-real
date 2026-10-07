@@ -247,7 +247,7 @@ footer{border-top:6px solid var(--ink);padding:22px 0 0;font-size:17px;color:var
 
 <nav id="nav" aria-label="Menu da página">
   <p class="nav-brand">30 anos do Real</p>
-  <p class="nav-h">As 11 perguntas</p>
+  <p class="nav-h">As 12 perguntas</p>
   <ol id="nav-q"></ol>
   <p class="nav-h">Conclusão</p>
   <ul>
@@ -277,7 +277,7 @@ footer{border-top:6px solid var(--ink);padding:22px 0 0;font-size:17px;color:var
   <a class="btn btn-2" href="#placar">Ir direto para a conclusão: a nota de cada governo</a>
 </header>
 
-<section id="perguntas" aria-label="As 11 perguntas"></section>
+<section id="perguntas" aria-label="As 12 perguntas"></section>
 
 <section id="placar" class="deep conclusao">
   <p class="q-n">Conclusão</p>
@@ -333,6 +333,9 @@ footer{border-top:6px solid var(--ink);padding:22px 0 0;font-size:17px;color:var
       <li><a href="https://www3.bcb.gov.br/sgspub/">Banco Central/SGS — Salário mínimo (série 1619), cesta básica do DIEESE em São Paulo (série 7493) e juros nominais do setor público em % do PIB (série 5760)</a></li>
       <li><a href="https://www.dieese.org.br/cesta/">DIEESE — Pesquisa Nacional da Cesta Básica de Alimentos</a></li>
       <li><a href="https://fred.stlouisfed.org/series/MCOILBRENTEU">FRED/EIA — Petróleo Brent, US$ por barril, média mensal (série MCOILBRENTEU); convertido para reais pelo dólar médio mensal do Banco Central (SGS 3698)</a></li>
+      <li><a href="http://www.ipeadata.gov.br/">MDS via IPEADATA — Bolsa Família: famílias (FAM_PBF) e folha de pagamento (VAL_PBF, VAL_PBF12); BPC: benefícios (BPC_idos, BPC_defi, PES_BPC)</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/beneficiarios-com-nis-de-final-8-recebem-bolsa-familia-de-setembro">Agência Brasil — Bolsa Família de setembro de 2026: 19,29 milhões de famílias, valor médio de R$ 678,18</a></li>
+      <li><a href="https://sidra.ibge.gov.br/tabela/6731">IBGE/SIDRA — Total de domicílios, PNAD (tabela 1955) e PNAD Contínua (tabela 6731)</a></li>
       <li><a href="https://cidades.ibge.gov.br/brasil/sp/sao-paulo/panorama">IBGE Cidades — Área do município de São Paulo (1.521 km²)</a></li>
       <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/45968-pib-cresce-2-3-em-2025-e-fecha-o-ano-em-r-12-7-trilhoes">IBGE — PIB cresce 2,3% em 2025</a></li>
       <li><a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/47739-ipca-fica-em-0-07-em-julho">IBGE — IPCA de julho de 2026</a></li>
@@ -404,6 +407,11 @@ const D={
  balanca:{labels:Y(1994,2025),v:[10.5,-3.5,-5.6,-6.8,-6.6,-1.3,-0.7,2.7,13.1,24.8,33.6,44.7,46.5,40.0,24.8,25.3,20.1,29.8,19.4,2.3,-4.0,19.7,47.7,67.0,58.0,48.0,50.4,61.4,61.8,98.8,74.2,68.3]},
  smreal:{labels:[...Y(1994,2025),"ago/26"],v:[512,597,610,621,662,636,666,738,728,800,805,879,994,1033,1066,1145,1185,1189,1282,1320,1325,1303,1369,1416,1389,1393,1396,1335,1391,1448,1477,1523,1577]},
  salmedio:{labels:[...Y(2012,2025),"ago/26"],v:[3189,3289,3348,3239,3260,3306,3351,3361,3442,3068,3317,3418,3563,3742,3777]},
+ bfFam:{labels:[...Y(2004,2025),"set/26"],v:[6.57,8.70,10.97,11.04,10.56,12.37,12.78,13.35,13.90,14.08,14.05,13.98,13.56,13.91,14.20,13.24,14.27,14.18,20.98,20.88,20.44,18.62,19.29]},
+ bfCasas:{labels:[...Y(2004,2025),"set/26"],v:[12.6,16.3,20.0,19.6,18.1,20.9,21.6,21.5,21.8,21.6,21.0,20.5,20.3,20.6,20.7,19.0,20.5,20.3,28.9,27.5,26.4,23.5,24.3]},
+ bfReal:{labels:[...Y(2004,2025),"set/26"],v:[207,185,178,205,220,234,225,262,299,296,308,269,282,270,271,266,256,273,437,718,714,680,660]},
+ bfPib:{labels:Y(2013,2025),v:[0.47,0.47,0.46,0.45,0.44,0.44,0.42,0.42,0.37,0.69,1.38,1.37,1.23]},
+ bpc:{labels:[...Y(2004,2025),"ago/26"],v:[2.06,2.28,2.48,2.68,2.93,3.17,3.40,3.60,3.77,3.96,4.13,4.24,null,4.55,4.65,4.63,4.66,4.71,5.12,5.71,6.29,6.39,6.52]},
  pobreza:{labels:Y(2012,2024),v:[26.5,24.9,24.1,26.7,27.9,27.7,26.5,25.9,24.1,36.7,31.6,27.3,23.1]},
  desmat:{labels:Y(1994,2025),v:[14896,29059,18161,13227,17383,17259,18226,18165,21651,25396,27772,19014,14286,11651,12911,7464,7000,6418,4571,5891,5012,6207,7893,6947,7536,10129,10851,13038,11594,9064,6288,5731]},
  comida:{labels:Y(1995,2025),v:[4.2,1.5,1.6,2.8,10.2,3.1,9.6,21.6,6.7,2.6,0.6,-0.1,12.4,10.7,0.9,10.7,5.4,10.0,7.6,7.1,12.9,9.4,-4.9,4.5,7.8,18.2,8.2,13.2,-0.5,8.2,1.4]},
@@ -592,6 +600,11 @@ const CH=[
  {id:"balanca",title:"Balança comercial",sub:"Saldo anual, US$ bilhões",type:"bar",ds:[{d:"balanca",l:"Saldo",c:"#15120F"}],note:"Recorde de US$ 98,8 bi em 2023; US$ 68,3 bi em 2025 com exportações recordes apesar das tarifas dos EUA. Série ligada a commodities, não a governos."},
  {id:"smreal",title:"Salário mínimo real",sub:"Valor de dezembro de cada ano, em R$ de janeiro de 2026 (descontado o IPCA)",type:"line",ds:[{d:"smreal",l:"Mínimo real",c:"#15120F"}],note:"De R$ 728 em 2002 para R$ 1.325 em 2014; entre R$ 1.303 e R$ 1.416 de 2015 a 2022; R$ 1.577 em agosto de 2026. Cálculo aproximado."},
  {id:"pobreza",title:"Pobreza",sub:"% da população abaixo de US$ 6,85/dia (IBGE, linha do Banco Mundial)",type:"line",ds:[{d:"pobreza",l:"Pobreza",c:"#15120F"}],note:"2020 caiu com o Auxílio Emergencial; 2021 é o pior ano da série (36,7%); a queda começa em 2022 sob Bolsonaro e chega ao mínimo de 23,1% em 2024 sob Lula."},
+ {id:"bfCasas",title:"Casas que recebem o Bolsa Família",sub:"De cada 100 casas do Brasil, quantas recebiam o benefício em dezembro",type:"line",ds:[{d:"bfCasas",l:"De cada 100 casas",c:"#15120F"}],note:"13 de cada 100 casas em 2004; entre 19 e 22 de 2006 a 2021; 29 em 2022, o ponto mais alto; 24 em 2025 e em setembro de 2026. Famílias do MDS divididas pelo total de domicílios do IBGE (2010, 2020, 2021 e 2026 usam o total do ano anterior). Em 2022 o programa chamava-se Auxílio Brasil. Fonte: MDS (via IPEADATA) e IBGE."},
+ {id:"bfFam",title:"Famílias no Bolsa Família",sub:"Milhões de famílias que receberam o benefício em dezembro",type:"line",ds:[{d:"bfFam",l:"Famílias (milhões)",c:"#15120F"}],note:"6,6 milhões em 2004; 12,8 em 2010; entre 13,2 e 14,3 de 2011 a 2021; 21,0 em 2022, o ponto mais alto; 18,6 em 2025; 19,3 em setembro de 2026. Fonte: MDS, via IPEADATA; setembro de 2026 pela Agência Brasil."},
+ {id:"bfReal",title:"Valor médio por família",sub:"Folha de dezembro dividida pelas famílias, em R$ de janeiro de 2026 (descontado o IPCA)",type:"line",ds:[{d:"bfReal",l:"R$ por família por mês",c:"#15120F"}],note:"R$ 207 em 2004; R$ 308 em 2014; R$ 256 em 2020, o ponto mais baixo desde 2010; R$ 437 em 2022; R$ 718 em 2023, o mais alto; R$ 680 em 2025; R$ 660 em setembro de 2026 (valor nominal de R$ 678). Cálculo próprio com dados do MDS e do IBGE."},
+ {id:"bfPib",title:"Gasto com o Bolsa Família",sub:"Soma da folha do ano, em % do PIB (a folha mensal existe desde 2013)",type:"bar",ds:[{d:"bfPib",l:"% do PIB",c:"#15120F"}],note:"Entre 0,37% e 0,47% do PIB de 2013 a 2021; 0,69% em 2022; 1,38% em 2023, o ponto mais alto; 1,23% em 2025. Cálculo próprio com dados do MDS e do Banco Central."},
+ {id:"bpc",title:"BPC: benefícios a idosos e pessoas com deficiência",sub:"Milhões de benefícios pagos em dezembro (Benefício de Prestação Continuada)",type:"line",ds:[{d:"bpc",l:"Benefícios (milhões)",c:"#15120F"}],note:"2,1 milhões em 2004; 3,4 em 2010; 4,65 em 2018; 5,1 em 2022; 6,5 em agosto de 2026. O dado de 2016 vem incompleto na fonte e foi omitido. Fonte: MDS, via IPEADATA."},
  {id:"desmat",title:"Desmatamento na Amazônia",sub:"Prodes/Inpe, km² por ano (agosto a julho)",type:"bar",ds:[{d:"desmat",l:"km²",c:"#15120F"}],note:"Pico de 29.059 km² em 1995 e 27.772 em 2004; mínimo de 4.571 em 2012. Bolsonaro: média 11.400 km²/ano, alta de 60% sobre Temer. Lula 3: 5.731 km² em 2025, terceira menor taxa da série."},
  {id:"comida",title:"Preço da comida em casa",sub:"IPCA, alimentação no domicílio, variação no ano, %",type:"bar",ds:[{d:"comida",l:"Comida em casa",c:"#15120F"}],note:"Maiores altas: 21,6% em 2002, 18,2% em 2020 e 13,2% em 2022. Quedas em 2006 (−0,1%), 2017 (−4,9%) e 2023 (−0,5%). De janeiro a agosto de 2026: +3,4%. Fonte: IBGE."},
  {id:"gasolina",title:"Preço da gasolina",sub:"IPCA, gasolina, variação no ano, %",type:"bar",ds:[{d:"gasolina",l:"Gasolina",c:"#15120F"}],note:"Maiores altas: 52,0% em 1999, 47,5% em 2021 e 30,7% em 2000. Maior queda: −25,8% em 2022. De janeiro a agosto de 2026: +4,3%. Fonte: IBGE."},
@@ -657,7 +670,7 @@ const COLS=[
 ];
 const fmt=v=>v==null?"—":(typeof v==="number"&&Math.abs(v)>=1000?v.toLocaleString("pt-BR"):String(v).replace(".",","));
 
-/* ---------- As 11 perguntas ----------
+/* ---------- As 12 perguntas ----------
    Cada pergunta mostra uma ou mais medidas (m) em seis barras, uma por governo.
    f reaproveita o cálculo do placar (ATTRS) quando o assunto é o mesmo.
    tags = rótulo do maior e do menor valor; sum e obs são escritos à mão: revisar junto com D. */
@@ -704,6 +717,13 @@ const Q=[
   obs:"Dilma: de 2013 a 2016. Lula 3: até 2024, o último dado.",
   sum:"A pobreza subiu 3,0 pontos com Dilma e 5,1 com Bolsonaro; caiu 1,4 com Temer e 8,5 com Lula 3. Ano a ano: 24,1% em 2020, 36,7% em 2021 (o pior da série), 31,6% em 2022 e 23,1% em 2024 (o melhor).",
   ch:["pobreza"],ev:["Pandemia"]},
+ {id:"bolsa",q:"Quantas casas vivem com o Bolsa Família?",
+  lede:"De cada 100 casas do Brasil, quantas recebiam o Bolsa Família no fim de cada governo, e quanto cada família recebia por mês, em dinheiro de hoje.",
+  m:[{t:"De cada 100 casas, quantas recebem",f:(g,a,b)=>g==="Lula 3"?D.bfCasas.v[D.bfCasas.v.length-1]:val("bfCasas",b),fmt:"casas",tags:["mais casas","menos casas"]},
+     {t:"Quanto cada família recebe por mês",f:(g,a,b)=>g==="Lula 3"?D.bfReal.v[D.bfReal.v.length-1]:val("bfReal",b),fmt:"reais",tags:["maior valor","menor valor"]}],
+  obs:"Dezembro do último ano de cada governo (Lula 3: setembro de 2026, o dado mais recente). O Bolsa Família começou em outubro de 2003; de novembro de 2021 a março de 2023 chamou-se Auxílio Brasil. O valor médio é cálculo próprio: folha de dezembro dividida pelas famílias, descontado o IPCA.",
+  sum:"No fim de cada governo, recebiam o benefício 22 de cada 100 casas com Lula 1 e 2, 20 com Dilma, 21 com Temer, 29 com Bolsonaro e 24 com Lula 3 (em setembro de 2026). O valor médio por família, em dinheiro de hoje, foi de R$ 225, R$ 282, R$ 271, R$ 437 e R$ 660. O gasto no ano foi de 0,45% do PIB em 2016, 0,44% em 2018, 0,69% em 2022 e 1,23% em 2025.",
+  ch:["bfCasas","bfReal","bfFam","bfPib","bpc"],ev:["Pandemia","PEC da Transição","Desemprego de 5,3% e pacote eleitoral"]},
  {id:"economia",q:"A economia cresceu?",
   lede:"Quanto a produção do país (PIB) cresceu <b>por ano</b>, em média. Quando a economia cresce, costuma haver mais emprego e mais renda.",
   m:[{f:attr("pib"),fmt:"ano",tags:["cresceu mais","cresceu menos"]}],
@@ -741,7 +761,9 @@ const FMT={
  pct:v=>zero(v)?["não mudou",""]:[(v>0?"subiu ":"caiu ")+n1(v)+"%",""],
  saldo:v=>zero(v)?["empatou",""]:[(v>0?"sobrou ":"faltou ")+n1(v)+"%","do PIB"],
  km2:v=>[Math.round(v).toLocaleString("pt-BR")+" km²","por ano"],
- saldoj:v=>[n1(v)+"%","do PIB"]
+ saldoj:v=>[n1(v)+"%","do PIB"],
+ casas:v=>[Math.round(v)+" de cada 100",""],
+ reais:v=>["R$ "+Math.round(v).toLocaleString("pt-BR"),"por mês"]
 };
 const fimGov=g=>g.e>=2027?"hoje":Math.ceil(g.e)-1;
 const periodo=g=>{ const a=Math.floor(g.s), b=fimGov(g); return a===b?String(a):`${a}–${b}`; };
